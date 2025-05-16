@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block header %}
+{% endblock %}
+
+{% block nav %}
+<style>
+    /* Estilos para a barra lateral */
+    .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .sidebar a {
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+        background-color: #575757;
+    }
+
+    .sidebar .closebtn {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Estilos para o botão de abrir a barra lateral */
+    .openbtn {
+        font-size: 20px;
+        cursor: pointer;
+        background-color: #111;
+        color: white;
+        border: none;
+        padding: 5px 10px; /* Reduzido para ajustar ao tamanho do conteúdo */
+    }
+
+    .openbtn:hover {
+        background-color: #444;
+    }
+
+    /* Barra horizontal para telas maiores */
+    @media screen and (min-width: 768px) {
+        .sidebar {
+            display: flex;
+            position: static;
+            width: 100%;
+            height: auto;
+            flex-direction: row;
+            background-color: #111;
+            padding-top: 0;
+        }
+
+        .sidebar a {
+            display: inline-block;
+            padding: 10px 20px;
+        }
+
+        .openbtn, .closebtn {
+            display: none;
+        }
+    }
+</style>
+
+<!-- Botão para abrir a barra lateral -->
+<div style="display: inline-block;">
+    <button class="openbtn" onclick="openNav()">☰</button>
+</div>
+
+<!-- Barra lateral -->
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="display: none;">×</a>
+    <script>
+        if (window.innerWidth < 768) {
+            document.querySelector('.closebtn').style.display = 'block';
+        }
+    </script>
+    <a href="{% url 'index' %}">Dashboard</a>
+    
+    {% if user.is_staff %}
+        <a href="{% url 'reports' %}">Reports</a>
+        <a href="{% url 'alunos' %}">Alunos</a>
+        <a href="{% url 'user_management' %}">User Management</a>
+    {% endif %}
+
+    <a href="{% url 'logout' %}" style="margin-left: auto;">Logout</a>
+</div>
+
+<script>
+    // Função para abrir a barra lateral
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+    }
+
+    // Função para fechar a barra lateral
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+    }
+</script>
+{% endblock %}
