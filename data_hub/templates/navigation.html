@@ -94,8 +94,12 @@
     
     {% if user.is_staff %}
         <a href="{% url 'reports' %}">Reports</a>
-        <a href="{% url 'alunos' %}">Alunos</a>
-        <a href="{% url 'user_management' %}">User Management</a>
+        <a href="/admin/data_hub/aluno/">Alunos</a>
+        <a href="/admin/data_hub/divida/">Dividas</a>
+
+        {% if perms.auth.view_group and perms.auth.view_user%}
+            <a href="{% url 'user_management' %}">User Management</a>
+        {% endif %}
     {% endif %}
 
     <a href="{% url 'logout' %}" style="margin-left: auto;">Logout</a>
