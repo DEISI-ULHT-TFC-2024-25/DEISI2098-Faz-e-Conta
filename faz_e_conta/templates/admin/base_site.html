@@ -1,6 +1,11 @@
 {% extends "navigation.html" %}
 {% load static %}
 
+{% block title %}
+  {% if title %}{{ title }} | {% endif %}{{ site_title }}
+{% endblock %}
+
+
 {% block style %}
   {{ block.super }}
   <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
@@ -9,3 +14,6 @@
   <link rel="stylesheet" href="{% static 'admin/css/dashboard.css' %}">
 {% endblock %}
 
+{% block content %}
+  {{ block.super }}
+{% endblock %}

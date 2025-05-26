@@ -109,14 +109,11 @@
     {% endblock %}
 </head>
 <body style="overflow: hidden;">
-        {% block nav %}
+    {% block nav %}
+    {% endblock %}
+    <div class="content">
+        {% block content %}
         {% endblock %}
-        <main>
-            <div class="content">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </main>
-    
+    </div>
 </body>
 </html>

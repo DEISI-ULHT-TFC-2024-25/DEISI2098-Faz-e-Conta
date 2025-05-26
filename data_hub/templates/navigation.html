@@ -5,30 +5,33 @@
 
 {% block nav %}
 <style>
-    /* Estilos para a barra lateral */
     .sidebar {
         height: 100%;
         width: 0;
         position: fixed;
-        z-index: 1;
+        z-index: 1000;
         top: 0;
         left: 0;
         background-color: #111;
-        overflow-x: hidden;
         transition: 0.5s;
         padding-top: 60px;
     }
 
-    .sidebar a {
+    .sidebar a, .dropdown-btn {
         padding: 10px 15px;
         text-decoration: none;
         font-size: 18px;
         color: white;
         display: block;
         transition: 0.3s;
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
     }
 
-    .sidebar a:hover {
+    .sidebar a:hover, .dropdown-btn:hover {
         background-color: #575757;
     }
 
@@ -40,25 +43,29 @@
         margin-left: 50px;
     }
 
-    /* Estilos para o botão de abrir a barra lateral */
-    .openbtn {
-        font-size: 20px;
-        cursor: pointer;
-        background-color: #111;
-        color: white;
-        border: none;
-        padding: 5px 10px; /* Reduzido para ajustar ao tamanho do conteúdo */
+    .dropdown {
+        position: relative;
     }
 
-    .openbtn:hover {
-        background-color: #444;
+    .dropdown-container {
+        display: none;
+        background-color: #262626;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 160px;
+        z-index: 2000;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
-    /* Barra horizontal para telas maiores */
+    .dropdown:hover .dropdown-container {
+        display: block;
+    }
+
     @media screen and (min-width: 768px) {
         .sidebar {
             display: flex;
-            position: static;
+            position: relative;
             width: 100%;
             height: auto;
             flex-direction: row;
@@ -66,9 +73,15 @@
             padding-top: 0;
         }
 
-        .sidebar a {
+        .sidebar a, .dropdown-btn {
             display: inline-block;
             padding: 10px 20px;
+            width: auto;
+            text-align: center;
+        }
+
+        .dropdown {
+            position: relative;
         }
 
         .openbtn, .closebtn {
@@ -77,43 +90,42 @@
     }
 </style>
 
-<!-- Botão para abrir a barra lateral -->
 <div style="display: inline-block;">
     <button class="openbtn" onclick="openNav()">☰</button>
 </div>
 
-<!-- Barra lateral -->
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="display: none;">×</a>
-    <script>
-        if (window.innerWidth < 768) {
-            document.querySelector('.closebtn').style.display = 'block';
-        }
-    </script>
+
     <a href="{% url 'index' %}">Dashboard</a>
-    
+
     {% if user.is_staff %}
         <a href="{% url 'reports' %}">Reports</a>
         <a href="/admin/data_hub/aluno/">Alunos</a>
         <a href="/admin/data_hub/divida/">Dividas</a>
-
-        {% if perms.auth.view_group and perms.auth.view_user%}
-            <a href="{% url 'user_management' %}">User Management</a>
-        {% endif %}
+        <div class="dropdown">
+            <button class="dropdown-btn">Admin ▼</button>
+            <div class="dropdown-container">
+                {% if perms.auth.view_group and perms.auth.view_user %}
+                    <a href="{% url 'user_management' %}">User Management</a>
+                {% endif %}
+            </div>
+        </div>
     {% endif %}
 
     <a href="{% url 'logout' %}" style="margin-left: auto;">Logout</a>
 </div>
 
 <script>
-    // Função para abrir a barra lateral
     function openNav() {
         document.getElementById("mySidebar").style.width = "250px";
     }
-
-    // Função para fechar a barra lateral
     function closeNav() {
         document.getElementById("mySidebar").style.width = "0";
+    }
+
+    if (window.innerWidth < 768) {
+        document.querySelector('.closebtn').style.display = 'block';
     }
 </script>
 {% endblock %}
