@@ -106,6 +106,9 @@ admin.site.register(Aluno, AlunoAdmin)
 admin.site.register(ResponsavelEducativo, ResponsavelEducativoAdmin)
 admin.site.register(TipoProblema, TipoProblemaAdmin)
 admin.site.register(TipoImagem, TipoImagemAdmin)
+
+
+# admin.site.register(Divida, DividaAgrupadaAdmin)
 admin.site.register(Divida, DividaAdmin)
 
 

@@ -61,6 +61,10 @@
     .dropdown:hover .dropdown-container {
         display: block;
     }
+    .dropdown:hover .dropdown-container a {
+        width: 100%;
+        text-align: center;
+    }
 
     @media screen and (min-width: 768px) {
         .sidebar {
@@ -100,19 +104,31 @@
     <a href="{% url 'index' %}">Dashboard</a>
 
     {% if user.is_staff %}
-        <a href="{% url 'reports' %}">Reports</a>
         <a href="/admin/data_hub/aluno/">Alunos</a>
-        <a href="/admin/data_hub/divida/">Dividas</a>
-        <div class="dropdown">
-            <button class="dropdown-btn">Admin ▼</button>
-            <div class="dropdown-container">
-                {% if perms.auth.view_group and perms.auth.view_user %}
-                    <a href="{% url 'user_management' %}">User Management</a>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
 
+        <div class="dropdown">
+                <span class="dropdown-btn">Finanças ▼</span>
+                <div class="dropdown-container">
+                    <a href="/admin/data_hub/divida/">Dividas</a>
+                    <a href="{% url 'reports' %}">Reports</a>
+                </div>
+            </div>
+
+        {% if perms.auth.view_group and perms.auth.view_user %}
+            <div class="dropdown">
+                <span class="dropdown-btn">Admin ▼</span>
+                <div class="dropdown-container"> 
+                    <a href="{% url 'admin:auth_user_changelist' %}">Manage Users</a>
+                    <a href="{% url 'admin:auth_group_changelist' %}">Manage Groups</a>
+                </div>
+            </div>
+        {% endif %}
+
+    {% endif %}
+    
+    <span style="color: white; margin-left: auto; display: inline-block; vertical-align: middle;">
+        {{ user.username }}
+    </span>
     <a href="{% url 'logout' %}" style="margin-left: auto;">Logout</a>
 </div>
 
