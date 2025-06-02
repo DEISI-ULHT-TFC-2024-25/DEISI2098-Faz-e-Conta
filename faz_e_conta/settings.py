@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'data_hub',  # a tua app
+    'data_hub',  # app com Layout.html
 ]
 
 # Middleware
@@ -38,7 +38,10 @@ ROOT_URLCONF = 'faz_e_conta.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Adiciona aqui se tiveres templates fora da app
+        'DIRS': [
+            BASE_DIR / 'faz_e_conta' / 'templates',  # admin personalizado
+            BASE_DIR / 'data_hub' / 'templates',     # layout.html
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -51,6 +54,7 @@ TEMPLATES = [
     },
 ]
 
+# WSGI
 WSGI_APPLICATION = 'faz_e_conta.wsgi.application'
 
 # Base de dados
@@ -70,23 +74,19 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internacionalização
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-pt'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Ficheiros estáticos (CSS, JS, imagens)
+# Ficheiros estáticos
 STATIC_URL = 'static/'
-
-# Diretório onde os ficheiros estáticos do projeto ficam guardados durante o desenvolvimento
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
-# Diretório onde serão colocados os ficheiros estáticos para produção com collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Ficheiros media (uploads e imagens geradas pelo utilizador ou pelo sistema)
+# Media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'faz_e_conta/resources/')
 
