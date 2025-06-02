@@ -47,7 +47,8 @@
         background-color: #111;
         color: white;
         border: none;
-        padding: 5px 10px; /* Reduzido para ajustar ao tamanho do conteúdo */
+        padding: 5px 10px;
+        /* Reduzido para ajustar ao tamanho do conteúdo */
     }
 
     .openbtn:hover {
@@ -71,7 +72,8 @@
             padding: 10px 20px;
         }
 
-        .openbtn, .closebtn {
+        .openbtn,
+        .closebtn {
             display: none;
         }
     }
@@ -91,11 +93,12 @@
         }
     </script>
     <a href="{% url 'index' %}">Dashboard</a>
-    
+
     {% if user.is_staff %}
-        <a href="{% url 'reports' %}">Reports</a>
-        <a href="{% url 'alunos' %}">Alunos</a>
-        <a href="{% url 'user_management' %}">User Management</a>
+    <a href="{% url 'reports' %}">Reports</a>
+    <a href="{% url 'alunos' %}">Alunos</a>
+    <a href="{% url 'user_management' %}">User Management</a>
+    <a href="{% url 'import_data' %}">Import Data</a>
     {% endif %}
 
     <a href="{% url 'logout' %}" style="margin-left: auto;">Logout</a>

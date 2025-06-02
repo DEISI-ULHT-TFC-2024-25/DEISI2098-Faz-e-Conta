@@ -1,0 +1,23 @@
+{% extends 'navigation.html' %}
+{% block title %}Import Preview{% endblock %}
+{% block content %}
+<h1>Preview Data</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="confirm" value="1">
+    {{ form.as_p }}
+    <table border="1">
+        <tr>
+            <th>Select</th>
+            {% for key in data.0.keys %}<th>{{ key }}</th>{% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td><input type="checkbox" name="rows" value="{{ forloop.counter0 }}"></td>
+            {% for value in row.values %}<td>{{ value }}</td>{% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Import</button>
+</form>
+{% endblock %}

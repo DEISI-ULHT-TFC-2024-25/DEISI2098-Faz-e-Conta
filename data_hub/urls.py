@@ -11,7 +11,6 @@ testes = [
 ]
 
 
-
 financas = [
     
 ]
@@ -35,6 +34,9 @@ reports = [
     path('gerar-pdf-mensal/<int:month>/<int:year>/', views.reportMensal, name='report_mensal'),
 ]
 
+imports = [
+    path('import/', views.import_data, name='import_data'),
+]
 
 '''
 URLs added
@@ -45,4 +47,5 @@ urlpatterns += user
 urlpatterns += reports
 urlpatterns += financas
 urlpatterns += alunos
+urlpatterns += imports
 
