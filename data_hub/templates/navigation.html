@@ -43,8 +43,20 @@
         margin-left: 50px;
     }
 
+<<<<<<< HEAD
+    /* Estilos para o botão de abrir a barra lateral */
+    .openbtn {
+        font-size: 20px;
+        cursor: pointer;
+        background-color: #111;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        /* Reduzido para ajustar ao tamanho do conteúdo */
+=======
     .dropdown {
         position: relative;
+>>>>>>> b0500e5a29851204fb897969694ab2f212273fe8
     }
 
     .dropdown-container {
@@ -119,7 +131,8 @@
             position: relative;
         }
 
-        .openbtn, .closebtn {
+        .openbtn,
+        .closebtn {
             display: none;
         }
     }
@@ -131,6 +144,22 @@
 
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="display: none;">×</a>
+<<<<<<< HEAD
+    <script>
+        if (window.innerWidth < 768) {
+            document.querySelector('.closebtn').style.display = 'block';
+        }
+    </script>
+    <a href="{% url 'index' %}">Dashboard</a>
+
+    {% if user.is_staff %}
+    <a href="{% url 'reports' %}">Reports</a>
+    <a href="{% url 'alunos' %}">Alunos</a>
+    <a href="{% url 'user_management' %}">User Management</a>
+    <a href="{% url 'import_data' %}">Import Data</a>
+    {% endif %}
+=======
+>>>>>>> b0500e5a29851204fb897969694ab2f212273fe8
 
     <a href="{% url 'index' %}">Dashboard</a>
 

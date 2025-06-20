@@ -11,7 +11,6 @@ testes = [
 ]
 
 
-
 financas = [
     path('financas/dividas', views.alunos_dividas, name='alunos_dividas'),
     path('financas/add_saldo/<int:id_aluno>', views.add_saldo, name='add_saldo'),
@@ -36,6 +35,9 @@ reports = [
     path('gerar-pdf-mensal/<int:month>/<int:year>/', views.reportMensal, name='report_mensal'),
 ]
 
+imports = [
+    path('import/', views.import_data, name='import_data'),
+]
 
 '''
 URLs added
@@ -46,4 +48,5 @@ urlpatterns += user
 urlpatterns += reports
 urlpatterns += financas
 urlpatterns += alunos
+urlpatterns += imports
 

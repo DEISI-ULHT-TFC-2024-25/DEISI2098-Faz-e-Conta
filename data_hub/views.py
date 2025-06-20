@@ -12,6 +12,8 @@ from .reports.reports import *
 from .models import *
 from .urls import *
 from django.urls import get_resolver
+import csv, json
+from .forms import ImportFileForm
 
 
 login_url='login'
@@ -124,5 +126,41 @@ def galeria(request):
     }
     return render(request, 'testes/galeria.html', content)
 
-
+@login_required(login_url=login_url)
+def import_data(request):
+    error = None
+    preview = None
+    if request.method == 'POST':
+        form = ImportFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            f = request.FILES['file']
+            ext = f.name.split('.')[-1].lower()
+            if ext not in ['csv', 'json']:
+                error = 'Invalid file extension. Only CSV or JSON allowed.'
+            else:
+                # Read data
+                if ext == 'csv':
+                    decoded = f.read().decode('utf-8').splitlines()
+                    reader = csv.DictReader(decoded)
+                    data = list(reader)
+                else:
+                    data = json.load(f)
+                # Preview for row selection
+                if 'confirm' not in request.POST:
+                    preview = data
+                else:
+                    replace = form.cleaned_data.get('replace', False)
+                    selected_rows = request.POST.getlist('rows')
+                    from .models import Aluno  # Change to your target model
+                    for i, row in enumerate(data):
+                        if replace and str(i) in selected_rows:
+                            Aluno.objects.update_or_create(id=row.get('id'), defaults=row)
+                        else:
+                            Aluno.objects.get_or_create(id=row.get('id'), defaults=row)
+                    return redirect('index')
+    else:
+        form = ImportFileForm()
+    if preview is not None:
+        return render(request, 'import/import_preview.html', {'form': form, 'data': preview})
+    return render(request, 'import/import.html', {'form': form, 'error': error})
 
