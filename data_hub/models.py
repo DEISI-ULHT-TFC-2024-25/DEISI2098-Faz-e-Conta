@@ -24,8 +24,9 @@ class Aluno(models.Model):
     fregesia = models.CharField(max_length=150, null=True, blank=True)
     escolaridade_anterior = models.CharField(max_length=150, null=True, blank=True)
     motivo_admissao = models.CharField(max_length=150, null=True, blank=True)
-    cuidados_especias = models.ManyToManyField(to='CuidadoEspecial', db_table='aluno_cuidados_especiais')
+    cuidados_especias = models.ManyToManyField(to='CuidadoEspecial', db_table='aluno_cuidados_especiais', null=True, blank=True)
     sala_id = models.ForeignKey(to='Sala', on_delete=models.CASCADE, db_column='sala_id')
+    saldo = models.IntegerField(null=False, blank=True, default=0)
 
     def __str__(self):
         return f"{self.processo}, {self.nome_proprio} {self. apelido}"

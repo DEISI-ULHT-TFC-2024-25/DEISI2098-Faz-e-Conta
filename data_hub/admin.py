@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.apps import apps
 from .models import *
 from django.db.models import Sum
+from .admin_filters import *
 
 class DefaultAdmin(admin.ModelAdmin):
     def __init__(self, model, admin_site):
@@ -10,9 +11,9 @@ class DefaultAdmin(admin.ModelAdmin):
         super().__init__(model, admin_site)
 
 class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('nome_completo', 'numero_documento', 'processo')
+    list_display = ('nome_completo', 'numero_documento', 'processo', 'saldo')
     search_fields = ('nome_proprio', 'apelido', 'numero_documento', 'processo')
-    list_filter = ('sala_id', 'cuidados_especias')
+    list_filter = (SaldoListFilter, 'sala_id', 'cuidados_especias')
     ordering = [field.name for field in Aluno._meta.fields]
     
     def nome_completo(self, obj):
