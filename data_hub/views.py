@@ -42,6 +42,29 @@ def reports(request):
     }
     return render(request, 'financas/reports.html', content)
 
+# Finanças
+@login_required(login_url=login_url)
+def alunos_dividas(request):
+    content = {
+        'title': 'Alunos com Dividas',
+        'description': 'Lista de alunos com dividas.',
+        'alunos_dividas': Aluno.objects.filter(saldo__lt=-1) if hasattr(Aluno, 'saldo') else [],
+    }
+    return render(request, 'financas/alunos_dividas.html', content)
+
+@login_required(login_url=login_url)
+def add_saldo(request, id_aluno):
+    aluno = Aluno.objects.get(pk=id_aluno)
+    if request.method == 'POST':
+        try:
+            valor = float(request.POST.get('valor', 0))
+            aluno.saldo += valor
+            aluno.save()
+            messages.success(request, f'Saldo atualizado com sucesso: {valor}')
+        except ValueError:
+            messages.error(request, 'Valor inválido.')
+        return redirect('alunos_dividas')
+    return render(request, 'financas/add_saldo.html', {'aluno': aluno})
 
 # User
 def user_login(request):

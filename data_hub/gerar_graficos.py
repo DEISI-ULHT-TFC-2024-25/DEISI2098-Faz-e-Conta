@@ -7,7 +7,7 @@ import random
 from django.conf import settings
 import matplotlib.pyplot as plt
 from .models import *
-from .models import Imagem  # Certifique-se de que o modelo Grafico está definido
+from .models import Imagem
 
 
 palette = [
