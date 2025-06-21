@@ -1,0 +1,11 @@
+{% extends 'navigation.html' %}
+
+{% block content %}
+    <h2>Adicionar Pagamento</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+{% endblock %}

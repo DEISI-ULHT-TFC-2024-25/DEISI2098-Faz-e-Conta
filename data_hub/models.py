@@ -24,8 +24,7 @@ class Aluno(models.Model):
     fregesia = models.CharField(max_length=150, null=True, blank=True)
     escolaridade_anterior = models.CharField(max_length=150, null=True, blank=True)
     motivo_admissao = models.CharField(max_length=150, null=True, blank=True)
-    cuidados_especias = models.ManyToManyField(to='CuidadoEspecial', db_table='aluno_cuidados_especiais', null=True, blank=True)
-    sala_id = models.ForeignKey(to='Sala', on_delete=models.CASCADE, db_column='sala_id')
+    cuidados_especias = models.ManyToManyField(to='CuidadoEspecial', db_table='aluno_cuidados_especiais', blank=True)
     saldo = models.IntegerField(null=False, blank=True, default=0)
 
     def __str__(self):
@@ -132,6 +131,28 @@ class LinkFiliacao(models.Model):
     def __str__(self):
         return f"{self.responsavel_educativo_id} {self. type}, Aluno Id: {self.aluno_id}"
 
+class TipoPagamento(models.Model):
+    class Meta:
+        db_table = 'tipo_pagamento'
+    tipo_pagamento_id = models.AutoField(primary_key=True)
+    tipo_pagamento = models.CharField(max_length=100, default='')
+
+    def __str__(self):
+        return f"{self.tipo_pagamento}"
+
+class Pagamento(models.Model):
+    class Meta:
+        db_table = 'pagamento'
+    pagamento_id = models.AutoField(primary_key=True)
+    aluno_id = models.ForeignKey(to='Aluno', on_delete=models.CASCADE, db_column='aluno_id')
+    valor = models.FloatField()
+    data_pagamento = models.DateTimeField(default= du.timezone.now)
+    descricao = models.CharField(max_length=250, null=True, blank=True)
+    tipo_pagamento = models.ForeignKey(to='TipoPAgamento', on_delete=models.CASCADE, db_column='tipo_pagamento', null=True)
+    
+    def __str__(self):
+        return f"{self.aluno_id.nome_proprio} {self. valor}, Pagamento Id: {self.pagamento_id}"
+
 class Sala(models.Model):
     class Meta:
         db_table = 'sala'
@@ -139,6 +160,7 @@ class Sala(models.Model):
     sala_nome = models.CharField(max_length=255, default='')
     sala_local = models.CharField(max_length=255, null=True, blank=True)
     sala_valencia = models.CharField(max_length=255, default='')
+    alunos = models.ManyToManyField(to='Aluno', db_table='sala_aluno', blank=True)
     funcionario_id = models.ForeignKey(to='Funcionario', on_delete=models.CASCADE, db_column='funcionario_id', null=True, blank=True)
 
     def __str__(self):
@@ -283,7 +305,6 @@ class Acordo(models.Model):
     def __str__(self):
         return f"{self.responsavel_educativo_id} {self. divida_id}, Acordo Id: {self.acordo_id}"
 
-
 class TipoImagem(models.Model):
     class Meta:
         db_table = 'tipo_imagem'
@@ -303,7 +324,6 @@ class Imagem(models.Model):
     
     def __str__(self):
         return f"{self.alt}"
-
 
 class TipoProblema(models.Model):
     class Meta:

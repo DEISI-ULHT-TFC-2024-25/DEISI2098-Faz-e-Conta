@@ -138,11 +138,14 @@ def gerar_pdf_aluno(request, aluno_id):
 @login_required(login_url=login_url)
 def reportAlunoSala(request):
     # Obtém o modelo de Aluno e Sala
+    Aluno = None
+    Sala = None
     for app in apps.get_app_configs():
         try:
             Aluno = apps.get_model(app.label, 'Aluno')
             Sala = apps.get_model(app.label, 'Sala')
-            break
+            if Aluno and Sala:
+                break
         except LookupError:
             continue
 
@@ -169,24 +172,22 @@ def reportAlunoSala(request):
         elements.append(Paragraph(f"Sala: {sala.sala_nome}", styles['Heading2']))
         elements.append(Spacer(1, 12))
 
-        # Obtém alunos da sala
-        alunos = Aluno.objects.filter(sala_id=sala.sala_id)
+        # Obtém alunos da sala (ManyToMany)
+        alunos = sala.alunos.all()
 
         # Cria tabela de alunos
         data = [["ID", "Nome", "Apelido", "Processo", "Numero\nDocumento", "Data\nAdmissao"]]
-        
-        #for i in range(20):
         for aluno in alunos:
             data.append([
                 aluno.aluno_id,
                 Paragraph(aluno.nome_proprio, styles['Normal']),
                 Paragraph(aluno.apelido, styles['Normal']),
-                Paragraph(aluno.processo, styles['Normal']),
+                Paragraph(aluno.processo or '', styles['Normal']),
                 Paragraph(aluno.numero_documento, styles['Normal']),
-                Paragraph(str(aluno.data_admissao).split(" ")[0], styles['Normal'])
+                Paragraph(str(aluno.data_admissao.date()), styles['Normal'])
             ])
 
-        table = Table(data, colWidths=[doc.width / 6.0] * 6)  # Ajusta a largura das colunas
+        table = Table(data, colWidths=[doc.width / 6.0] * 6)
         table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
@@ -195,9 +196,9 @@ def reportAlunoSala(request):
             ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
             ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
             ('GRID', (0, 0), (-1, -1), 1, colors.black),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),  # Alinha verticalmente ao meio
-            ('FONTSIZE', (0, 0), (-1, -1), 10),  # Define o tamanho da fonte
-            ('TEXTCOLOR', (0, 1), (-1, -1), colors.black),  # Cor do texto para as linhas de dados
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ('TEXTCOLOR', (0, 1), (-1, -1), colors.black),
         ]))
 
         elements.append(table)
