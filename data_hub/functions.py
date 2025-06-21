@@ -39,7 +39,7 @@ def verificar_pagamentos():
         alunos = Aluno.objects.filter()
         valores_alunos = set()
         
-        alunos_saldo_invalido = []
+        alunos_saldo_invalido = set()
         
         for pagamento in pagamentos:
             if pagamento.aluno_id and pagamento.valor:
@@ -49,7 +49,8 @@ def verificar_pagamentos():
             if valores_alunos[aluno.pk] == aluno.saldo:
                 continue
             else:
-                alunos_saldo_invalido.append(aluno.pk)         
+                alunos_saldo_invalido[aluno.pk] = aluno.saldo-valores_alunos[aluno.pk]
+                     
     except Exception as e:
         print(f"Erro ao verificar pagamentos: {e}")
     
