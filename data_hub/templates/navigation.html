@@ -43,22 +43,6 @@
         margin-left: 50px;
     }
 
-<<<<<<< HEAD
-    /* Estilos para o botão de abrir a barra lateral */
-    .openbtn {
-        font-size: 20px;
-        cursor: pointer;
-        background-color: #111;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        /* Reduzido para ajustar ao tamanho do conteúdo */
-=======
-    .dropdown {
-        position: relative;
->>>>>>> b0500e5a29851204fb897969694ab2f212273fe8
-    }
-
     .dropdown-container {
         display: none;
         background-color: #262626;
@@ -144,23 +128,6 @@
 
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="display: none;">×</a>
-<<<<<<< HEAD
-    <script>
-        if (window.innerWidth < 768) {
-            document.querySelector('.closebtn').style.display = 'block';
-        }
-    </script>
-    <a href="{% url 'index' %}">Dashboard</a>
-
-    {% if user.is_staff %}
-    <a href="{% url 'reports' %}">Reports</a>
-    <a href="{% url 'alunos' %}">Alunos</a>
-    <a href="{% url 'user_management' %}">User Management</a>
-    <a href="{% url 'import_data' %}">Import Data</a>
-    {% endif %}
-=======
->>>>>>> b0500e5a29851204fb897969694ab2f212273fe8
-
     <a href="{% url 'index' %}">Dashboard</a>
 
     {% if user.is_staff %}
@@ -176,6 +143,8 @@
                         <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
                             <a href="/admin/data_hub/aluno/">Alunos</a>
                             <a href="/admin/data_hub/aluno/add/">Adicionar Aluno</a>
+                            <a href="/admin/data_hub/sala/">Salas</a>
+                            <a href="/admin/data_hub/sala/add">Adicionar sala</a>
                         </div>
                     </div>
                 </div>
@@ -193,6 +162,13 @@
                         <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
                             <a href="{% url 'alunos_dividas' %}">Dívidas</a>
                             <a href="/admin/data_hub/divida/add/">Adicionar Dívida</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">Pagamentos =></span>
+                        <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
+                            <a href="/admin/data_hub/pagamento/">Pagamentos</a>
+                            <a href="{% url 'registar_pagamento' %}">Registar Pagamento</a>
                         </div>
                     </div>
                     <a href="{% url 'reports' %}">Reports</a>
@@ -234,7 +210,7 @@
                 </div>
             </div>
         {% endif %}
-
+        <a href="{% url 'import_data' %}">Import Data</a>
     {% endif %}
     
     <span style="color: white; margin-left: auto; display: inline-block; vertical-align: middle; font-size: 18px; padding: 10px 15px;">

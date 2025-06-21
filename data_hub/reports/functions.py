@@ -2,7 +2,6 @@ from ..models import *
 
 from django.db.models import Sum
 
-
 def calcular_total_mensalidades():
     return MensalidadeAluno.objects.filter(mensalidade_paga__isnull=False).aggregate(
         total=Sum('mensalidade_paga')
@@ -11,10 +10,11 @@ def calcular_total_mensalidades():
 
 def calcular_mensalidades_por_valencia():
     mensalidades_por_valencia = {}
-    mensalidades = MensalidadeAluno.objects.select_related('aluno_id__sala_id').filter(mensalidade_paga__isnull=False)
+    mensalidades = MensalidadeAluno.objects.filter(mensalidade_paga__isnull=False)
 
     for m in mensalidades:
-        valencia = m.aluno_id.sala_id.sala_valencia
+        sala = m.aluno_id.sala_set.first()
+        valencia = sala.sala_valencia if sala else "Indefinido"
         mensalidades_por_valencia[valencia] = mensalidades_por_valencia.get(valencia, 0) + m.mensalidade_paga
 
     return mensalidades_por_valencia
@@ -28,14 +28,14 @@ def calcular_total_mensalidades_ss():
 
 def calcular_mensalidades_ss_por_valencia():
     mensalidades_por_valencia_ss = {}
-    mensalidades = ComparticipacaoMensalSs.objects.select_related('aluno_id__sala_id').filter(mensalidade_paga__isnull=False)
+    mensalidades = ComparticipacaoMensalSs.objects.filter(mensalidade_paga__isnull=False)
 
     for m in mensalidades:
-        valencia = m.aluno_id.sala_id.sala_valencia
+        sala = m.aluno_id.sala_set.first()
+        valencia = sala.sala_valencia if sala else "Indefinido"
         mensalidades_por_valencia_ss[valencia] = mensalidades_por_valencia_ss.get(valencia, 0) + m.mensalidade_paga
 
     return mensalidades_por_valencia_ss
-
 
 def calcular_pagamentos_em_falta():
     dividas = Divida.objects.all()
@@ -58,12 +58,12 @@ def calcular_pagamentos_em_falta():
 
 
 def listar_pagamentos_em_falta():
-    dividas = Divida.objects.select_related('aluno_id__sala_id')
+    dividas = Divida.objects.select_related('aluno_id')
     pagamentos_em_falta_list = []
 
     for divida in dividas:
         aluno = divida.aluno_id
-        sala = aluno.sala_id
+        sala = aluno.sala_set.first()
         valencia = sala.sala_valencia if sala else "Indefinido"
 
         # Conversão segura dos valores
@@ -90,7 +90,7 @@ def listar_pagamentos_em_falta():
             "Quantia do último pagamento": getattr(ultimo_pagamento, 'mensalidade_paga', None),
             "Valor pago pela SS": 0,  # Se necessário, implementar cálculo real
             "Data último pagamento SS": None,
-            "Acordo": "Sim" if divida.acordo_set.exists() else "Não"
+            "Acordo": "Sim" if hasattr(divida, 'acordo_set') and divida.acordo_set.exists() else "Não"
         }
 
         pagamentos_em_falta_list.append(pagamento_em_falta)

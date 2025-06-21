@@ -8,12 +8,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
+from data_hub import functions
+
 from .reports.reports import *
 from .models import *
 from .urls import *
 from django.urls import get_resolver
 import csv, json
 from .forms import ImportFileForm
+from .forms import *
 
 
 login_url='login'
@@ -68,6 +71,26 @@ def add_saldo(request, id_aluno):
         return redirect('alunos_dividas')
     return render(request, 'financas/add_saldo.html', {'aluno': aluno})
 
+
+@login_required(login_url=login_url)
+def registar_pagamento(request):
+    if request.method == 'POST':
+        form = PagamentoForm(request.POST)
+        if form.is_valid():
+            aluno_id = form.cleaned_data['aluno_id'].pk
+            valor = form.cleaned_data['valor']
+            descricao = form.cleaned_data['descricao']
+            try:
+                print(f"Descrição: {descricao}|")
+                functions.pagamento(aluno_id, valor, descricao)
+                messages.success(request, f'Pagamento registado com sucesso: {valor}')
+            except ValueError:
+                messages.error(request, 'Valor inválido.')
+            return redirect('/admin/data_hub/aluno/')
+    else:
+        form = PagamentoForm()
+    return render(request, 'financas/registar_pagamento.html', {'form': form})
+
 # User
 def user_login(request):
     if request.method == 'POST':
@@ -94,15 +117,6 @@ def user_management(request):
     return render(request, 'user/management.html')
 
 # Alunos
-@login_required(login_url=login_url)
-def dashboard_alunos(request):
-    content = {
-        'title': 'Dashboard Alunos',
-        'valencia': gerar_grafico_numero_alunos_por_valencia(),
-        'sala': gerar_grafico_alunos_por_sala(),
-    }
-    return render(request, 'alunos/dashboard.html', content)
-
 @login_required(login_url=login_url)
 def galeria(request):
     imagens_por_tipo = {}

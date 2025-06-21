@@ -11,15 +11,19 @@ class DefaultAdmin(admin.ModelAdmin):
         super().__init__(model, admin_site)
 
 class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('nome_completo', 'numero_documento', 'processo', 'saldo')
+    list_display = ('nome_completo', 'numero_documento', 'processo', 'saldo', 'sala_nome')
     search_fields = ('nome_proprio', 'apelido', 'numero_documento', 'processo')
-    list_filter = (SaldoListFilter, 'sala_id', 'cuidados_especias')
+    list_filter = (SaldoListFilter, 'cuidados_especias', 'sala')
     ordering = [field.name for field in Aluno._meta.fields]
-    
+
     def nome_completo(self, obj):
         return f"{obj.nome_proprio} {obj.apelido}"
-    
     nome_completo.short_description = 'Nome Completo'
+
+    def sala_nome(self, obj):
+        # Mostra todas as salas em que o aluno está, separadas por vírgula
+        return ", ".join([s.sala_nome for s in obj.sala_set.all()])
+    sala_nome.short_description = 'Sala'
     
 class ResponsavelEducativoAdmin(admin.ModelAdmin):
     list_display = ('nome_completo', 'numero_documento', 'telefone', 'email')
@@ -40,39 +44,6 @@ class TipoImagemAdmin(admin.ModelAdmin):
     search_fields = ('tipo_imagem',)
     ordering = ('tipo_imagem',)
 
-class DividaAgrupadaAdmin(admin.ModelAdmin):
-    list_display = ('nome_completo', 'aluno_id__processo', 'total_valor')
-    search_fields = ('aluno_id__processo', 'aluno_id__nome_proprio', 'aluno_id__apelido')
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        # Annotate each Divida with the total per row
-        qs = qs.annotate(
-            total=Sum('valor_pagar') - Sum('valor_pago')
-        )
-        # Only include rows where total > 0
-        return qs.filter(total__gt=0)
-
-    def aluno_id__processo(self, obj):
-        return obj.aluno_id.processo
-
-    def nome_completo(self, obj):
-        return f"{obj.aluno_id.nome_proprio} {obj.aluno_id.apelido}"
-
-    def total_valor(self, obj):
-        # Use the annotated value if available, otherwise calculate
-        total = getattr(obj, 'total', None)
-        if total is None:
-            total = type(obj).objects.filter(aluno_id=obj.aluno_id).aggregate(
-                total=Sum('valor_pagar') - Sum('valor_pago')
-            )['total']
-
-        return total
-
-
-    nome_completo.short_description = 'Aluno'
-    total_valor.short_description = 'Divida Total'
-    aluno_id__processo.short_description = 'Processo'
-
 class DividaAdmin(admin.ModelAdmin):
     list_display = ('aluno', 'valor_pagar', 'valor_pago')
     search_fields = ('aluno_id__processo', 'aluno_id__nome_proprio', 'aluno_id__apelido')
@@ -91,22 +62,31 @@ class DividaAdmin(admin.ModelAdmin):
             total_valor_pagar = dividas.aggregate(total=Sum('valor_pagar'))['total'] or 0
             total_valor_pago = dividas.aggregate(total=Sum('valor_pago'))['total'] or 0
 
-            # Cria ou atualiza a DividaAgrupada
-            DividaAgrupada.objects.update_or_create(
-                aluno_id_id=aluno_id,
-                defaults={
-                    'valor_pagar': total_valor_pagar,
-                    'valor_pago': total_valor_pago,
-                }
-            )
         self.message_user(request, "Dívidas agrupadas com sucesso. Veja em Dívida Agrupada.")
 
     agrupar_dividas.short_description = "Agrupar dívidas selecionadas"
 
+class PagamentoAdmin(admin.ModelAdmin):
+    list_display = ('nome_completo', 'valor', 'data_pagamento', 'tipo_pagamento')
+    search_fields = ('aluno__processo', 'aluno__nome_proprio', 'aluno__apelido')
+    list_filter = ('data_pagamento', 'tipo_pagamento')
+
+    
+    def nome_completo(self, obj):
+        return f"{obj.aluno_id.nome_proprio} {obj.aluno_id.apelido}"
+    
+    def tipo_pagamento(self, obj):
+        if obj.tipo_pagamento != None:
+            return obj.tipo_pagamento.tipo_pagamento
+    nome_completo.short_description = 'Nome Completo'
+    
+    tipo_pagamento.short_description = 'Tipo de Pagamento'
+    
 admin.site.register(Aluno, AlunoAdmin)
 admin.site.register(ResponsavelEducativo, ResponsavelEducativoAdmin)
 admin.site.register(TipoProblema, TipoProblemaAdmin)
 admin.site.register(TipoImagem, TipoImagemAdmin)
+admin.site.register(Pagamento, PagamentoAdmin)
 
 
 # admin.site.register(Divida, DividaAgrupadaAdmin)
