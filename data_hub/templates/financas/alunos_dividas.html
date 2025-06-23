@@ -30,16 +30,15 @@
 {% block content %}
 <div class="container mt-4">
     <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
     {% if alunos_dividas %}
-
+        <p>{{ description }}</p>
         <table class="admin-table">
             <thead>
                 <tr>
                     <th>Aluno</th>
                     <th>Divida</th>
                     <th>Adicionar saldo</th>
-                    <th> Relatório do aluno</th>
+                    <th>Relatório do aluno</th>
                 </tr>
             </thead>
             <tbody>

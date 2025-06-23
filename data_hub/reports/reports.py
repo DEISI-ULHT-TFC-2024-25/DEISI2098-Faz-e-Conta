@@ -93,41 +93,64 @@ def gerar_pdf_aluno(request, aluno_id):
     elements = []
 
     styles = getSampleStyleSheet()
+    wrap_style = ParagraphStyle('WrapStyle', parent=styles['Normal'], wordWrap='CJK')
+
     elements.append(Paragraph(f"Relatório do {aluno}", styles['Title']))
     elements.append(Spacer(1, 6))
 
     head = [field.name for field in Aluno._meta.fields]
     data = []
     for field in head:
-        wrapped_text = textwrap.wrap(str(getattr(aluno, field)), width=70)
-        data.append([field, "\n".join(wrapped_text)])
+        value = getattr(aluno, field)
+        data.append([
+            Paragraph(str(field), wrap_style),
+            Paragraph(str(value), wrap_style)
+        ])
 
-    table = Table(data)
+    # Tabela ocupa 95% da largura da página
+    table_width = doc.width * 0.95
+    col_widths = [table_width * 0.3, table_width * 0.7]
+    table = Table(data, colWidths=col_widths)
     table.setStyle(TableStyle([
         ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
         ('BACKGROUND', (0, 0), (-1, -1), colors.beige),
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
     ]))
     elements.append(table)
 
     elements.append(PageBreak())
-    
+
     elements.append(Paragraph("Transações do aluno:", styles['Heading2']))
     elements.append(Spacer(1, 6))
 
-    pagamentos = Transacao.objects.filter(aluno_id=aluno.pk).order_by('-data_pagamento')
+    pagamentos = Transacao.objects.filter(aluno_id=aluno.pk).order_by('-data_transacao')
     if pagamentos.exists():
         table_data = [
-            ["Data", "Valor", "Descrição", "Tipo Transação"]
+            [
+                Paragraph("Data", wrap_style),
+                Paragraph("Tipo Transação", wrap_style),
+                Paragraph("Valor", wrap_style),
+                Paragraph("Descrição", wrap_style)
+            ]
         ]
         for pagamento in pagamentos:
             table_data.append([
-                pagamento.data_pagamento.strftime('%d/%m/%Y') if pagamento.data_pagamento else "",
-                f"{abs(pagamento.valor):.2f}€",
-                f"{pagamento.descricao or ''}",
-                f"{pagamento.tipo_transacao or ''}"
+                Paragraph(pagamento.data_transacao.strftime('%d/%m/%Y') if pagamento.data_transacao else "", wrap_style),
+                Paragraph(f"{pagamento.tipo_transacao or ''}", wrap_style),
+                Paragraph(f"{abs(pagamento.valor):.2f}€", wrap_style),
+                Paragraph(f"{pagamento.descricao or ''}", wrap_style),
             ])
-        table = Table(table_data, colWidths=[30*mm, 25*mm, 35*mm, 35*mm, 55*mm])
+        # Tabela ocupa 95% da largura da página
+        trans_table_width = doc.width * 0.95
+        trans_col_widths = [
+            trans_table_width * 0.18,
+            trans_table_width * 0.22,
+            trans_table_width * 0.20,
+            trans_table_width * 0.40,
+        ]
+        table = Table(table_data, colWidths=trans_col_widths)
         table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
@@ -136,14 +159,14 @@ def gerar_pdf_aluno(request, aluno_id):
             ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
             ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
             ('GRID', (0, 0), (-1, -1), 1, colors.black),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
             ('FONTSIZE', (0, 0), (-1, -1), 9),
         ]))
         elements.append(table)
     else:
         elements.append(Paragraph("Nenhuma Transação encontrada.", styles['Normal']))
     elements.append(Spacer(1, 12))
-    
+
     if elements:
         doc.build(elements)
 

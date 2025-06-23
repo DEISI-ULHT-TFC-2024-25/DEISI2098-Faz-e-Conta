@@ -68,7 +68,6 @@ class DividaAdmin(admin.ModelAdmin):
 
 
 
-    
 class ImagemAdmin(admin.ModelAdmin):
     list_display = ('alt', 'imagem', 'tipos_imagem')
     search_fields = ('alt',)
@@ -78,18 +77,9 @@ class ImagemAdmin(admin.ModelAdmin):
         return ", ".join([t.tipo_imagem for t in obj.tipo_imagem_id.all()])
     tipos_imagem.short_description = 'Tipos de Imagem'
 
-
-admin.site.register(Aluno, AlunoAdmin)
-admin.site.register(ResponsavelEducativo, ResponsavelEducativoAdmin)
-admin.site.register(TipoProblema, TipoProblemaAdmin)
-admin.site.register(TipoImagem, TipoImagemAdmin)
-admin.site.register(Divida, DividaAdmin)
-admin.site.register(Imagem, ImagemAdmin)
-
-'''
 class TransacaoAdmin(admin.ModelAdmin):
-    list_display = ('nome_completo', 'valor', 'data_transacao', 'tipo_transacao')
-    search_fields = ('aluno__processo', 'aluno__nome_proprio', 'aluno__apelido')
+    list_display = ('nome_completo', 'data_transacao', 'tipo_transacao', 'valor', 'descricao')
+    search_fields = ('aluno_id__processo', 'aluno_id__nome_proprio', 'aluno_id__apelido')
     list_filter = ('data_transacao', 'tipo_transacao')
 
     
@@ -103,8 +93,15 @@ class TransacaoAdmin(admin.ModelAdmin):
     
     tipo_transacao.short_description = 'Tipo de transacao'
 
+
+admin.site.register(Aluno, AlunoAdmin)
+admin.site.register(ResponsavelEducativo, ResponsavelEducativoAdmin)
+admin.site.register(TipoProblema, TipoProblemaAdmin)
+admin.site.register(TipoImagem, TipoImagemAdmin)
+admin.site.register(Divida, DividaAdmin)
+admin.site.register(Imagem, ImagemAdmin)
 admin.site.register(Transacao, TransacaoAdmin)
-'''
+
 
 
 models = apps.get_models()
