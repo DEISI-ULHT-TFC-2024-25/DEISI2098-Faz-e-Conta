@@ -1,8 +1,78 @@
 def calcular_mensalidade(id_aluno):
     pass
 
+# Calculos
+def calcular_despesas():
+    from .models import DespesaFixa, DespesasVariavel
+    from django.db.models import Sum
+    try:
+        despesas_fixas = DespesaFixa.objects.all()
+        despesas_variaveis = DespesasVariavel.objects.all()
+        
+        total_fixas = despesas_fixas.aggregate(total=Sum('valor'))['total'] or 0
+        total_variaveis = despesas_variaveis.aggregate(total=Sum('valor'))['total'] or 0
+
+        return total_fixas + total_variaveis
+    except Exception as e:
+        print(f"Erro ao calcular despesas fixas e variáveis: {e}")
+        return 0
+
+def calcular_pagamento_mensal_alunos(mes=None):
+    from .models import Aluno, pagamento
+    from django.db.models import Sum
+
+    try:
+        if mes is None:
+            pagamentos = pagamento.objects.filter(tipo_pagamento_id__tipo_pagamento="pagamento")
+        else:
+            pagamentos = pagamento.objects.filter(
+            data_pagamento__month=mes,
+            tipo_pagamento_id__tipo_pagamento="pagamento"
+            )
+        alunos = Aluno.objects.all()
+        
+        total_pagamentos = pagamentos.aggregate(total=Sum('valor'))['total'] or 0
+        total_alunos = alunos.count()
+        
+        if total_alunos == 0:
+            return 0
+        
+        return total_pagamentos / total_alunos
+    except Exception as e:
+        print(f"Erro ao calcular pagamento mensal dos alunos: {e}")
+        return 0
+
+def calcular_pagamentos_falta_alunos(mes=None, ano=None):
+    from .models import Aluno, pagamento
+    from django.db.models import Sum
+    from collections import defaultdict
+    from django.db.models import Q
+    
+    alunos_saldo = set()
+    
+    if mes is None or ano is None:
+        pagamentos = pagamento.objects.all()
+    else:
+        pagamentos = pagamento.objects.filter(
+            (Q(data_pagamento__year=ano) & Q(data_pagamento__month__lte=mes)) |
+            Q(data_pagamento__year__lt=ano)
+        )
+    
+    # Calcula o saldo de cada aluno a partir dos pagamentos
+    alunos_saldo = defaultdict(float)
+    for pagamento in pagamentos:
+        alunos_saldo[pagamento.aluno_id_id] += pagamento.valor
+    
+    saldos = 0
+    for aluno in alunos_saldo:
+        if alunos_saldo[aluno] < 0:
+            saldos -= abs(alunos_saldo[aluno])
+    
+    return saldos
+
+# pagamentos
 def pagamento(id_aluno, valor, descricao=None):
-    from .models import Aluno, Pagamento, TipoPagamento
+    from .models import Aluno, pagamento, Tipopagamento
     from django.utils import timezone
 
     try:
@@ -13,13 +83,13 @@ def pagamento(id_aluno, valor, descricao=None):
         if valor > 0:
             if descricao is None:
                 descricao = "Carregamento"
-            tipo_pagamento = TipoPagamento.objects.get(tipo_pagamento="Carregamento")
+            tipo_pagamento = Tipopagamento.objects.get(tipo_pagamento="Carregamento")
         else:
             if descricao is None:
-                descricao = "Pagamento"
-            tipo_pagamento = TipoPagamento.objects.get(tipo_pagamento="Pagamento")
+                descricao = "pagamento"
+            tipo_pagamento = Tipopagamento.objects.get(tipo_pagamento="pagamento")
             
-        Pagamento.objects.create(
+        pagamento.objects.create(
             aluno_id=aluno,
             valor=valor,
             data_pagamento=timezone.now(),
@@ -31,11 +101,10 @@ def pagamento(id_aluno, valor, descricao=None):
     except Exception as e:
         print(f"Erro ao registrar pagamento: {e}")
 
-
 def verificar_pagamentos():
-    from .models import Aluno, Pagamento
+    from .models import Aluno, pagamento
     try:
-        pagamentos = Pagamento.objects.filter(data_pagamento__isnull=True)
+        pagamentos = pagamento.objects.filter(data_pagamento__isnull=True)
         alunos = Aluno.objects.filter()
         valores_alunos = set()
         
@@ -55,3 +124,10 @@ def verificar_pagamentos():
         print(f"Erro ao verificar pagamentos: {e}")
     
     return alunos_saldo_invalido
+
+# Other
+def get_sala_id(aluno_id):
+    from .models import Sala
+    for sala in Sala.objects.all():
+        if sala.alunos.filter(pk=aluno_id).exists():
+            return sala.pk

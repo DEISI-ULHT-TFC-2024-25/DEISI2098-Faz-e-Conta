@@ -6,9 +6,9 @@ class ImportFileForm(forms.Form):
     replace = forms.BooleanField(required=False, label="Replace selected rows?")
 
 
-class PagamentoForm(forms.ModelForm):
+class TransacaoForm(forms.ModelForm):
     class Meta:
-        model = Pagamento
+        model = Transacao
         fields = ['aluno_id', 'valor', 'descricao']
         widgets = {
             'data_pagamento': forms.DateTimeInput(attrs={'type': 'datetime-local'}),

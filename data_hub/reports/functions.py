@@ -1,12 +1,14 @@
+from datetime import datetime as dt
 from ..models import *
-
+from ..functions import *
 from django.db.models import Sum
+from django.db.models import Q
+
 
 def calcular_total_mensalidades():
     return MensalidadeAluno.objects.filter(mensalidade_paga__isnull=False).aggregate(
         total=Sum('mensalidade_paga')
     )['total'] or 0
-
 
 def calcular_mensalidades_por_valencia():
     mensalidades_por_valencia = {}
@@ -19,12 +21,10 @@ def calcular_mensalidades_por_valencia():
 
     return mensalidades_por_valencia
 
-
 def calcular_total_mensalidades_ss():
     return ComparticipacaoMensalSs.objects.filter(mensalidade_paga__isnull=False).aggregate(
         total=Sum('mensalidade_paga')
     )['total'] or 0
-
 
 def calcular_mensalidades_ss_por_valencia():
     mensalidades_por_valencia_ss = {}
@@ -56,43 +56,33 @@ def calcular_pagamentos_em_falta():
 
     return total_pagamentos_em_falta
 
-
-def listar_pagamentos_em_falta():
-    dividas = Divida.objects.select_related('aluno_id')
-    pagamentos_em_falta_list = []
-
-    for divida in dividas:
-        aluno = divida.aluno_id
-        sala = aluno.sala_set.first()
-        valencia = sala.sala_valencia if sala else "Indefinido"
-
-        # Conversão segura dos valores
-        try:
-            valor_pagar = int(divida.valor_pagar) if divida.valor_pagar is not None else 0
-        except (ValueError, TypeError):
-            valor_pagar = 0
-
-        try:
-            valor_pago = int(divida.valor_pago) if divida.valor_pago is not None else 0
-        except (ValueError, TypeError):
-            valor_pago = 0
-
-        quantidade_falta = max(0, valor_pagar - valor_pago)
-
-        ultimo_pagamento = MensalidadeAluno.objects.filter(aluno_id=aluno).order_by('-data_pagamento').first()
-
+def listar_pagamentos_em_falta(mes=None, ano=None):
+    alunos = Aluno.objects.filter(saldo__lt=0).order_by('saldo')
+    pagamentos_em_falta = []
+    
+    if mes is None or ano is None:
+        print("Mes e ano não especificados, usando o mês atual.")
+        mes = dt.now().month
+        ano = dt.now().year
+    
+    pagamentos = Transacao.objects.all()
+    
+    for aluno in alunos:
+        pagamentos_data = pagamentos.filter(aluno_id=aluno.pk).order_by('-data_pagamento').first()
+            
         pagamento_em_falta = {
             "Nome de aluno": f"{aluno.nome_proprio} {aluno.apelido}",
-            "Valência": valencia,
-            "Quantia mensal devida": valor_pagar,
-            "Quantia em falta": quantidade_falta,
-            "Data do último pagamento": getattr(ultimo_pagamento, 'data_pagamento', None),
-            "Quantia do último pagamento": getattr(ultimo_pagamento, 'mensalidade_paga', None),
-            "Valor pago pela SS": 0,  # Se necessário, implementar cálculo real
+            "Valência": Sala.objects.get(pk=get_sala_id(aluno.pk)).sala_valencia,
+            "Quantia mensal devida": f"{aluno.saldo} __Temp__",
+            "Quantia em falta": aluno.saldo,
+            "Data do último pagamento": pagamentos_data.data_pagamento if pagamentos_data else None,
+            "Quantia do último pagamento": pagamentos_data.valor if pagamentos_data else 0,
+            "Valor pago pela SS": 0,
             "Data último pagamento SS": None,
-            "Acordo": "Sim" if hasattr(divida, 'acordo_set') and divida.acordo_set.exists() else "Não"
+            "Acordo": "Não" + "__Temp__",
         }
 
-        pagamentos_em_falta_list.append(pagamento_em_falta)
+        pagamentos_em_falta.append(pagamento_em_falta)
 
-    return pagamentos_em_falta_list
+    return pagamentos_em_falta
+

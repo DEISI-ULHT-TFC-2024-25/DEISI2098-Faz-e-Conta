@@ -131,27 +131,27 @@ class LinkFiliacao(models.Model):
     def __str__(self):
         return f"{self.responsavel_educativo_id} {self. type}, Aluno Id: {self.aluno_id}"
 
-class TipoPagamento(models.Model):
+class TipoTransacao(models.Model):
     class Meta:
-        db_table = 'tipo_pagamento'
-    tipo_pagamento_id = models.AutoField(primary_key=True)
-    tipo_pagamento = models.CharField(max_length=100, default='')
-
-    def __str__(self):
-        return f"{self.tipo_pagamento}"
-
-class Pagamento(models.Model):
-    class Meta:
-        db_table = 'pagamento'
-    pagamento_id = models.AutoField(primary_key=True)
-    aluno_id = models.ForeignKey(to='Aluno', on_delete=models.CASCADE, db_column='aluno_id')
-    valor = models.FloatField()
-    data_pagamento = models.DateTimeField(default= du.timezone.now)
-    descricao = models.CharField(max_length=250, null=True, blank=True)
-    tipo_pagamento = models.ForeignKey(to='TipoPAgamento', on_delete=models.CASCADE, db_column='tipo_pagamento', null=True)
+        db_table = 'tipo_transacao'
+    tipo_transacao_id = models.AutoField(primary_key=True)
+    tipo_transacao = models.CharField(max_length=100, default='')
     
     def __str__(self):
-        return f"{self.aluno_id.nome_proprio} {self. valor}, Pagamento Id: {self.pagamento_id}"
+        return f"{self.tipo_transacao}"
+
+class Transacao(models.Model):
+    class Meta:
+        db_table = 'transacao'
+    transacao_id = models.AutoField(primary_key=True)
+    aluno_id = models.ForeignKey(to='Aluno', on_delete=models.CASCADE, db_column='aluno_id')
+    valor = models.FloatField()
+    data_transacao = models.DateTimeField(default= du.timezone.now)
+    descricao = models.CharField(max_length=250, null=True, blank=True)
+    tipo_transacao = models.ForeignKey(to='TipoTransacao', on_delete=models.CASCADE, db_column='tipo_transacao', null=True)
+    
+    def __str__(self):
+        return f"{self.aluno_id.nome_proprio} {self.valor}, transacao Id: {self.transacao_id}"
 
 class Sala(models.Model):
     class Meta:
