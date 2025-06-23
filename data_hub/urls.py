@@ -15,6 +15,7 @@ financas = [
     path('financas/dividas', views.alunos_dividas, name='alunos_dividas'),
     path('financas/add_saldo/<int:id_aluno>', views.add_saldo, name='add_saldo'),
     path('financas/pagamento/add/', views.registar_pagamento, name='registar_pagamento'),
+    path('financas/pagamento/add/<int:id_aluno>', views.registar_pagamento, name='registar_pagamento'),
 ]
 
 user = [

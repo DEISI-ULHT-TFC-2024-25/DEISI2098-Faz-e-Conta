@@ -7,6 +7,7 @@ from datetime import datetime as dt
 from ..gerar_graficos import *
 from .functions import *
 from ..models import *
+from ..functions import *
 
 from django.apps import apps
 from django.http import FileResponse, HttpResponse
@@ -25,6 +26,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 
 from PyPDF2 import PdfMerger
+from reportlab.lib.units import mm
 
 
 login_url = 'login'
@@ -108,6 +110,40 @@ def gerar_pdf_aluno(request, aluno_id):
     ]))
     elements.append(table)
 
+    elements.append(PageBreak())
+    
+    elements.append(Paragraph("Transações do aluno:", styles['Heading2']))
+    elements.append(Spacer(1, 6))
+
+    pagamentos = Transacao.objects.filter(aluno_id=aluno.pk).order_by('-data_pagamento')
+    if pagamentos.exists():
+        table_data = [
+            ["Data", "Valor", "Descrição", "Tipo Transação"]
+        ]
+        for pagamento in pagamentos:
+            table_data.append([
+                pagamento.data_pagamento.strftime('%d/%m/%Y') if pagamento.data_pagamento else "",
+                f"{abs(pagamento.valor):.2f}€",
+                f"{pagamento.descricao or ''}",
+                f"{pagamento.tipo_transacao or ''}"
+            ])
+        table = Table(table_data, colWidths=[30*mm, 25*mm, 35*mm, 35*mm, 55*mm])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
+            ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('FONTSIZE', (0, 0), (-1, -1), 9),
+        ]))
+        elements.append(table)
+    else:
+        elements.append(Paragraph("Nenhuma Transação encontrada.", styles['Normal']))
+    elements.append(Spacer(1, 12))
+    
     if elements:
         doc.build(elements)
 
@@ -251,11 +287,11 @@ def reportMensal(request, month=None, year=None):
     doc2 = SimpleDocTemplate(buffer2, pagesize=landscape(A4), leftMargin=40, rightMargin=40, topMargin=40, bottomMargin=40)
     elements2 = []
 
-    payments_in_default = float(calcular_pagamentos_em_falta() or 0)
-    elements2.append(Paragraph(f"Valor de pagamentos de alunos em falta: {payments_in_default:.2f}€", styles['Title']))
+    payments_in_default = float(calcular_pagamentos_falta_alunos(mes=month, ano=year) or 0)
+    elements2.append(Paragraph(f"Valor de pagamentos de alunos em falta: {payments_in_default}€", styles['Title']))
     elements2.append(Spacer(1, 12))
 
-    pagamentos = listar_pagamentos_em_falta()
+    pagamentos = listar_pagamentos_em_falta(mes=month, ano=year)
     table_data = [[
         Paragraph("Nome de aluno", wrap_style),
         Paragraph("Valência", wrap_style),

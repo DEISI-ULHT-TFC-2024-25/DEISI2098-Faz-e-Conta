@@ -37,8 +37,9 @@
             <thead>
                 <tr>
                     <th>Aluno</th>
-                    <th>Saldo</th>
+                    <th>Divida</th>
                     <th>Adicionar saldo</th>
+                    <th> Relatório do aluno</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +47,8 @@
                     <tr>
                         <td>{{ aluno.nome_proprio }} {{ aluno.apelido }}</td>
                         <td>{{ aluno.saldo }}</td>
-                        <td> <a href="{% url 'add_saldo'%}">Adicionar saldo </a> </td>
+                        <td> <a href="{% url 'registar_pagamento' aluno.pk %}">Adicionar saldo </a></td>
+                        <td><a href="{% url 'gerar_pdf_aluno' aluno.pk %}">Ver relatório</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

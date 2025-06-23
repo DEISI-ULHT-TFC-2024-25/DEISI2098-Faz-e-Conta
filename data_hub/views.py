@@ -71,11 +71,10 @@ def add_saldo(request, id_aluno):
         return redirect('alunos_dividas')
     return render(request, 'financas/add_saldo.html', {'aluno': aluno})
 
-
 @login_required(login_url=login_url)
-def registar_pagamento(request):
+def registar_pagamento(request, id_aluno=None):
     if request.method == 'POST':
-        form = PagamentoForm(request.POST)
+        form = TransacaoForm(request.POST)
         if form.is_valid():
             aluno_id = form.cleaned_data['aluno_id'].pk
             valor = form.cleaned_data['valor']
@@ -88,7 +87,14 @@ def registar_pagamento(request):
                 messages.error(request, 'Valor inválido.')
             return redirect('/admin/data_hub/aluno/')
     else:
-        form = PagamentoForm()
+        if id_aluno is None:
+            form = TransacaoForm()
+        else:
+            try:
+                aluno = Aluno.objects.get(pk=id_aluno)
+                form = TransacaoForm(initial={'aluno_id': aluno})
+            except Aluno.DoesNotExist:
+                form = TransacaoForm()
     return render(request, 'financas/registar_pagamento.html', {'form': form})
 
 # User

@@ -66,34 +66,47 @@ class DividaAdmin(admin.ModelAdmin):
 
     agrupar_dividas.short_description = "Agrupar dívidas selecionadas"
 
-class PagamentoAdmin(admin.ModelAdmin):
-    list_display = ('nome_completo', 'valor', 'data_pagamento', 'tipo_pagamento')
+
+
+    
+class ImagemAdmin(admin.ModelAdmin):
+    list_display = ('alt', 'imagem', 'tipos_imagem')
+    search_fields = ('alt',)
+    filter_horizontal = ('tipo_imagem_id',)
+
+    def tipos_imagem(self, obj):
+        return ", ".join([t.tipo_imagem for t in obj.tipo_imagem_id.all()])
+    tipos_imagem.short_description = 'Tipos de Imagem'
+
+
+admin.site.register(Aluno, AlunoAdmin)
+admin.site.register(ResponsavelEducativo, ResponsavelEducativoAdmin)
+admin.site.register(TipoProblema, TipoProblemaAdmin)
+admin.site.register(TipoImagem, TipoImagemAdmin)
+admin.site.register(Divida, DividaAdmin)
+admin.site.register(Imagem, ImagemAdmin)
+
+'''
+class TransacaoAdmin(admin.ModelAdmin):
+    list_display = ('nome_completo', 'valor', 'data_transacao', 'tipo_transacao')
     search_fields = ('aluno__processo', 'aluno__nome_proprio', 'aluno__apelido')
-    list_filter = ('data_pagamento', 'tipo_pagamento')
+    list_filter = ('data_transacao', 'tipo_transacao')
 
     
     def nome_completo(self, obj):
         return f"{obj.aluno_id.nome_proprio} {obj.aluno_id.apelido}"
     
-    def tipo_pagamento(self, obj):
-        if obj.tipo_pagamento != None:
-            return obj.tipo_pagamento.tipo_pagamento
+    def tipo_transacao(self, obj):
+        if obj.tipo_transacao != None:
+            return obj.tipo_transacao.tipo_transacao
     nome_completo.short_description = 'Nome Completo'
     
-    tipo_pagamento.short_description = 'Tipo de Pagamento'
-    
-admin.site.register(Aluno, AlunoAdmin)
-admin.site.register(ResponsavelEducativo, ResponsavelEducativoAdmin)
-admin.site.register(TipoProblema, TipoProblemaAdmin)
-admin.site.register(TipoImagem, TipoImagemAdmin)
-admin.site.register(Pagamento, PagamentoAdmin)
+    tipo_transacao.short_description = 'Tipo de transacao'
+
+admin.site.register(Transacao, TransacaoAdmin)
+'''
 
 
-# admin.site.register(Divida, DividaAgrupadaAdmin)
-admin.site.register(Divida, DividaAdmin)
-
-
-# Dynamically register all models with DefaultAdmin
 models = apps.get_models()
 for model in models:
     try:

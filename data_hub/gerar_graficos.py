@@ -4,9 +4,16 @@ import json
 import os
 import base64
 import io
+
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
 from django.conf import settings
 from .models import *
+from .models import Imagem, TipoImagem
+from django.core.files.base import ContentFile
+import uuid
 
 palette = [
     (0.90, 0.10, 0.10), (0.10, 0.60, 0.10), (0.10, 0.10, 0.90),
@@ -22,10 +29,21 @@ GRAPH_PATH = os.path.join(settings.BASE_DIR, 'static', 'graficos')
 os.makedirs(GRAPH_PATH, exist_ok=True)
 
 def save_grafico(grafico, title):
-    path = os.path.join(GRAPH_PATH, f"{title.replace(' ', '_')}.png")
-    with open(path, 'wb') as f:
-        f.write(base64.b64decode(grafico))
-    return path
+    try:
+        img_data = base64.b64decode(grafico)
+        file_name = f"{uuid.uuid4().hex}_{title.replace(' ', '_')}.png"
+        image_file = ContentFile(img_data, name=file_name)
+
+        # Cria ou atualiza o registro Imagem
+        imagem_obj = Imagem.objects.create(
+            imagem=image_file,
+            alt=title,
+            tipo_imagem_id=TipoImagem.objects.get_or_create(tipo_imagem="grafico")[0]
+        )
+
+        imagem_obj.save()
+    except Exception as e:
+        pass
 
 def gerar_grafico_barras(x, y, title, rotation=0, multi_color=False, return_path=False):
     plt.figure(figsize=(12, 6))
@@ -74,7 +92,6 @@ def gerar_grafico_pizza(x, y, title, return_path=False):
     save_grafico(grafico, title)
 
     return grafico
-
 
 def gerar_grafico_numero_alunos_por_valencia(return_path=False):
     valencias = Sala.objects.values_list('sala_valencia', flat=True).distinct()
