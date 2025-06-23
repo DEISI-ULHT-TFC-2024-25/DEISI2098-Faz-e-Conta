@@ -161,11 +161,10 @@
                         <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">Dívidas =></span>
                         <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
                             <a href="{% url 'alunos_dividas' %}">Dívidas</a>
-                            <a href="/admin/data_hub/divida/add/">Adicionar Dívida</a>
                         </div>
                     </div>
                     <div class="dropdown-submenu">
-                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">Pagamentos =></span>
+                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">Transações =></span>
                         <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
                             <a href="/admin/data_hub/transacao/">Transações</a>
                             <a href="{% url 'registar_pagamento' %}">Registar Transação</a>

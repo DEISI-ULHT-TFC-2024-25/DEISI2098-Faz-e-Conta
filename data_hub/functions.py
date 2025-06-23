@@ -43,7 +43,7 @@ def calcular_pagamento_mensal_alunos(mes=None):
         return 0
 
 def calcular_pagamentos_falta_alunos(mes=None, ano=None):
-    from .models import Aluno, pagamento
+    from .models import Aluno, Transacao
     from django.db.models import Sum
     from collections import defaultdict
     from django.db.models import Q
@@ -51,9 +51,9 @@ def calcular_pagamentos_falta_alunos(mes=None, ano=None):
     alunos_saldo = set()
     
     if mes is None or ano is None:
-        pagamentos = pagamento.objects.all()
+        pagamentos = Transacao.objects.all()
     else:
-        pagamentos = pagamento.objects.filter(
+        pagamentos = Transacao.objects.filter(
             (Q(data_pagamento__year=ano) & Q(data_pagamento__month__lte=mes)) |
             Q(data_pagamento__year__lt=ano)
         )
@@ -70,9 +70,9 @@ def calcular_pagamentos_falta_alunos(mes=None, ano=None):
     
     return saldos
 
-# pagamentos
+# Transações
 def pagamento(id_aluno, valor, descricao=None):
-    from .models import Aluno, pagamento, Tipopagamento
+    from .models import Aluno, Transacao, TipoTransacao
     from django.utils import timezone
 
     try:
@@ -83,26 +83,27 @@ def pagamento(id_aluno, valor, descricao=None):
         if valor > 0:
             if descricao is None:
                 descricao = "Carregamento"
-            tipo_pagamento = Tipopagamento.objects.get(tipo_pagamento="Carregamento")
+            else:
+                tipo_pagamento = TipoTransacao.objects.get(tipo_transacao="Carregamento")
         else:
             if descricao is None:
-                descricao = "pagamento"
-            tipo_pagamento = Tipopagamento.objects.get(tipo_pagamento="pagamento")
+                descricao = "Pagamento"
+            else:
+                tipo_pagamento = TipoTransacao.objects.get(tipo_transacao="Pagamento")
             
-        pagamento.objects.create(
-            aluno_id=aluno,
-            valor=valor,
-            data_pagamento=timezone.now(),
-            descricao= descricao,
-            tipo_pagamento= tipo_pagamento,
+        Transacao.objects.create(
+            aluno_id = aluno,
+            valor = valor,
+            data_transacao = timezone.now(),
+            descricao = descricao,
+            tipo_transacao = tipo_pagamento,
         )
-        
         aluno.save()
     except Exception as e:
         print(f"Erro ao registrar pagamento: {e}")
 
 def verificar_pagamentos():
-    from .models import Aluno, pagamento
+    from .models import Aluno, Transacao as pagamento
     try:
         pagamentos = pagamento.objects.filter(data_pagamento__isnull=True)
         alunos = Aluno.objects.filter()
