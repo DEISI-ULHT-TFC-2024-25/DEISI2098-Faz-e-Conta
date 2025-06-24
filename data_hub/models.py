@@ -2,6 +2,8 @@ from django.db import models
 import datetime
 import django.utils as du
 
+salario_minimo = 760.00
+
 class Aluno(models.Model):
     class Meta:
         db_table = 'aluno'
@@ -52,6 +54,7 @@ class ResponsavelEducativo(models.Model):
     morada_emprego = models.CharField(max_length=150, null=True, blank=True)
     horario_trabalho = models.TimeField(null=True, blank=True)
     aluno_id = models.ForeignKey(to='Aluno', on_delete=models.CASCADE, db_column='aluno_id')
+    salario = models.IntegerField(null=False, default=salario_minimo)
 
     def __str__(self):
         return f"{self.nome_proprio} {self. apelido}, Responsavel Educativo Id: {self.responsavel_educativo_id}"
@@ -146,9 +149,9 @@ class Transacao(models.Model):
     transacao_id = models.AutoField(primary_key=True)
     aluno_id = models.ForeignKey(to='Aluno', on_delete=models.CASCADE, db_column='aluno_id')
     valor = models.FloatField()
-    data_transacao = models.DateTimeField(default= du.timezone.now)
+    data_transacao = models.DateTimeField(default= du.timezone.now, blank=True)
     descricao = models.CharField(max_length=250, null=True, blank=True)
-    tipo_transacao = models.ForeignKey(to='TipoTransacao', on_delete=models.CASCADE, db_column='tipo_transacao', null=True)
+    tipo_transacao = models.ForeignKey(to='TipoTransacao', on_delete=models.CASCADE, db_column='tipo_transacao', null=True, blank=True)
     
     def __str__(self):
         return f"{self.aluno_id.nome_proprio} {self.valor}, transacao Id: {self.transacao_id}"
@@ -159,10 +162,10 @@ class Sala(models.Model):
     sala_id = models.AutoField(primary_key=True)
     sala_nome = models.CharField(max_length=255, default='')
     sala_local = models.CharField(max_length=255, null=True, blank=True)
-    sala_valencia = models.CharField(max_length=255, default='')
+    sala_valencia = models.ForeignKey(to='Valencia', on_delete=models.CASCADE, db_column='sala_valencia', null=False, default=1, blank=True)
     alunos = models.ManyToManyField(to='Aluno', db_table='sala_aluno', blank=True)
     funcionario_id = models.ForeignKey(to='Funcionario', on_delete=models.CASCADE, db_column='funcionario_id', null=True, blank=True)
-
+    
     def __str__(self):
         return f"{self.sala_nome}"
 
@@ -333,6 +336,15 @@ class TipoProblema(models.Model):
 
     def __str__(self):
         return f"{self.tipo_problema}"
+
+class Valencia(models.Model):
+    class Meta:
+        db_table = 'valencia'
+    valencia_id = models.AutoField(primary_key=True)
+    valencia_nome = models.CharField(max_length=255, default='')
+    
+    def __str__(self):
+        return f"{self.valencia_nome}"
 
 class CuidadoEspecial(models.Model):
     class Meta:

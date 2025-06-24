@@ -9,7 +9,7 @@ class ImportFileForm(forms.Form):
 class TransacaoForm(forms.ModelForm):
     class Meta:
         model = Transacao
-        fields = ['aluno_id', 'valor', 'descricao']
+        fields = ['aluno_id', 'valor', 'descricao', 'tipo_transacao']
         widgets = {
-            'data_pagamento': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'tipo_transacao': forms.HiddenInput(),
         }
