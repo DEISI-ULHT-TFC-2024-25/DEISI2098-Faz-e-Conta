@@ -234,6 +234,14 @@
                         </div>
                     </div>
 {% comment %}-------------------{% endcomment %}
+                    <div class="dropdown-submenu">
+                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">DB =></span>
+                        <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
+                            <a href="{% url 'create_backup' %}">Criar Backup</a>
+                            <a href="{% url 'restore_backup' %}">Restaurar Backup</a>
+                        </div>
+                    </div>
+{% comment %}-------------------{% endcomment %}
                 </div>
             </div>
         {% endif %}

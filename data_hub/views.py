@@ -22,8 +22,9 @@ from .forms import ImportFileForm
 from .forms import *
 import datetime
 import io
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import sqlite3
 
 
 login_url='login'
@@ -210,3 +211,69 @@ def export_data_json(request):
     response['Content-Disposition'] = 'attachment; filename="data_hub.json"'
     return response
     
+
+
+# Backup
+def ver_backup(request):
+    filename = request.GET.get("filename")
+    if not filename:
+        return HttpResponseNotFound("Ficheiro não especificado.")
+
+    caminho = os.path.join(settings.BASE_DIR, "backup", filename)
+    
+    # print("🔍 Caminho absoluto procurado:", caminho)  # DEBUG
+    # print("📁 Ficheiros na pasta backup:", os.listdir(os.path.join(settings.BASE_DIR, "backup")))  # DEBUG
+
+    if not os.path.exists(caminho):
+        return HttpResponseNotFound("Ficheiro não encontrado.")
+
+    try:
+        conn = sqlite3.connect(caminho)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        # Obter todas as tabelas do banco de dados
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        tabelas = [row['name'] for row in cursor.fetchall()]
+
+        dump = {}
+        for tabela in tabelas:
+            cursor.execute(f"SELECT * FROM {tabela}")
+            linhas = [dict(row) for row in cursor.fetchall()]
+            dump[tabela] = linhas
+
+        conn.close()
+    except Exception as e:
+        return JsonResponse({"erro": f"Erro ao ler sqlite3: {e}"}, status=400)
+    return JsonResponse(dump, safe=False)
+
+
+@login_required(login_url=login_url)
+def create_backup(request):
+    try:
+        functions.create_backup()
+        messages.success(request, 'Backup criado com sucesso.')
+    except Exception as e:
+        messages.error(request, f'Erro ao criar backup: {e}')
+    return redirect('index')
+
+
+@login_required(login_url=login_url)
+def restore_backup(request):
+    if request.method == 'POST':
+        backup_filename = request.POST.get('backup_filename')
+        if backup_filename:
+            try:
+                functions.restore_backup(backup_filename)
+                messages.success(request, 'Backup restaurado com sucesso.')
+            except Exception as e:
+                messages.error(request, f'Erro ao restaurar backup: {e}')
+        else:
+            messages.error(request, 'Nenhum arquivo de backup selecionado.')
+    else:
+        backup_files = functions.listar_backups()
+        
+        
+        return render(request, 'backup/restore_backup.html', {'backup_files': backup_files})
+
+    return redirect('index')
