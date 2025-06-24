@@ -6,21 +6,61 @@
     {% csrf_token %}
     <div>
         <label for="backup_filename">Selecione o backup para restaurar:</label>
+        <br>
+        <label for="backup_search">Procurar backup:</label>
+        <input type="text" id="backup_search" placeholder="Digite para procurar...">
+        <br>
         <select name="backup_filename" id="backup_filename" required>
-            <option value="">-- Escolha um backup --</option>
+            <option value="">Nenhum</option>
             {% for file in backup_files %}
                 <option value="{{ file }}">{{ file }}</option>
             {% endfor %}
         </select>
     </div>
+    <br>
+    <div>
+        <h3>Conteúdo da Base de Dados</h3>
+        <pre id="backup_content" style="background:#f5f5f5; padding:10px; border-radius:5px; max-height:300px; overflow:auto;">Selecione um backup para ver o conteúdo.</pre>
+    </div>
+    <br><br>
     <button type="submit">Restaurar</button>
 </form>
 
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+<script>
+    document.getElementById('backup_filename').addEventListener('change', function() {
+        var filename = this.value;
+        var contentPre = document.getElementById('backup_content');
+        if (!filename) {
+            contentPre.textContent = "Selecione um backup para ver o conteúdo.";
+            return;
+        }
+        contentPre.textContent = "A carregar...";
+        fetch(`/backup/?filename=${encodeURIComponent(filename)}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Erro ao obter conteúdo do backup.');
+                return response.json();
+            })
+            .then(data => {
+                contentPre.textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                contentPre.textContent = "Erro ao carregar conteúdo do backup.";
+            });
+    });
+</script>
+
+<script>
+    document.getElementById('backup_search').addEventListener('input', function() {
+        var search = this.value.toLowerCase();
+        var select = document.getElementById('backup_filename');
+        for (var i = 0; i < select.options.length; i++) {
+            var option = select.options[i];
+            if (option.value === "" || option.text.toLowerCase().includes(search)) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+            }
+        }
+    });
+</script>
 {% endblock %}

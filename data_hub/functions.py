@@ -268,4 +268,4 @@ def listar_backups():
         print("Nenhum arquivo de backup encontrado.")
         return []
     backup_files.sort(reverse=True)  # Ordena do mais recente para o mais antigo
-    return [os.path.join(backup_dir, f) for f in backup_files]
+    return [os.path.join(f) for f in backup_files]

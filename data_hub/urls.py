@@ -45,6 +45,7 @@ imports = [
 ]
 
 backups = [
+    path('backup/', views.ver_backup, name='ver_backup'),
     path('backups/create', views.create_backup, name='create_backup'),
     path('backups/restore', views.restore_backup, name='restore_backup'),
 ]
