@@ -1,5 +1,3 @@
-# gerar_graficos.py atualizado com base no novo models.py, incluindo todos os gráficos existentes
-
 import json
 import os
 import base64
@@ -29,21 +27,20 @@ GRAPH_PATH = os.path.join(settings.BASE_DIR, 'static', 'graficos')
 os.makedirs(GRAPH_PATH, exist_ok=True)
 
 def save_grafico(grafico, title):
-    try:
-        img_data = base64.b64decode(grafico)
-        file_name = f"{uuid.uuid4().hex}_{title.replace(' ', '_')}.png"
-        image_file = ContentFile(img_data, name=file_name)
-
-        # Cria ou atualiza o registro Imagem
+    tipo, _ = TipoImagem.objects.get_or_create(tipo_imagem="grafico")
+    img_bytes = base64.b64decode(grafico)
+    filename = f"{uuid.uuid4().hex}.png"
+    imagem_existente = Imagem.objects.filter(alt=title, tipo_imagem_id=tipo).first()
+    if imagem_existente:
+        imagem_existente.imagem.save(filename, ContentFile(img_bytes), save=True)
+        imagem_existente.save()
+    else:
         imagem_obj = Imagem.objects.create(
-            imagem=image_file,
-            alt=title,
-            tipo_imagem_id=TipoImagem.objects.get_or_create(tipo_imagem="grafico")[0]
+            alt=title
         )
-
+        imagem_obj.imagem.save(filename, ContentFile(img_bytes), save=True)
+        imagem_obj.tipo_imagem_id.add(tipo)
         imagem_obj.save()
-    except Exception as e:
-        pass
 
 def gerar_grafico_barras(x, y, title, rotation=0, multi_color=False, return_path=False):
     plt.figure(figsize=(12, 6))
@@ -72,53 +69,71 @@ def gerar_grafico_barras(x, y, title, rotation=0, multi_color=False, return_path
     return grafico
 
 def gerar_grafico_pizza(x, y, title, return_path=False):
-    plt.figure(figsize=(12, 6))
-    plt.pie(y[1], labels=x[1], autopct='%1.1f%%', startangle=140)
-    plt.axis('equal')
-    plt.title(title)
+    labels = []
+    values = []
+    for label, value in zip(x[1], y[1]):
+        if value > 0:
+            labels.append(label)
+            values.append(value)
+    if not values:
+        plt.figure(figsize=(8, 6))
+        plt.text(0.5, 0.5, 'Sem dados para exibir', ha='center', va='center', fontsize=16)
+        plt.axis('off')
+    else:
+        plt.figure(figsize=(12, 6))
+        plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=140)
+        plt.axis('equal')
+        plt.title(title)
     buf = io.BytesIO()
     if return_path:
         path = os.path.join(GRAPH_PATH, f"{title.replace(' ', '_')}.png")
         plt.savefig(path)
         plt.close()
         return path
-    
+
     plt.savefig(buf, format='png')
     buf.seek(0)
     grafico = base64.b64encode(buf.getvalue()).decode('utf-8')
     buf.close()
     plt.close()
-    
+
     save_grafico(grafico, title)
 
     return grafico
 
 def gerar_grafico_numero_alunos_por_valencia(return_path=False):
-    valencias = Sala.objects.values_list('sala_valencia', flat=True).distinct()
-    alunos = Aluno.objects.prefetch_related('sala_set').all()
-    contagem = {val: 0 for val in valencias}
-    for aluno in alunos:
-        salas = aluno.sala_set.all()
-        for sala in salas:
-            contagem[sala.sala_valencia] += 1
-            
-    return gerar_grafico_barras(["Valencia", list(contagem.keys())],
-                                ["Numero de Alunos", list(contagem.values())],
-                                "Numero de Alunos por Valencia",
-                                multi_color=True,
-                                return_path=return_path)
+    valencias = Valencia.objects.all()
+    contagem = {val.valencia_nome: 0 for val in valencias}
+    for sala in Sala.objects.select_related('sala_valencia').prefetch_related('alunos'):
+        valencia_nome = sala.sala_valencia.valencia_nome
+        contagem[valencia_nome] += sala.alunos.count()
+    return gerar_grafico_barras(
+        ["Valência", list(contagem.keys())],
+        ["Número de Alunos", list(contagem.values())],
+        "Número de Alunos por Valência",
+        multi_color=True,
+        return_path=return_path
+    )
 
 def gerar_grafico_mensalidades_por_valencia(return_path=False):
-    valencias = Sala.objects.values_list('sala_valencia', flat=True).distinct()
-    contagem = {val: 0 for val in valencias}
-    for m in MensalidadeAluno.objects.select_related('aluno_id'):
-        salas = m.aluno_id.sala_set.all()
-        for sala in salas:
-            contagem[sala.sala_valencia] += 1
-    return gerar_grafico_pizza(["Valencia", list(contagem.keys())],
-                               ["Numero de Mensalidades", list(contagem.values())],
-                               "Mensalidades por Valencia",
-                               return_path=return_path)
+    valencias = Valencia.objects.all()
+    contagem = {val.valencia_nome: 0 for val in valencias}
+    tipo_mensalidade = TipoTransacao.objects.filter(tipo_transacao__iexact="Mensalidade").first()
+    if tipo_mensalidade:
+        transacoes = Transacao.objects.filter(tipo_transacao=tipo_mensalidade).select_related('aluno_id')
+        for transacao in transacoes:
+            aluno = transacao.aluno_id
+            if aluno:
+                salas = Sala.objects.filter(alunos=aluno).select_related('sala_valencia')
+                for sala in salas:
+                    valencia_nome = sala.sala_valencia.valencia_nome
+                    contagem[valencia_nome] += 1
+    return gerar_grafico_pizza(
+        ["Valência", list(contagem.keys())],
+        ["Número de Mensalidades", list(contagem.values())],
+        "Mensalidades por Valência",
+        return_path=return_path
+    )
 
 def gerar_grafico_vacinacao_por_tipo(return_path=False):
     vacinas = Vacina.objects.all()
@@ -126,11 +141,13 @@ def gerar_grafico_vacinacao_por_tipo(return_path=False):
     for v in Vacinacao.objects.select_related('dose_id__vacina_id'):
         nome = v.dose_id.vacina_id.vacina_name
         contagem[nome] += 1
-    return gerar_grafico_barras(["Vacina", list(contagem.keys())],
-                                ["Numero de Doses", list(contagem.values())],
-                                "Doses por Vacina",
-                                rotation=45,
-                                multi_color=True)
+    return gerar_grafico_barras(
+        ["Vacina", list(contagem.keys())],
+        ["Número de Doses", list(contagem.values())],
+        "Doses por Vacina",
+        rotation=45,
+        multi_color=True
+    )
 
 def gerar_grafico_plano_vacinacao(return_path=False):
     contagem = {"Incluídas": 0, "Excluídas": 0}
@@ -139,41 +156,50 @@ def gerar_grafico_plano_vacinacao(return_path=False):
             contagem["Incluídas"] += 1
         else:
             contagem["Excluídas"] += 1
-    return gerar_grafico_pizza(["Plano Vacinação", list(contagem.keys())],
-                               ["Numero de Vacinas", list(contagem.values())],
-                               "Vacinas no Plano Nacional")
+    return gerar_grafico_pizza(
+        ["Plano Vacinação", list(contagem.keys())],
+        ["Número de Vacinas", list(contagem.values())],
+        "Vacinas no Plano Nacional"
+    )
 
 def gerar_grafico_despesas_fixas_por_tipo(return_path=False):
     despesas = DespesaFixa.objects.all()
     categorias = {}
     for d in despesas:
         categorias[d.produto] = categorias.get(d.produto, 0) + d.valor
-    return gerar_grafico_barras(["Produto", list(categorias.keys())],
-                                ["Total (€)", list(categorias.values())],
-                                "Despesas Fixas por Produto",
-                                rotation=45,
-                                multi_color=True)
+    return gerar_grafico_barras(
+        ["Produto", list(categorias.keys())],
+        ["Total (€)", list(categorias.values())],
+        "Despesas Fixas por Produto",
+        rotation=45,
+        multi_color=True
+    )
 
 def gerar_grafico_mensalidades_SS_por_valencia(return_path=False):
-    valencias = Sala.objects.values_list('sala_valencia', flat=True).distinct()
-    contagem = {val: 0 for val in valencias}
+    valencias = Valencia.objects.all()
+    contagem = {val.valencia_nome: 0 for val in valencias}
     for m in ComparticipacaoMensalSs.objects.select_related('aluno_id'):
-        salas = m.aluno_id.sala_set.all()
+        salas = Sala.objects.filter(alunos=m.aluno_id).select_related('sala_valencia')
         for sala in salas:
-            contagem[sala.sala_valencia] += 1
-    return gerar_grafico_pizza(["Valencia", list(contagem.keys())],
-                               ["Mensalidades SS", list(contagem.values())],
-                               "Mensalidades SS por Valência",
-                               return_path=return_path)
+            valencia_nome = sala.sala_valencia.valencia_nome
+            contagem[valencia_nome] += 1
+    return gerar_grafico_pizza(
+        ["Valência", list(contagem.keys())],
+        ["Mensalidades SS", list(contagem.values())],
+        "Mensalidades SS por Valência",
+        return_path=return_path
+    )
 
 def gerar_grafico_alunos_por_sala(return_path=False):
     salas = Sala.objects.all()
     contagem = {sala.sala_nome: sala.alunos.count() for sala in salas}
-    return gerar_grafico_barras(["Sala", list(contagem.keys())],
-                                ["Numero de Alunos", list(contagem.values())],
-                                "Numero de Alunos por Sala",
-                                rotation=45,
-                                multi_color=True)
+    return gerar_grafico_barras(
+        ["Sala", list(contagem.keys())],
+        ["Número de Alunos", list(contagem.values())],
+        "Número de Alunos por Sala",
+        rotation=45,
+        multi_color=True
+    )
 
 def ResponsavelEducativo_HorariosEntradaQuantidade(return_path=False):
     horarios = {}
@@ -182,9 +208,11 @@ def ResponsavelEducativo_HorariosEntradaQuantidade(return_path=False):
         key = f"{hora:02d}:00 - {((hora + 1) % 24):02d}:00"
         horarios[key] = horarios.get(key, 0) + 1
     horarios = dict(sorted(horarios.items()))
-    return gerar_grafico_barras(["Horario", list(horarios.keys())],
-                                ["Numero de Responsaveis", list(horarios.values())],
-                                "Entradas por Hora")
+    return gerar_grafico_barras(
+        ["Horário", list(horarios.keys())],
+        ["Número de Responsáveis", list(horarios.values())],
+        "Entradas por Hora"
+    )
 
 def graficos_modelo(model: str):
     graficos = []

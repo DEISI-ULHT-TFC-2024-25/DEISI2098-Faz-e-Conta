@@ -162,10 +162,10 @@ class Sala(models.Model):
     sala_id = models.AutoField(primary_key=True)
     sala_nome = models.CharField(max_length=255, default='')
     sala_local = models.CharField(max_length=255, null=True, blank=True)
-    sala_valencia = models.CharField(max_length=255, default='')
+    sala_valencia = models.ForeignKey(to='Valencia', on_delete=models.CASCADE, db_column='sala_valencia', null=False, default=1, blank=True)
     alunos = models.ManyToManyField(to='Aluno', db_table='sala_aluno', blank=True)
     funcionario_id = models.ForeignKey(to='Funcionario', on_delete=models.CASCADE, db_column='funcionario_id', null=True, blank=True)
-
+    
     def __str__(self):
         return f"{self.sala_nome}"
 
@@ -336,6 +336,15 @@ class TipoProblema(models.Model):
 
     def __str__(self):
         return f"{self.tipo_problema}"
+
+class Valencia(models.Model):
+    class Meta:
+        db_table = 'valencia'
+    valencia_id = models.AutoField(primary_key=True)
+    valencia_nome = models.CharField(max_length=255, default='')
+    
+    def __str__(self):
+        return f"{self.valencia_nome}"
 
 class CuidadoEspecial(models.Model):
     class Meta:

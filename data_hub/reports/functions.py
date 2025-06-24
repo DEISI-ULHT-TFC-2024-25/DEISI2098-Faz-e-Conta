@@ -4,20 +4,36 @@ from ..functions import *
 from django.db.models import Sum
 from django.db.models import Q
 
-
 def calcular_total_mensalidades():
     return MensalidadeAluno.objects.filter(mensalidade_paga__isnull=False).aggregate(
         total=Sum('mensalidade_paga')
     )['total'] or 0
 
 def calcular_mensalidades_por_valencia():
-    mensalidades_por_valencia = {}
-    mensalidades = MensalidadeAluno.objects.filter(mensalidade_paga__isnull=False)
+    mensalidades_por_valencia = set()
+    valencias = Sala.objects.values_list('sala_valencia', flat=True).distinct()
+    # valencias agora são IDs de Valencia, precisamos buscar o nome
+    for valencia_id in valencias:
+        valencia_obj = Valencia.objects.filter(pk=valencia_id).first()
+        valencia_nome = valencia_obj.valencia_nome if valencia_obj else "Indefinido"
+        mensalidades_por_valencia.add(valencia_nome)
+    mensalidades_por_valencia = {valencia: 0 for valencia in mensalidades_por_valencia}
+    
+    tipo_mensalidade = TipoTransacao.objects.filter(tipo_transacao__icontains="mensalidade").first()
+    if not tipo_mensalidade:
+        return mensalidades_por_valencia
 
-    for m in mensalidades:
-        sala = m.aluno_id.sala_set.first()
-        valencia = sala.sala_valencia if sala else "Indefinido"
-        mensalidades_por_valencia[valencia] = mensalidades_por_valencia.get(valencia, 0) + m.mensalidade_paga
+    transacoes = Transacao.objects.filter(
+        tipo_transacao=tipo_mensalidade
+    ).select_related('aluno_id')
+
+    for transacao in transacoes:
+        sala = Sala.objects.filter(alunos=transacao.aluno_id).first()
+        if sala and sala.sala_valencia:
+            valencia_nome = sala.sala_valencia.valencia_nome
+        else:
+            valencia_nome = "Indefinido"
+        mensalidades_por_valencia[valencia_nome] = mensalidades_por_valencia.get(valencia_nome, 0) - transacao.valor
 
     return mensalidades_por_valencia
 
@@ -31,9 +47,12 @@ def calcular_mensalidades_ss_por_valencia():
     mensalidades = ComparticipacaoMensalSs.objects.filter(mensalidade_paga__isnull=False)
 
     for m in mensalidades:
-        sala = m.aluno_id.sala_set.first()
-        valencia = sala.sala_valencia if sala else "Indefinido"
-        mensalidades_por_valencia_ss[valencia] = mensalidades_por_valencia_ss.get(valencia, 0) + m.mensalidade_paga
+        sala = Sala.objects.filter(alunos=m.aluno_id).first()
+        if sala and sala.sala_valencia:
+            valencia_nome = sala.sala_valencia.valencia_nome
+        else:
+            valencia_nome = "Indefinido"
+        mensalidades_por_valencia_ss[valencia_nome] = mensalidades_por_valencia_ss.get(valencia_nome, 0) + m.mensalidade_paga
 
     return mensalidades_por_valencia_ss
 
@@ -68,14 +87,16 @@ def listar_pagamentos_em_falta(mes=None, ano=None):
     pagamentos = Transacao.objects.all()
     
     for aluno in alunos:
-        pagamentos_data = pagamentos.filter(aluno_id=aluno.pk).order_by('-data_pagamento').first()
+        pagamentos_data = pagamentos.filter(aluno_id=aluno.pk).order_by('-data_transacao').first()
+        sala = Sala.objects.filter(alunos=aluno).first()
+        valencia_nome = sala.sala_valencia.valencia_nome if sala and sala.sala_valencia else "Indefinido"
             
         pagamento_em_falta = {
             "Nome de aluno": f"{aluno.nome_proprio} {aluno.apelido}",
-            "Valência": Sala.objects.get(pk=get_sala_id(aluno.pk)).sala_valencia,
+            "Valência": valencia_nome,
             "Quantia mensal devida": f"{aluno.saldo} __Temp__",
             "Quantia em falta": aluno.saldo,
-            "Data do último pagamento": pagamentos_data.data_pagamento if pagamentos_data else None,
+            "Data do último pagamento": pagamentos_data.data_transacao if pagamentos_data else None,
             "Quantia do último pagamento": pagamentos_data.valor if pagamentos_data else 0,
             "Valor pago pela SS": 0,
             "Data último pagamento SS": None,
@@ -85,4 +106,3 @@ def listar_pagamentos_em_falta(mes=None, ano=None):
         pagamentos_em_falta.append(pagamento_em_falta)
 
     return pagamentos_em_falta
-

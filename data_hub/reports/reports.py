@@ -1,7 +1,6 @@
 import textwrap
 import io
 import base64
-import os
 from datetime import datetime as dt
 
 from ..gerar_graficos import *
@@ -26,8 +25,6 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 
 from PyPDF2 import PdfMerger
-from reportlab.lib.units import mm
-
 
 login_url = 'login'
 
@@ -84,8 +81,9 @@ def gerar_pdf(request, model):
 
 @login_required(login_url=login_url)
 def gerar_pdf_aluno(request, aluno_id):
-    aluno = Aluno.objects.get(aluno_id=aluno_id)
-    if not aluno:
+    try:
+        aluno = Aluno.objects.get(aluno_id=aluno_id)
+    except Aluno.DoesNotExist:
         return HttpResponse("Aluno não encontrado", status=404)
 
     buffer = io.BytesIO()
@@ -107,7 +105,6 @@ def gerar_pdf_aluno(request, aluno_id):
             Paragraph(str(value), wrap_style)
         ])
 
-    # Tabela ocupa 95% da largura da página
     table_width = doc.width * 0.95
     col_widths = [table_width * 0.3, table_width * 0.7]
     table = Table(data, colWidths=col_widths)
@@ -142,7 +139,6 @@ def gerar_pdf_aluno(request, aluno_id):
                 Paragraph(f"{abs(pagamento.valor):.2f}€", wrap_style),
                 Paragraph(f"{pagamento.descricao or ''}", wrap_style),
             ])
-        # Tabela ocupa 95% da largura da página
         trans_table_width = doc.width * 0.95
         trans_col_widths = [
             trans_table_width * 0.18,
