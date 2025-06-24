@@ -5,9 +5,12 @@ from django.db.models import Sum
 from django.db.models import Q
 
 def calcular_total_mensalidades():
-    return MensalidadeAluno.objects.filter(mensalidade_paga__isnull=False).aggregate(
-        total=Sum('mensalidade_paga')
-    )['total'] or 0
+    tipo_mensalidade = TipoTransacao.objects.filter(tipo_transacao__icontains="mensalidade").first()
+    if not tipo_mensalidade:
+        return 0
+    total = Transacao.objects.filter(tipo_transacao=tipo_mensalidade).aggregate(total=Sum('valor'))['total']
+    return total * -1 or 0\
+    
 
 def calcular_mensalidades_por_valencia():
     mensalidades_por_valencia = set()
@@ -106,3 +109,44 @@ def listar_pagamentos_em_falta(mes=None, ano=None):
         pagamentos_em_falta.append(pagamento_em_falta)
 
     return pagamentos_em_falta
+
+
+# Despesas
+def calcular_despesas_fixas(mes=None, ano=None):
+    despesas_fixas = DespesaFixa.objects.all()
+    if mes is not None and ano is not None:
+        despesas_fixas = despesas_fixas.filter(
+            data__month=mes,
+            data__year=ano
+        )
+    total_despesas = 0
+    for despesa in despesas_fixas:
+        try:
+            total_despesas += int(despesa.valor)
+        except (ValueError, TypeError):
+            total_despesas += 0
+    return total_despesas
+
+def calcular_despesas_variaveis(mes=None, ano=None):
+    despesas_variaveis = DespesasVariavel.objects.all()
+    if mes is not None and ano is not None:
+        despesas_variaveis = despesas_variaveis.filter(
+            data__month=mes,
+            data__year=ano
+        )
+    total_despesas = 0
+    for despesa in despesas_variaveis:
+        try:
+            total_despesas += int(despesa.valor)
+        except (ValueError, TypeError):
+            total_despesas += 0
+    return total_despesas
+
+def calcular_despesas(mes=None, ano=None):
+    total_despesas_fixas = calcular_despesas_fixas(mes=mes, ano=ano)
+    total_despesas_variaveis = calcular_despesas_variaveis(mes=mes, ano=ano)
+    return total_despesas_fixas + total_despesas_variaveis
+
+def calcular_despesas_por_aluno(mes=None, ano=None):
+    return (calcular_despesas(mes=mes, ano=ano) / Aluno.objects.count()) if Aluno.objects.count() > 0 else 0
+

@@ -8,6 +8,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
+from django.core.management import call_command
+import io
+
 from data_hub import functions
 
 from .reports.reports import *
@@ -18,6 +21,9 @@ import csv, json
 from .forms import ImportFileForm
 from .forms import *
 import datetime
+import io
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 login_url='login'
@@ -164,39 +170,43 @@ def galeria(request):
 
 @login_required(login_url=login_url)
 def import_data(request):
-    error = None
-    preview = None
     if request.method == 'POST':
         form = ImportFileForm(request.POST, request.FILES)
         if form.is_valid():
-            f = request.FILES['file']
-            ext = f.name.split('.')[-1].lower()
-            if ext not in ['csv', 'json']:
-                error = 'Invalid file extension. Only CSV or JSON allowed.'
-            else:
-                # Read data
-                if ext == 'csv':
-                    decoded = f.read().decode('utf-8').splitlines()
-                    reader = csv.DictReader(decoded)
-                    data = list(reader)
-                else:
-                    data = json.load(f)
-                # Preview for row selection
-                if 'confirm' not in request.POST:
-                    preview = data
-                else:
-                    replace = form.cleaned_data.get('replace', False)
-                    selected_rows = request.POST.getlist('rows')
-                    from .models import Aluno  # Change to your target model
-                    for i, row in enumerate(data):
-                        if replace and str(i) in selected_rows:
-                            Aluno.objects.update_or_create(id=row.get('id'), defaults=row)
-                        else:
-                            Aluno.objects.get_or_create(id=row.get('id'), defaults=row)
+            json_file = request.FILES['file']
+            try:
+                data = json.load(json_file)
+                # Suporta formato de dumpdata do Django (lista de dicts com 'model', 'pk', 'fields')
+                if isinstance(data, list) and all('model' in item and 'fields' in item for item in data):
+                    for item in data:
+                        model_name = item['model'].split('.')[-1]
+                        if model_name == 'aluno':
+                            fields = item['fields']
+                            pk = item['pk']
+                            cuidados_especias = fields.pop('cuidados_especias', [])
+                            aluno_obj, _ = Aluno.objects.update_or_create(pk=pk, defaults=fields)
+                            if hasattr(aluno_obj, 'cuidados_especias'):
+                                aluno_obj.cuidados_especias.set(cuidados_especias)
+                        # Adicione outros modelos conforme necessário
+                    messages.success(request, 'Dados importados com sucesso.')
                     return redirect('index')
+                else:
+                    messages.error(request, 'Formato de arquivo JSON não suportado.')
+            except Exception as e:
+                messages.error(request, f'Erro ao importar: {e}')
+        else:
+            messages.error(request, 'Formulário inválido.')
     else:
         form = ImportFileForm()
-    if preview is not None:
-        return render(request, 'import/import_preview.html', {'form': form, 'data': preview})
-    return render(request, 'import/import.html', {'form': form, 'error': error})
+    return render(request, 'import/import_data.html', {'form': form})
 
+
+@login_required(login_url=login_url)
+def export_data_json(request):
+    buffer = io.StringIO()
+    call_command('dumpdata', 'data_hub', indent=4, stdout=buffer)
+    json_data = buffer.getvalue()
+    response = HttpResponse(json_data, content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename="data_hub.json"'
+    return response
+    

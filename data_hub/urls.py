@@ -40,6 +40,7 @@ reports = [
 ]
 
 imports = [
+    path('export/json', views.export_data_json, name='export_json'),
     path('import/', views.import_data, name='import_data'),
 ]
 

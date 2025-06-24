@@ -2,8 +2,7 @@ from django import forms
 from data_hub.models import *
 
 class ImportFileForm(forms.Form):
-    file = forms.FileField(label="Choose a CSV or JSON file")
-    replace = forms.BooleanField(required=False, label="Replace selected rows?")
+    file = forms.FileField(label="Choose a JSON file")
 
 
 class TransacaoForm(forms.ModelForm):
