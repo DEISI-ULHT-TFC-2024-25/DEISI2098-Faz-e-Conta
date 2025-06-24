@@ -357,20 +357,12 @@ def reportMensal(request, month=None, year=None):
     doc3 = SimpleDocTemplate(buffer3, pagesize=A4)
     elements3 = []
 
-    if month is None or year is None:
-        DespesasFixas = DespesaFixa.objects.all().values('valor')
-        DespesasVariaveis = DespesasVariavel.objects.all().values('valor')
-    else:
-        DespesasFixas = DespesaFixa.objects.filter(data__month=month, data__year=year).values('valor')
-        DespesasVariaveis = DespesasVariavel.objects.filter(data__month=month, data__year=year).values('valor')
-
-    fixed_expenses = float(DespesasFixas.aggregate(sum=Sum('valor'))['sum'] or 0)
-    variable_expenses = float(DespesasVariaveis.aggregate(sum=Sum('valor'))['sum'] or 0)
+   
+    fixed_expenses = float(calcular_despesas_fixas(mes=month, ano=year) or 0)
+    variable_expenses = float(calcular_despesas_variaveis(mes=month, ano=year) or 0)
     total_students = Aluno.objects.count() or 1
 
-    cost_per_student = (
-        fixed_expenses + variable_expenses - (total_fees_paid_by_students + total_fees_paid_by_ss)
-    ) / total_students * -1
+    cost_per_student = calcular_despesas_por_aluno(mes=month, ano=year) * -1
 
     final_balance = (
         total_fees_paid_by_students + total_fees_paid_by_ss

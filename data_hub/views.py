@@ -18,6 +18,9 @@ import csv, json
 from .forms import ImportFileForm
 from .forms import *
 import datetime
+import io
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 login_url='login'
@@ -200,3 +203,171 @@ def import_data(request):
         return render(request, 'import/import_preview.html', {'form': form, 'data': preview})
     return render(request, 'import/import.html', {'form': form, 'error': error})
 
+@login_required(login_url=login_url)
+def export_data_csv(request):
+    # Export Aluno data as CSV
+    alunos = Aluno.objects.all()
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="alunos_export.csv"'
+
+    writer = csv.writer(response)
+    # Write header
+    fields = [field.name for field in Aluno._meta.fields]
+    writer.writerow(fields)
+    # Write data rows
+    for aluno in alunos:
+        writer.writerow([getattr(aluno, field) for field in fields])
+
+    return response
+
+@login_required(login_url=login_url)
+def export_data_json(request):
+    os.system('python manage.py dumpdata data_hub --indent 4 > data_hub.json')
+    with open('data_hub.json', 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/json')
+        response['Content-Disposition'] = 'attachment; filename="data_hub.json"'
+        return response
+
+
+@csrf_exempt
+@login_required(login_url=login_url)
+def import_json(request):
+    if request.method == 'POST':
+        file = request.FILES.get('file')
+        if not file:
+            messages.error(request, 'Nenhum ficheiro enviado.')
+            return redirect('import_json')
+        try:
+            data = json.load(file)
+            for obj in data:
+                model_name = obj.get('model')
+                fields = obj.get('fields', {})
+                pk = obj.get('pk')
+                if model_name == 'data_hub.aluno':
+                    cuidados = fields.pop('cuidados_especias', [])
+                    aluno, _ = Aluno.objects.update_or_create(pk=pk, defaults=fields)
+                    if hasattr(aluno, 'cuidados_especias'):
+                        aluno.cuidados_especias.set(cuidados)
+                elif model_name == 'data_hub.responsaveleducativo':
+                    aluno_id = fields.pop('aluno_id', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    ResponsavelEducativo.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.alunosaida':
+                    aluno_id = fields.pop('aluno_id', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    AlunoSaida.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.vacinacao':
+                    aluno_id = fields.pop('aluno_id', None)
+                    dose_id = fields.pop('dose_id', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    if dose_id:
+                        fields['dose_id'] = Dose.objects.get(pk=dose_id)
+                    Vacinacao.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.despesafixa':
+                    DespesaFixa.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.despesasvariavel':
+                    DespesasVariavel.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.salario':
+                    Salario.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.linkfiliacao':
+                    aluno_id = fields.pop('aluno_id', None)
+                    resp_id = fields.pop('responsavel_educativo_id', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    if resp_id:
+                        fields['responsavel_educativo_id'] = ResponsavelEducativo.objects.get(pk=resp_id)
+                    LinkFiliacao.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.tipotransacao':
+                    TipoTransacao.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.transacao':
+                    aluno_id = fields.pop('aluno_id', None)
+                    tipo_transacao = fields.pop('tipo_transacao', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    if tipo_transacao:
+                        fields['tipo_transacao'] = TipoTransacao.objects.get(pk=tipo_transacao)
+                    Transacao.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.sala':
+                    alunos = fields.pop('alunos', [])
+                    funcionario_id = fields.pop('funcionario_id', None)
+                    if funcionario_id:
+                        fields['funcionario_id'] = Funcionario.objects.get(pk=funcionario_id)
+                    sala, _ = Sala.objects.update_or_create(pk=pk, defaults=fields)
+                    if alunos:
+                        sala.alunos.set(Aluno.objects.filter(pk__in=alunos))
+                elif model_name == 'data_hub.mensalidadealuno':
+                    aluno_id = fields.pop('aluno_id', None)
+                    aluno_financas_id = fields.pop('aluno_financas_id', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    if aluno_financas_id:
+                        fields['aluno_financas_id'] = AlunoFinancas.objects.get(pk=aluno_financas_id)
+                    MensalidadeAluno.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.alunofinancas':
+                    aluno_id = fields.pop('aluno_id', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    AlunoFinancas.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.alunofinacascalc':
+                    funcionario_id = fields.pop('funcionario_id', None)
+                    if funcionario_id:
+                        fields['funcionario_id'] = Funcionario.objects.get(pk=funcionario_id)
+                    AlunoFinacasCalc.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.funcionario':
+                    salario = fields.pop('salario', None)
+                    if salario:
+                        fields['salario'] = Salario.objects.get(pk=salario)
+                    Funcionario.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.comparticipacaomensalss':
+                    aluno_id = fields.pop('aluno_id', None)
+                    aluno_financas_id = fields.pop('aluno_financas_id', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    if aluno_financas_id:
+                        fields['aluno_financas_id'] = AlunoFinancas.objects.get(pk=aluno_financas_id)
+                    ComparticipacaoMensalSs.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.vacina':
+                    Vacina.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.dose':
+                    vacina_id = fields.pop('vacina_id', None)
+                    if vacina_id:
+                        fields['vacina_id'] = Vacina.objects.get(pk=vacina_id)
+                    Dose.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.divida':
+                    aluno_id = fields.pop('aluno_id', None)
+                    if aluno_id:
+                        fields['aluno_id'] = Aluno.objects.get(pk=aluno_id)
+                    Divida.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.acordo':
+                    resp_id = fields.pop('responsavel_educativo_id', None)
+                    divida_id = fields.pop('divida_id', None)
+                    if resp_id:
+                        fields['responsavel_educativo_id'] = ResponsavelEducativo.objects.get(pk=resp_id)
+                    if divida_id:
+                        fields['divida_id'] = Divida.objects.get(pk=divida_id)
+                    Acordo.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.tipoimagem':
+                    TipoImagem.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.imagem':
+                    tipos = fields.pop('tipo_imagem_id', [])
+                    imagem, _ = Imagem.objects.update_or_create(pk=pk, defaults=fields)
+                    if tipos:
+                        imagem.tipo_imagem_id.set(TipoImagem.objects.filter(pk__in=tipos))
+                elif model_name == 'data_hub.tipoproblema':
+                    TipoProblema.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.valencia':
+                    Valencia.objects.update_or_create(pk=pk, defaults=fields)
+                elif model_name == 'data_hub.cuidadoespecial':
+                    tipo_problema = fields.pop('tipo_problema', None)
+                    if tipo_problema:
+                        fields['tipo_problema'] = TipoProblema.objects.get(pk=tipo_problema)
+                    CuidadoEspecial.objects.update_or_create(pk=pk, defaults=fields)
+            messages.success(request, 'Importação concluída com sucesso.')
+            return redirect('index')
+        except Exception as e:
+            messages.error(request, f'Erro ao importar: {e}')
+            return redirect('import_json')
+    return render(request, 'index.html', {'error': 'Método inválido.'})

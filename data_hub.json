@@ -1,0 +1,4594 @@
+[
+{
+    "model": "data_hub.aluno",
+    "pk": 1,
+    "fields": {
+        "nome_proprio": "Ana",
+        "apelido": "Santos",
+        "archive_flag": false,
+        "processo": "2023001",
+        "data_admissao": "2023-09-01T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-01T00:00:00Z",
+        "data_nascimento": "2015-04-10T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "12345678",
+        "data_validade": "2030-04-10T00:00:00Z",
+        "niss": 123456789,
+        "nif": 123456789,
+        "morada": "Rua das Flores",
+        "codigo_postal": "1000-001",
+        "concelho": "Lisboa",
+        "fregesia": "Arroios",
+        "escolaridade_anterior": "1º Ciclo",
+        "motivo_admissao": "Transferência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 2,
+    "fields": {
+        "nome_proprio": "Bruno",
+        "apelido": "Silva",
+        "archive_flag": false,
+        "processo": "2023002",
+        "data_admissao": "2023-09-05T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-05T00:00:00Z",
+        "data_nascimento": "2014-08-20T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "87654321",
+        "data_validade": "2029-08-20T00:00:00Z",
+        "niss": 987654321,
+        "nif": 987654321,
+        "morada": "Rua dos Cedros",
+        "codigo_postal": "2000-002",
+        "concelho": "Santarém",
+        "fregesia": "Marvila",
+        "escolaridade_anterior": "2º Ciclo",
+        "motivo_admissao": "Residência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 3,
+    "fields": {
+        "nome_proprio": "Catarina",
+        "apelido": "Oliveira",
+        "archive_flag": false,
+        "processo": "2023003",
+        "data_admissao": "2023-09-10T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-10T00:00:00Z",
+        "data_nascimento": "2013-12-15T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "56781234",
+        "data_validade": "2028-12-15T00:00:00Z",
+        "niss": 234567890,
+        "nif": 234567890,
+        "morada": "Avenida Central",
+        "codigo_postal": "3000-003",
+        "concelho": "Coimbra",
+        "fregesia": "Santo António",
+        "escolaridade_anterior": "3º Ciclo",
+        "motivo_admissao": "Bolsa",
+        "saldo": 0,
+        "cuidados_especias": [
+            3
+        ]
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 4,
+    "fields": {
+        "nome_proprio": "Daniel",
+        "apelido": "Pereira",
+        "archive_flag": false,
+        "processo": "2023004",
+        "data_admissao": "2023-09-12T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-12T00:00:00Z",
+        "data_nascimento": "2016-02-05T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "43218765",
+        "data_validade": "2031-02-05T00:00:00Z",
+        "niss": 345678901,
+        "nif": 345678901,
+        "morada": "Rua Nova",
+        "codigo_postal": "4000-004",
+        "concelho": "Porto",
+        "fregesia": "Bonfim",
+        "escolaridade_anterior": "Pré-Escolar",
+        "motivo_admissao": "Transferência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 5,
+    "fields": {
+        "nome_proprio": "Elisa",
+        "apelido": "Moreira",
+        "archive_flag": false,
+        "processo": "2023005",
+        "data_admissao": "2023-09-15T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-15T00:00:00Z",
+        "data_nascimento": "2015-06-30T00:00:00Z",
+        "documento": "Passaporte",
+        "numero_documento": "78912345",
+        "data_validade": "2028-06-30T00:00:00Z",
+        "niss": 456789012,
+        "nif": 456789012,
+        "morada": "Rua dos Cravos",
+        "codigo_postal": "5000-005",
+        "concelho": "Braga",
+        "fregesia": "Maximinos",
+        "escolaridade_anterior": "1º Ciclo",
+        "motivo_admissao": "Residência",
+        "saldo": 0,
+        "cuidados_especias": [
+            1
+        ]
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 6,
+    "fields": {
+        "nome_proprio": "Fernando",
+        "apelido": "Martins",
+        "archive_flag": false,
+        "processo": "2023006",
+        "data_admissao": "2023-09-18T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-18T00:00:00Z",
+        "data_nascimento": "2012-11-25T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "12349876",
+        "data_validade": "2027-11-25T00:00:00Z",
+        "niss": 567890123,
+        "nif": 567890123,
+        "morada": "Travessa do Sol",
+        "codigo_postal": "6000-006",
+        "concelho": "Castelo Branco",
+        "fregesia": "Alcains",
+        "escolaridade_anterior": "Secundário",
+        "motivo_admissao": "Bolsa",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 7,
+    "fields": {
+        "nome_proprio": "Gabriela",
+        "apelido": "Alves",
+        "archive_flag": false,
+        "processo": "2023007",
+        "data_admissao": "2023-09-20T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-20T00:00:00Z",
+        "data_nascimento": "2014-05-18T00:00:00Z",
+        "documento": "Passaporte",
+        "numero_documento": "23456789",
+        "data_validade": "2029-05-18T00:00:00Z",
+        "niss": 678901234,
+        "nif": 678901234,
+        "morada": "Rua das Oliveiras",
+        "codigo_postal": "7000-007",
+        "concelho": "Évora",
+        "fregesia": "Mitra",
+        "escolaridade_anterior": "2º Ciclo",
+        "motivo_admissao": "Transferência",
+        "saldo": 0,
+        "cuidados_especias": [
+            2
+        ]
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 8,
+    "fields": {
+        "nome_proprio": "Henrique",
+        "apelido": "Ramos",
+        "archive_flag": false,
+        "processo": "2023008",
+        "data_admissao": "2023-09-22T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-22T00:00:00Z",
+        "data_nascimento": "2013-03-10T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "98765432",
+        "data_validade": "2028-03-10T00:00:00Z",
+        "niss": 789012345,
+        "nif": 789012345,
+        "morada": "Alameda Azul",
+        "codigo_postal": "8000-008",
+        "concelho": "Faro",
+        "fregesia": "Montenegro",
+        "escolaridade_anterior": "3º Ciclo",
+        "motivo_admissao": "Residência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 9,
+    "fields": {
+        "nome_proprio": "Inês",
+        "apelido": "Carvalho",
+        "archive_flag": false,
+        "processo": "2023009",
+        "data_admissao": "2023-09-25T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-25T00:00:00Z",
+        "data_nascimento": "2015-09-28T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "34567890",
+        "data_validade": "2030-09-28T00:00:00Z",
+        "niss": 890123456,
+        "nif": 890123456,
+        "morada": "Largo do Carmo",
+        "codigo_postal": "9000-009",
+        "concelho": "Funchal",
+        "fregesia": "Santa Maria",
+        "escolaridade_anterior": "1º Ciclo",
+        "motivo_admissao": "Bolsa",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 10,
+    "fields": {
+        "nome_proprio": "João",
+        "apelido": "Lopes",
+        "archive_flag": false,
+        "processo": "2023010",
+        "data_admissao": "2023-09-28T00:00:00Z",
+        "data_ultima_renovacao": "2024-09-28T00:00:00Z",
+        "data_nascimento": "2016-07-22T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "67890123",
+        "data_validade": "2031-07-22T00:00:00Z",
+        "niss": 901234567,
+        "nif": 901234567,
+        "morada": "Avenida do Mar",
+        "codigo_postal": "1000-010",
+        "concelho": "Lisboa",
+        "fregesia": "Alvalade",
+        "escolaridade_anterior": "Pré-Escolar",
+        "motivo_admissao": "Residência",
+        "saldo": 0,
+        "cuidados_especias": [
+            1
+        ]
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 11,
+    "fields": {
+        "nome_proprio": "Kátia",
+        "apelido": "Monteiro",
+        "archive_flag": false,
+        "processo": "2023011",
+        "data_admissao": "2023-10-01T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-01T00:00:00Z",
+        "data_nascimento": "2014-12-10T00:00:00Z",
+        "documento": "Passaporte",
+        "numero_documento": "45678901",
+        "data_validade": "2029-12-10T00:00:00Z",
+        "niss": 123987654,
+        "nif": 123987654,
+        "morada": "Travessa da Ponte",
+        "codigo_postal": "1100-011",
+        "concelho": "Porto",
+        "fregesia": "Ramalde",
+        "escolaridade_anterior": "2º Ciclo",
+        "motivo_admissao": "Transferência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 12,
+    "fields": {
+        "nome_proprio": "Leonardo",
+        "apelido": "Freitas",
+        "archive_flag": false,
+        "processo": "2023012",
+        "data_admissao": "2023-10-05T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-05T00:00:00Z",
+        "data_nascimento": "2013-10-05T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "78901234",
+        "data_validade": "2028-10-05T00:00:00Z",
+        "niss": 234876543,
+        "nif": 234876543,
+        "morada": "Rua da Amizade",
+        "codigo_postal": "1200-012",
+        "concelho": "Santarém",
+        "fregesia": "Amiais",
+        "escolaridade_anterior": "3º Ciclo",
+        "motivo_admissao": "Bolsa",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 13,
+    "fields": {
+        "nome_proprio": "Mariana",
+        "apelido": "Barros",
+        "archive_flag": false,
+        "processo": "2023013",
+        "data_admissao": "2023-10-08T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-08T00:00:00Z",
+        "data_nascimento": "2012-08-15T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "56789012",
+        "data_validade": "2027-08-15T00:00:00Z",
+        "niss": 345765432,
+        "nif": 345765432,
+        "morada": "Rua do Comércio",
+        "codigo_postal": "1300-013",
+        "concelho": "Coimbra",
+        "fregesia": "Almedina",
+        "escolaridade_anterior": "Secundário",
+        "motivo_admissao": "Residência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 14,
+    "fields": {
+        "nome_proprio": "Nuno",
+        "apelido": "Castro",
+        "archive_flag": false,
+        "processo": "2023014",
+        "data_admissao": "2023-10-10T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-10T00:00:00Z",
+        "data_nascimento": "2016-01-30T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "90123456",
+        "data_validade": "2031-01-30T00:00:00Z",
+        "niss": 456654321,
+        "nif": 456654321,
+        "morada": "Praceta dos Estudantes",
+        "codigo_postal": "1400-014",
+        "concelho": "Braga",
+        "fregesia": "Lamaçães",
+        "escolaridade_anterior": "Pré-Escolar",
+        "motivo_admissao": "Transferência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 15,
+    "fields": {
+        "nome_proprio": "Olívia",
+        "apelido": "Cunha",
+        "archive_flag": false,
+        "processo": "2023015",
+        "data_admissao": "2023-10-15T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-15T00:00:00Z",
+        "data_nascimento": "2015-11-20T00:00:00Z",
+        "documento": "Passaporte",
+        "numero_documento": "23456701",
+        "data_validade": "2030-11-20T00:00:00Z",
+        "niss": 567543210,
+        "nif": 567543210,
+        "morada": "Travessa das Árvores",
+        "codigo_postal": "1500-015",
+        "concelho": "Castelo Branco",
+        "fregesia": "São Vicente",
+        "escolaridade_anterior": "1º Ciclo",
+        "motivo_admissao": "Bolsa",
+        "saldo": 0,
+        "cuidados_especias": [
+            1
+        ]
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 16,
+    "fields": {
+        "nome_proprio": "Pedro",
+        "apelido": "Gomes",
+        "archive_flag": false,
+        "processo": "2023016",
+        "data_admissao": "2023-10-18T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-18T00:00:00Z",
+        "data_nascimento": "2014-06-05T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "67890145",
+        "data_validade": "2029-06-05T00:00:00Z",
+        "niss": 678432109,
+        "nif": 678432109,
+        "morada": "Rua das Hortas",
+        "codigo_postal": "1600-016",
+        "concelho": "Évora",
+        "fregesia": "Senhora da Saúde",
+        "escolaridade_anterior": "2º Ciclo",
+        "motivo_admissao": "Residência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 17,
+    "fields": {
+        "nome_proprio": "Raquel",
+        "apelido": "Neves",
+        "archive_flag": false,
+        "processo": "2023017",
+        "data_admissao": "2023-10-20T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-20T00:00:00Z",
+        "data_nascimento": "2013-04-14T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "34567812",
+        "data_validade": "2028-04-14T00:00:00Z",
+        "niss": 789321098,
+        "nif": 789321098,
+        "morada": "Avenida do Sol",
+        "codigo_postal": "1700-017",
+        "concelho": "Faro",
+        "fregesia": "Patacão",
+        "escolaridade_anterior": "3º Ciclo",
+        "motivo_admissao": "Transferência",
+        "saldo": 0,
+        "cuidados_especias": [
+            4
+        ]
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 18,
+    "fields": {
+        "nome_proprio": "Samuel",
+        "apelido": "Teixeira",
+        "archive_flag": false,
+        "processo": "2023018",
+        "data_admissao": "2023-10-22T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-22T00:00:00Z",
+        "data_nascimento": "2012-12-22T00:00:00Z",
+        "documento": "Passaporte",
+        "numero_documento": "89012367",
+        "data_validade": "2027-12-22T00:00:00Z",
+        "niss": 890210987,
+        "nif": 890210987,
+        "morada": "Rua Nova",
+        "codigo_postal": "1800-018",
+        "concelho": "Funchal",
+        "fregesia": "Câmara de Lobos",
+        "escolaridade_anterior": "Secundário",
+        "motivo_admissao": "Bolsa",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 19,
+    "fields": {
+        "nome_proprio": "Tatiana",
+        "apelido": "Ribeiro",
+        "archive_flag": false,
+        "processo": "2023019",
+        "data_admissao": "2023-10-25T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-25T00:00:00Z",
+        "data_nascimento": "2016-09-05T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "12345698",
+        "data_validade": "2031-09-05T00:00:00Z",
+        "niss": 901098765,
+        "nif": 901098765,
+        "morada": "Largo das Fontes",
+        "codigo_postal": "1900-019",
+        "concelho": "Lisboa",
+        "fregesia": "Benfica",
+        "escolaridade_anterior": "Pré-Escolar",
+        "motivo_admissao": "Residência",
+        "saldo": 0,
+        "cuidados_especias": [
+            1
+        ]
+    }
+},
+{
+    "model": "data_hub.aluno",
+    "pk": 20,
+    "fields": {
+        "nome_proprio": "Ulisses",
+        "apelido": "Machado",
+        "archive_flag": false,
+        "processo": "2023020",
+        "data_admissao": "2023-10-28T00:00:00Z",
+        "data_ultima_renovacao": "2024-10-28T00:00:00Z",
+        "data_nascimento": "2015-07-07T00:00:00Z",
+        "documento": "CC",
+        "numero_documento": "23456789",
+        "data_validade": "2030-07-07T00:00:00Z",
+        "niss": 912345678,
+        "nif": 912345678,
+        "morada": "Rua da Liberdade",
+        "codigo_postal": "2000-020",
+        "concelho": "Porto",
+        "fregesia": "Boavista",
+        "escolaridade_anterior": "1º Ciclo",
+        "motivo_admissao": "Transferência",
+        "saldo": 0,
+        "cuidados_especias": []
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 1,
+    "fields": {
+        "nome_proprio": "Ana",
+        "apelido": "Santos",
+        "data_nascimento": "1985-06-15",
+        "documento": "CC",
+        "numero_documento": 12345678,
+        "data_validade": "2030-06-15",
+        "niss": 123456789,
+        "nif": 123456789,
+        "morada": "Rua das Flores",
+        "codigo_postal": "1000-001",
+        "concelho": "Lisboa",
+        "fregesia": "Arroios",
+        "telefone": 912345678,
+        "email": "ana.santos@email.com",
+        "profissao": "Professora",
+        "morada_emprego": "Rua da Escola",
+        "horario_trabalho": "08:00:00",
+        "aluno_id": 1,
+        "salario": 1200
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 2,
+    "fields": {
+        "nome_proprio": "Bruno",
+        "apelido": "Silva",
+        "data_nascimento": "1979-09-22",
+        "documento": "CC",
+        "numero_documento": 87654321,
+        "data_validade": "2029-09-22",
+        "niss": 987654321,
+        "nif": 987654321,
+        "morada": "Rua dos Cedros",
+        "codigo_postal": "2000-002",
+        "concelho": "Santarém",
+        "fregesia": "Marvila",
+        "telefone": 923456789,
+        "email": "bruno.silva@email.com",
+        "profissao": "Engenheiro",
+        "morada_emprego": "Rua da Empresa",
+        "horario_trabalho": "09:00:00",
+        "aluno_id": 2,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 3,
+    "fields": {
+        "nome_proprio": "Catarina",
+        "apelido": "Oliveira",
+        "data_nascimento": "1990-04-10",
+        "documento": "Passaporte",
+        "numero_documento": 56781234,
+        "data_validade": "2031-04-10",
+        "niss": 234567890,
+        "nif": 234567890,
+        "morada": "Avenida Central",
+        "codigo_postal": "3000-003",
+        "concelho": "Coimbra",
+        "fregesia": "Santo António",
+        "telefone": 934567890,
+        "email": "catarina.oliveira@email.com",
+        "profissao": "Médica",
+        "morada_emprego": "Hospital Coimbra",
+        "horario_trabalho": "07:30:00",
+        "aluno_id": 3,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 4,
+    "fields": {
+        "nome_proprio": "Daniel",
+        "apelido": "Pereira",
+        "data_nascimento": "1982-07-18",
+        "documento": "CC",
+        "numero_documento": 43218765,
+        "data_validade": "2032-07-18",
+        "niss": 345678901,
+        "nif": 345678901,
+        "morada": "Rua Nova",
+        "codigo_postal": "4000-004",
+        "concelho": "Porto",
+        "fregesia": "Bonfim",
+        "telefone": 945678901,
+        "email": "daniel.pereira@email.com",
+        "profissao": "Advogado",
+        "morada_emprego": "Escritório Legal",
+        "horario_trabalho": "10:00:00",
+        "aluno_id": 4,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 5,
+    "fields": {
+        "nome_proprio": "Elisa",
+        "apelido": "Moreira",
+        "data_nascimento": "1987-12-25",
+        "documento": "CC",
+        "numero_documento": 78912345,
+        "data_validade": "2028-12-25",
+        "niss": 456789012,
+        "nif": 456789012,
+        "morada": "Rua dos Cravos",
+        "codigo_postal": "5000-005",
+        "concelho": "Braga",
+        "fregesia": "Maximinos",
+        "telefone": 956789012,
+        "email": "elisa.moreira@email.com",
+        "profissao": "Arquiteta",
+        "morada_emprego": "Estúdio de Arquitetura",
+        "horario_trabalho": "09:30:00",
+        "aluno_id": 5,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 6,
+    "fields": {
+        "nome_proprio": "Fernando",
+        "apelido": "Martins",
+        "data_nascimento": "1975-03-05",
+        "documento": "CC",
+        "numero_documento": 12349876,
+        "data_validade": "2027-03-05",
+        "niss": 567890123,
+        "nif": 567890123,
+        "morada": "Travessa do Sol",
+        "codigo_postal": "6000-006",
+        "concelho": "Castelo Branco",
+        "fregesia": "Alcains",
+        "telefone": 967890123,
+        "email": "fernando.martins@email.com",
+        "profissao": "Policial",
+        "morada_emprego": "Delegacia Central",
+        "horario_trabalho": "06:00:00",
+        "aluno_id": 6,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 7,
+    "fields": {
+        "nome_proprio": "Gabriela",
+        "apelido": "Alves",
+        "data_nascimento": "1991-10-30",
+        "documento": "Passaporte",
+        "numero_documento": 23456789,
+        "data_validade": "2029-10-30",
+        "niss": 678901234,
+        "nif": 678901234,
+        "morada": "Rua das Oliveiras",
+        "codigo_postal": "7000-007",
+        "concelho": "Évora",
+        "fregesia": "Mitra",
+        "telefone": 978901234,
+        "email": "gabriela.alves@email.com",
+        "profissao": "Designer",
+        "morada_emprego": "Rua Criativa",
+        "horario_trabalho": "10:30:00",
+        "aluno_id": 7,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 8,
+    "fields": {
+        "nome_proprio": "Henrique",
+        "apelido": "Ramos",
+        "data_nascimento": "1984-11-22",
+        "documento": "CC",
+        "numero_documento": 98765432,
+        "data_validade": "2028-11-22",
+        "niss": 789012345,
+        "nif": 789012345,
+        "morada": "Alameda Azul",
+        "codigo_postal": "8000-008",
+        "concelho": "Faro",
+        "fregesia": "Montenegro",
+        "telefone": 989012345,
+        "email": "henrique.ramos@email.com",
+        "profissao": "Empresário",
+        "morada_emprego": "Centro Empresarial",
+        "horario_trabalho": "11:00:00",
+        "aluno_id": 8,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 9,
+    "fields": {
+        "nome_proprio": "Inês",
+        "apelido": "Carvalho",
+        "data_nascimento": "1978-06-01",
+        "documento": "CC",
+        "numero_documento": 34567890,
+        "data_validade": "2030-06-01",
+        "niss": 890123456,
+        "nif": 890123456,
+        "morada": "Largo do Carmo",
+        "codigo_postal": "9000-009",
+        "concelho": "Funchal",
+        "fregesia": "Santa Maria",
+        "telefone": 999123456,
+        "email": "ines.carvalho@email.com",
+        "profissao": "Psicóloga",
+        "morada_emprego": "Consultório Psicologia",
+        "horario_trabalho": "08:30:00",
+        "aluno_id": 9,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 10,
+    "fields": {
+        "nome_proprio": "João",
+        "apelido": "Lopes",
+        "data_nascimento": "1995-09-12",
+        "documento": "CC",
+        "numero_documento": 67890123,
+        "data_validade": "2031-09-12",
+        "niss": 901234567,
+        "nif": 901234567,
+        "morada": "Avenida do Mar",
+        "codigo_postal": "1000-010",
+        "concelho": "Lisboa",
+        "fregesia": "Alvalade",
+        "telefone": 911234567,
+        "email": "joao.lopes@email.com",
+        "profissao": "Programador",
+        "morada_emprego": "Empresa Tech",
+        "horario_trabalho": "09:00:00",
+        "aluno_id": 10,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 11,
+    "fields": {
+        "nome_proprio": "Kátia",
+        "apelido": "Monteiro",
+        "data_nascimento": "1989-02-18",
+        "documento": "CC",
+        "numero_documento": 45678901,
+        "data_validade": "2029-02-18",
+        "niss": 123987654,
+        "nif": 123987654,
+        "morada": "Travessa da Ponte",
+        "codigo_postal": "1100-011",
+        "concelho": "Porto",
+        "fregesia": "Ramalde",
+        "telefone": 922345678,
+        "email": "katia.monteiro@email.com",
+        "profissao": "Enfermeira",
+        "morada_emprego": "Hospital São João",
+        "horario_trabalho": "07:00:00",
+        "aluno_id": 11,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 12,
+    "fields": {
+        "nome_proprio": "Leonardo",
+        "apelido": "Freitas",
+        "data_nascimento": "1976-12-05",
+        "documento": "Passaporte",
+        "numero_documento": 78901234,
+        "data_validade": "2028-12-05",
+        "niss": 234876543,
+        "nif": 234876543,
+        "morada": "Rua da Amizade",
+        "codigo_postal": "1200-012",
+        "concelho": "Santarém",
+        "fregesia": "Amiais",
+        "telefone": 933456789,
+        "email": "leonardo.freitas@email.com",
+        "profissao": "Contabilista",
+        "morada_emprego": "Escritório Financeiro",
+        "horario_trabalho": "09:00:00",
+        "aluno_id": 12,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 13,
+    "fields": {
+        "nome_proprio": "Mariana",
+        "apelido": "Barros",
+        "data_nascimento": "1980-08-22",
+        "documento": "CC",
+        "numero_documento": 56789012,
+        "data_validade": "2027-08-22",
+        "niss": 345765432,
+        "nif": 345765432,
+        "morada": "Rua do Comércio",
+        "codigo_postal": "1300-013",
+        "concelho": "Coimbra",
+        "fregesia": "Almedina",
+        "telefone": 944567890,
+        "email": "mariana.barros@email.com",
+        "profissao": "Farmacêutica",
+        "morada_emprego": "Farmácia Coimbra",
+        "horario_trabalho": "08:00:00",
+        "aluno_id": 13,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 14,
+    "fields": {
+        "nome_proprio": "Nuno",
+        "apelido": "Castro",
+        "data_nascimento": "1993-04-30",
+        "documento": "CC",
+        "numero_documento": 90123456,
+        "data_validade": "2031-04-30",
+        "niss": 456654321,
+        "nif": 456654321,
+        "morada": "Praceta dos Estudantes",
+        "codigo_postal": "1400-014",
+        "concelho": "Braga",
+        "fregesia": "Lamaçães",
+        "telefone": 955678901,
+        "email": "nuno.castro@email.com",
+        "profissao": "Engenheiro Civil",
+        "morada_emprego": "Construtora Braga",
+        "horario_trabalho": "07:30:00",
+        "aluno_id": 14,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 15,
+    "fields": {
+        "nome_proprio": "Olívia",
+        "apelido": "Cunha",
+        "data_nascimento": "1977-05-18",
+        "documento": "Passaporte",
+        "numero_documento": 23456701,
+        "data_validade": "2029-05-18",
+        "niss": 567543210,
+        "nif": 567543210,
+        "morada": "Travessa das Árvores",
+        "codigo_postal": "1500-015",
+        "concelho": "Castelo Branco",
+        "fregesia": "São Vicente",
+        "telefone": 966789012,
+        "email": "olivia.cunha@email.com",
+        "profissao": "Professora",
+        "morada_emprego": "Escola Secundária",
+        "horario_trabalho": "08:30:00",
+        "aluno_id": 15,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 16,
+    "fields": {
+        "nome_proprio": "Pedro",
+        "apelido": "Gomes",
+        "data_nascimento": "1985-07-09",
+        "documento": "CC",
+        "numero_documento": 67890145,
+        "data_validade": "2028-07-09",
+        "niss": 678432109,
+        "nif": 678432109,
+        "morada": "Rua das Hortas",
+        "codigo_postal": "1600-016",
+        "concelho": "Évora",
+        "fregesia": "Senhora da Saúde",
+        "telefone": 977890123,
+        "email": "pedro.gomes@email.com",
+        "profissao": "Gestor",
+        "morada_emprego": "Empresa Gestão",
+        "horario_trabalho": "09:00:00",
+        "aluno_id": 16,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 17,
+    "fields": {
+        "nome_proprio": "Raquel",
+        "apelido": "Neves",
+        "data_nascimento": "1992-03-21",
+        "documento": "CC",
+        "numero_documento": 34567812,
+        "data_validade": "2027-03-21",
+        "niss": 789321098,
+        "nif": 789321098,
+        "morada": "Avenida do Sol",
+        "codigo_postal": "1700-017",
+        "concelho": "Faro",
+        "fregesia": "Patacão",
+        "telefone": 988901234,
+        "email": "raquel.neves@email.com",
+        "profissao": "Tradutora",
+        "morada_emprego": "Agência de Tradução",
+        "horario_trabalho": "10:00:00",
+        "aluno_id": 17,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 18,
+    "fields": {
+        "nome_proprio": "Samuel",
+        "apelido": "Teixeira",
+        "data_nascimento": "1981-06-14",
+        "documento": "Passaporte",
+        "numero_documento": 89012367,
+        "data_validade": "2029-06-14",
+        "niss": 890210987,
+        "nif": 890210987,
+        "morada": "Rua Nova",
+        "codigo_postal": "1800-018",
+        "concelho": "Funchal",
+        "fregesia": "Câmara de Lobos",
+        "telefone": 999012345,
+        "email": "samuel.teixeira@email.com",
+        "profissao": "Motorista",
+        "morada_emprego": "Transporte Público",
+        "horario_trabalho": "06:00:00",
+        "aluno_id": 18,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 19,
+    "fields": {
+        "nome_proprio": "Tatiana",
+        "apelido": "Ribeiro",
+        "data_nascimento": "1974-09-08",
+        "documento": "CC",
+        "numero_documento": 12345698,
+        "data_validade": "2030-09-08",
+        "niss": 901098765,
+        "nif": 901098765,
+        "morada": "Largo das Fontes",
+        "codigo_postal": "1900-019",
+        "concelho": "Lisboa",
+        "fregesia": "Benfica",
+        "telefone": 911223344,
+        "email": "tatiana.ribeiro@email.com",
+        "profissao": "Assistente Social",
+        "morada_emprego": "Câmara Municipal",
+        "horario_trabalho": "09:30:00",
+        "aluno_id": 19,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.responsaveleducativo",
+    "pk": 20,
+    "fields": {
+        "nome_proprio": "Ulisses",
+        "apelido": "Machado",
+        "data_nascimento": "1986-11-30",
+        "documento": "CC",
+        "numero_documento": 23456789,
+        "data_validade": "2032-11-30",
+        "niss": 912345678,
+        "nif": 912345678,
+        "morada": "Rua da Liberdade",
+        "codigo_postal": "2000-020",
+        "concelho": "Porto",
+        "fregesia": "Boavista",
+        "telefone": 922334455,
+        "email": "ulisses.machado@email.com",
+        "profissao": "Engenheiro Informático",
+        "morada_emprego": "Empresa Software",
+        "horario_trabalho": "10:30:00",
+        "aluno_id": 20,
+        "salario": 760
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 1,
+    "fields": {
+        "aluno_id": 1,
+        "hora_entrada": "2024-03-20T08:00:00Z",
+        "hora_saida": "2024-03-20T17:30:00Z",
+        "autorizacao_sair": "Pais",
+        "valencia": 1
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 2,
+    "fields": {
+        "aluno_id": 2,
+        "hora_entrada": "2024-03-20T08:15:00Z",
+        "hora_saida": "2024-03-20T17:45:00Z",
+        "autorizacao_sair": "Tio",
+        "valencia": 2
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 3,
+    "fields": {
+        "aluno_id": 3,
+        "hora_entrada": "2024-03-20T08:10:00Z",
+        "hora_saida": "2024-03-20T17:20:00Z",
+        "autorizacao_sair": "Mãe",
+        "valencia": 3
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 4,
+    "fields": {
+        "aluno_id": 4,
+        "hora_entrada": "2024-03-20T08:05:00Z",
+        "hora_saida": "2024-03-20T17:50:00Z",
+        "autorizacao_sair": "Pai",
+        "valencia": 4
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 5,
+    "fields": {
+        "aluno_id": 5,
+        "hora_entrada": "2024-03-20T08:20:00Z",
+        "hora_saida": "2024-03-20T17:40:00Z",
+        "autorizacao_sair": "Irmão",
+        "valencia": 5
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 6,
+    "fields": {
+        "aluno_id": 6,
+        "hora_entrada": "2024-03-20T08:25:00Z",
+        "hora_saida": "2024-03-20T18:00:00Z",
+        "autorizacao_sair": "Pais",
+        "valencia": 6
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 7,
+    "fields": {
+        "aluno_id": 7,
+        "hora_entrada": "2024-03-20T08:30:00Z",
+        "hora_saida": "2024-03-20T17:10:00Z",
+        "autorizacao_sair": "Tia",
+        "valencia": 7
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 8,
+    "fields": {
+        "aluno_id": 8,
+        "hora_entrada": "2024-03-20T08:00:00Z",
+        "hora_saida": "2024-03-20T17:00:00Z",
+        "autorizacao_sair": "Avó",
+        "valencia": 8
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 9,
+    "fields": {
+        "aluno_id": 9,
+        "hora_entrada": "2024-03-20T08:45:00Z",
+        "hora_saida": "2024-03-20T18:15:00Z",
+        "autorizacao_sair": "Mãe",
+        "valencia": 9
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 10,
+    "fields": {
+        "aluno_id": 10,
+        "hora_entrada": "2024-03-20T08:50:00Z",
+        "hora_saida": "2024-03-20T17:55:00Z",
+        "autorizacao_sair": "Pai",
+        "valencia": 10
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 11,
+    "fields": {
+        "aluno_id": 11,
+        "hora_entrada": "2024-03-20T08:05:00Z",
+        "hora_saida": "2024-03-20T17:20:00Z",
+        "autorizacao_sair": "Irmã",
+        "valencia": 11
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 12,
+    "fields": {
+        "aluno_id": 12,
+        "hora_entrada": "2024-03-20T08:10:00Z",
+        "hora_saida": "2024-03-20T18:05:00Z",
+        "autorizacao_sair": "Pais",
+        "valencia": 12
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 13,
+    "fields": {
+        "aluno_id": 13,
+        "hora_entrada": "2024-03-20T08:35:00Z",
+        "hora_saida": "2024-03-20T18:10:00Z",
+        "autorizacao_sair": "Tio",
+        "valencia": 13
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 14,
+    "fields": {
+        "aluno_id": 14,
+        "hora_entrada": "2024-03-20T08:15:00Z",
+        "hora_saida": "2024-03-20T17:30:00Z",
+        "autorizacao_sair": "Pais",
+        "valencia": 14
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 15,
+    "fields": {
+        "aluno_id": 15,
+        "hora_entrada": "2024-03-20T08:40:00Z",
+        "hora_saida": "2024-03-20T17:25:00Z",
+        "autorizacao_sair": "Avô",
+        "valencia": 15
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 16,
+    "fields": {
+        "aluno_id": 16,
+        "hora_entrada": "2024-03-20T08:50:00Z",
+        "hora_saida": "2024-03-20T18:00:00Z",
+        "autorizacao_sair": "Mãe",
+        "valencia": 16
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 17,
+    "fields": {
+        "aluno_id": 17,
+        "hora_entrada": "2024-03-20T08:55:00Z",
+        "hora_saida": "2024-03-20T17:45:00Z",
+        "autorizacao_sair": "Pai",
+        "valencia": 17
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 18,
+    "fields": {
+        "aluno_id": 18,
+        "hora_entrada": "2024-03-20T08:20:00Z",
+        "hora_saida": "2024-03-20T17:35:00Z",
+        "autorizacao_sair": "Irmã",
+        "valencia": 18
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 19,
+    "fields": {
+        "aluno_id": 19,
+        "hora_entrada": "2024-03-20T08:30:00Z",
+        "hora_saida": "2024-03-20T17:50:00Z",
+        "autorizacao_sair": "Tia",
+        "valencia": 19
+    }
+},
+{
+    "model": "data_hub.alunosaida",
+    "pk": 20,
+    "fields": {
+        "aluno_id": 20,
+        "hora_entrada": "2024-03-20T08:00:00Z",
+        "hora_saida": "2024-03-20T17:00:00Z",
+        "autorizacao_sair": "Pais",
+        "valencia": 20
+    }
+},
+{
+    "model": "data_hub.vacinacao",
+    "pk": 1,
+    "fields": {
+        "aluno_id": 1,
+        "dose_id": 1,
+        "data_vacina": "2023-01-01T10:00:00Z"
+    }
+},
+{
+    "model": "data_hub.vacinacao",
+    "pk": 2,
+    "fields": {
+        "aluno_id": 2,
+        "dose_id": 2,
+        "data_vacina": "2023-02-01T11:00:00Z"
+    }
+},
+{
+    "model": "data_hub.vacinacao",
+    "pk": 3,
+    "fields": {
+        "aluno_id": 3,
+        "dose_id": 3,
+        "data_vacina": "2023-03-01T12:00:00Z"
+    }
+},
+{
+    "model": "data_hub.vacinacao",
+    "pk": 4,
+    "fields": {
+        "aluno_id": 4,
+        "dose_id": 4,
+        "data_vacina": "2023-04-01T13:00:00Z"
+    }
+},
+{
+    "model": "data_hub.vacinacao",
+    "pk": 5,
+    "fields": {
+        "aluno_id": 5,
+        "dose_id": 5,
+        "data_vacina": "2023-05-01T14:00:00Z"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 1,
+    "fields": {
+        "produto": "Aluguel",
+        "valor": 1200.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2001,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 2,
+    "fields": {
+        "produto": "Internet",
+        "valor": 150.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2002,
+        "pagamento": "Cartão de Crédito"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 3,
+    "fields": {
+        "produto": "Água",
+        "valor": 80.5,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2003,
+        "pagamento": "Boleto Bancário"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 4,
+    "fields": {
+        "produto": "Energia Elétrica",
+        "valor": 320.75,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2004,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 5,
+    "fields": {
+        "produto": "Telefone",
+        "valor": 90.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2005,
+        "pagamento": "Cartão de Débito"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 6,
+    "fields": {
+        "produto": "Manutenção Predial",
+        "valor": 500.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2006,
+        "pagamento": "Dinheiro"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 7,
+    "fields": {
+        "produto": "Segurança",
+        "valor": 750.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2007,
+        "pagamento": "Boleto Bancário"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 8,
+    "fields": {
+        "produto": "Serviço de Limpeza",
+        "valor": 600.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2008,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 9,
+    "fields": {
+        "produto": "Material de Escritório",
+        "valor": 200.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2009,
+        "pagamento": "Cartão de Crédito"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 10,
+    "fields": {
+        "produto": "Seguro do Prédio",
+        "valor": 1100.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2010,
+        "pagamento": "Cartão de Débito"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 11,
+    "fields": {
+        "produto": "Assinatura de Software",
+        "valor": 250.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2011,
+        "pagamento": "Boleto Bancário"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 12,
+    "fields": {
+        "produto": "Serviço de Jardinagem",
+        "valor": 300.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2012,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 13,
+    "fields": {
+        "produto": "Assinatura de Jornal",
+        "valor": 50.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2013,
+        "pagamento": "Cartão de Crédito"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 14,
+    "fields": {
+        "produto": "Compra de Café e Água",
+        "valor": 100.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2014,
+        "pagamento": "Dinheiro"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 15,
+    "fields": {
+        "produto": "Transporte Funcionários",
+        "valor": 850.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2015,
+        "pagamento": "Boleto Bancário"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 16,
+    "fields": {
+        "produto": "Serviço de TI",
+        "valor": 400.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2016,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 17,
+    "fields": {
+        "produto": "Licenciamento Anual",
+        "valor": 900.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2017,
+        "pagamento": "Cartão de Débito"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 18,
+    "fields": {
+        "produto": "Assistência Médica",
+        "valor": 1200.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2018,
+        "pagamento": "Cartão de Crédito"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 19,
+    "fields": {
+        "produto": "Salário Funcionários",
+        "valor": 15000.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2019,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesafixa",
+    "pk": 20,
+    "fields": {
+        "produto": "Despesa Contábil",
+        "valor": 650.0,
+        "data": "2024-03-01T00:00:00Z",
+        "fatura": 2020,
+        "pagamento": "Boleto Bancário"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 1,
+    "fields": {
+        "produto": "Material Escolar",
+        "valor": 45.75,
+        "data": "2025-03-01T10:15:00Z",
+        "fatura": 12345,
+        "pagamento": "Cartão de Crédito"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 2,
+    "fields": {
+        "produto": "Alimentação",
+        "valor": 120.0,
+        "data": "2025-03-02T12:30:00Z",
+        "fatura": 12346,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 3,
+    "fields": {
+        "produto": "Brinquedos",
+        "valor": 75.5,
+        "data": "2025-03-03T14:45:00Z",
+        "fatura": 12347,
+        "pagamento": "Dinheiro"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 4,
+    "fields": {
+        "produto": "Livros Didáticos",
+        "valor": 90.2,
+        "data": "2025-03-04T09:00:00Z",
+        "fatura": 12348,
+        "pagamento": "Débito Direto"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 5,
+    "fields": {
+        "produto": "Serviço de Manutenção",
+        "valor": 200.0,
+        "data": "2025-03-05T16:20:00Z",
+        "fatura": 12349,
+        "pagamento": "Cheque"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 6,
+    "fields": {
+        "produto": "Transporte Escolar",
+        "valor": 55.3,
+        "data": "2025-03-06T08:45:00Z",
+        "fatura": 12350,
+        "pagamento": "Cartão de Crédito"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 7,
+    "fields": {
+        "produto": "Fardamento",
+        "valor": 110.75,
+        "data": "2025-03-07T13:10:00Z",
+        "fatura": 12351,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 8,
+    "fields": {
+        "produto": "Excursão Escolar",
+        "valor": 85.4,
+        "data": "2025-03-08T11:00:00Z",
+        "fatura": 12352,
+        "pagamento": "Dinheiro"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 9,
+    "fields": {
+        "produto": "Software Educativo",
+        "valor": 99.9,
+        "data": "2025-03-09T15:30:00Z",
+        "fatura": 12353,
+        "pagamento": "Débito Direto"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 10,
+    "fields": {
+        "produto": "Equipamentos de Informática",
+        "valor": 250.0,
+        "data": "2025-03-10T10:50:00Z",
+        "fatura": 12354,
+        "pagamento": "Cheque"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 11,
+    "fields": {
+        "produto": "Atividades Extracurriculares",
+        "valor": 60.0,
+        "data": "2025-03-11T17:25:00Z",
+        "fatura": 12355,
+        "pagamento": "Cartão de Crédito"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 12,
+    "fields": {
+        "produto": "Consultoria Pedagógica",
+        "valor": 180.5,
+        "data": "2025-03-12T09:40:00Z",
+        "fatura": 12356,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 13,
+    "fields": {
+        "produto": "Serviços de Limpeza",
+        "valor": 130.25,
+        "data": "2025-03-13T14:55:00Z",
+        "fatura": 12357,
+        "pagamento": "Dinheiro"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 14,
+    "fields": {
+        "produto": "Reparação de Móveis",
+        "valor": 175.8,
+        "data": "2025-03-14T12:05:00Z",
+        "fatura": 12358,
+        "pagamento": "Débito Direto"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 15,
+    "fields": {
+        "produto": "Curso de Formação",
+        "valor": 210.0,
+        "data": "2025-03-15T16:45:00Z",
+        "fatura": 12359,
+        "pagamento": "Cheque"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 16,
+    "fields": {
+        "produto": "Assinatura de Plataforma Online",
+        "valor": 49.99,
+        "data": "2025-03-16T08:20:00Z",
+        "fatura": 12360,
+        "pagamento": "Cartão de Crédito"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 17,
+    "fields": {
+        "produto": "Material de Escritório",
+        "valor": 85.6,
+        "data": "2025-03-17T11:15:00Z",
+        "fatura": 12361,
+        "pagamento": "Transferência Bancária"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 18,
+    "fields": {
+        "produto": "Taxas Administrativas",
+        "valor": 92.3,
+        "data": "2025-03-18T13:35:00Z",
+        "fatura": 12362,
+        "pagamento": "Dinheiro"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 19,
+    "fields": {
+        "produto": "Eventos e Festas",
+        "valor": 145.5,
+        "data": "2025-03-19T15:10:00Z",
+        "fatura": 12363,
+        "pagamento": "Débito Direto"
+    }
+},
+{
+    "model": "data_hub.despesasvariavel",
+    "pk": 20,
+    "fields": {
+        "produto": "Aluguel de Equipamentos",
+        "valor": 275.0,
+        "data": "2025-03-20T10:00:00Z",
+        "fatura": 12364,
+        "pagamento": "Cheque"
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 1,
+    "fields": {
+        "valor": 1200.5,
+        "descricao": "Salário base\"\"",
+        "data_pagamento": "2025-02-28",
+        "subsidio_tipo": "Alimentação",
+        "subsidio_valor": 150.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 2,
+    "fields": {
+        "valor": 1350.75,
+        "descricao": "Salário com bonificação\"\"",
+        "data_pagamento": "2025-02-28",
+        "subsidio_tipo": "Transporte",
+        "subsidio_valor": 100.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 3,
+    "fields": {
+        "valor": 1100.0,
+        "descricao": "Salário base\"\"",
+        "data_pagamento": "2025-03-15",
+        "subsidio_tipo": "Alimentação",
+        "subsidio_valor": 140.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 4,
+    "fields": {
+        "valor": 1450.25,
+        "descricao": "Bónus de desempenho\"\"",
+        "data_pagamento": "2025-03-30",
+        "subsidio_tipo": "Viagem",
+        "subsidio_valor": 200.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 5,
+    "fields": {
+        "valor": 1600.0,
+        "descricao": "Salário base\"\"",
+        "data_pagamento": "2025-04-10",
+        "subsidio_tipo": "Alimentação",
+        "subsidio_valor": 175.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 6,
+    "fields": {
+        "valor": 1250.5,
+        "descricao": "Horas extras\"\"",
+        "data_pagamento": "2025-04-25",
+        "subsidio_tipo": "Transporte",
+        "subsidio_valor": 120.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 7,
+    "fields": {
+        "valor": 1700.75,
+        "descricao": "Aumento salarial\"\"",
+        "data_pagamento": "2025-05-05",
+        "subsidio_tipo": "Alimentação",
+        "subsidio_valor": 190.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 8,
+    "fields": {
+        "valor": 1150.0,
+        "descricao": "Salário base\"\"",
+        "data_pagamento": "2025-05-20",
+        "subsidio_tipo": "Viagem",
+        "subsidio_valor": 110.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 9,
+    "fields": {
+        "valor": 1300.25,
+        "descricao": "Promoção\"\"",
+        "data_pagamento": "2025-06-01",
+        "subsidio_tipo": "Transporte",
+        "subsidio_valor": 130.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 10,
+    "fields": {
+        "valor": 1400.0,
+        "descricao": "Salário base\"\"",
+        "data_pagamento": "2025-06-15",
+        "subsidio_tipo": "Alimentação",
+        "subsidio_valor": 160.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 11,
+    "fields": {
+        "valor": 1500.5,
+        "descricao": "Ajuste inflacionário\"\"",
+        "data_pagamento": "2025-07-01",
+        "subsidio_tipo": "Viagem",
+        "subsidio_valor": 180.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 12,
+    "fields": {
+        "valor": 1200.75,
+        "descricao": "Horas extras\"\"",
+        "data_pagamento": "2025-07-10",
+        "subsidio_tipo": "Transporte",
+        "subsidio_valor": 125.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 13,
+    "fields": {
+        "valor": 1800.0,
+        "descricao": "Bónus anual\"\"",
+        "data_pagamento": "2025-07-30",
+        "subsidio_tipo": "Alimentação",
+        "subsidio_valor": 210.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 14,
+    "fields": {
+        "valor": 1550.25,
+        "descricao": "Salário base\"\"",
+        "data_pagamento": "2025-08-05",
+        "subsidio_tipo": "Viagem",
+        "subsidio_valor": 195.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 15,
+    "fields": {
+        "valor": 1650.0,
+        "descricao": "Promoção\"\"",
+        "data_pagamento": "2025-08-20",
+        "subsidio_tipo": "Transporte",
+        "subsidio_valor": 185.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 16,
+    "fields": {
+        "valor": 1750.5,
+        "descricao": "Salário base\"\"",
+        "data_pagamento": "2025-09-01",
+        "subsidio_tipo": "Alimentação",
+        "subsidio_valor": 200.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 17,
+    "fields": {
+        "valor": 1850.75,
+        "descricao": "Bónus de desempenho\"\"",
+        "data_pagamento": "2025-09-10",
+        "subsidio_tipo": "Viagem",
+        "subsidio_valor": 220.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 18,
+    "fields": {
+        "valor": 1900.0,
+        "descricao": "Salário base\"\"",
+        "data_pagamento": "2025-09-25",
+        "subsidio_tipo": "Transporte",
+        "subsidio_valor": 230.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 19,
+    "fields": {
+        "valor": 2000.25,
+        "descricao": "Ajuste salarial\"\"",
+        "data_pagamento": "2025-10-05",
+        "subsidio_tipo": "Alimentação",
+        "subsidio_valor": 250.0
+    }
+},
+{
+    "model": "data_hub.salario",
+    "pk": 20,
+    "fields": {
+        "valor": 2100.0,
+        "descricao": "Salário com gratificação\"\"",
+        "data_pagamento": "2025-10-20",
+        "subsidio_tipo": "Viagem",
+        "subsidio_valor": 270.0
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 61,
+    "fields": {
+        "aluno_id": 1,
+        "responsavel_educativo_id": 1,
+        "type": "Pai",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 62,
+    "fields": {
+        "aluno_id": 2,
+        "responsavel_educativo_id": 2,
+        "type": "Mãe",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 63,
+    "fields": {
+        "aluno_id": 3,
+        "responsavel_educativo_id": 3,
+        "type": "Tio",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 64,
+    "fields": {
+        "aluno_id": 4,
+        "responsavel_educativo_id": 4,
+        "type": "Avó",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 65,
+    "fields": {
+        "aluno_id": 5,
+        "responsavel_educativo_id": 5,
+        "type": "Irmão",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 66,
+    "fields": {
+        "aluno_id": 6,
+        "responsavel_educativo_id": 6,
+        "type": "Pai",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 67,
+    "fields": {
+        "aluno_id": 7,
+        "responsavel_educativo_id": 7,
+        "type": "Mãe",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 68,
+    "fields": {
+        "aluno_id": 8,
+        "responsavel_educativo_id": 8,
+        "type": "Tia",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 69,
+    "fields": {
+        "aluno_id": 9,
+        "responsavel_educativo_id": 9,
+        "type": "Avô",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 70,
+    "fields": {
+        "aluno_id": 10,
+        "responsavel_educativo_id": 10,
+        "type": "Padrasto",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 71,
+    "fields": {
+        "aluno_id": 11,
+        "responsavel_educativo_id": 11,
+        "type": "Mãe",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 72,
+    "fields": {
+        "aluno_id": 12,
+        "responsavel_educativo_id": 12,
+        "type": "Pai",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 73,
+    "fields": {
+        "aluno_id": 13,
+        "responsavel_educativo_id": 13,
+        "type": "Prima",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 74,
+    "fields": {
+        "aluno_id": 14,
+        "responsavel_educativo_id": 14,
+        "type": "Avó",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 75,
+    "fields": {
+        "aluno_id": 15,
+        "responsavel_educativo_id": 15,
+        "type": "Tia",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 76,
+    "fields": {
+        "aluno_id": 16,
+        "responsavel_educativo_id": 16,
+        "type": "Irmão",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 77,
+    "fields": {
+        "aluno_id": 17,
+        "responsavel_educativo_id": 17,
+        "type": "Pai",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 78,
+    "fields": {
+        "aluno_id": 18,
+        "responsavel_educativo_id": 18,
+        "type": "Mãe",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 79,
+    "fields": {
+        "aluno_id": 19,
+        "responsavel_educativo_id": 19,
+        "type": "Avô",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.linkfiliacao",
+    "pk": 80,
+    "fields": {
+        "aluno_id": 20,
+        "responsavel_educativo_id": 20,
+        "type": "Madrasta",
+        "encarr_educacao": false
+    }
+},
+{
+    "model": "data_hub.tipotransacao",
+    "pk": 1,
+    "fields": {
+        "tipo_transacao": "Pagamento"
+    }
+},
+{
+    "model": "data_hub.tipotransacao",
+    "pk": 2,
+    "fields": {
+        "tipo_transacao": "Carregamento"
+    }
+},
+{
+    "model": "data_hub.tipotransacao",
+    "pk": 3,
+    "fields": {
+        "tipo_transacao": "Comparticipação"
+    }
+},
+{
+    "model": "data_hub.tipotransacao",
+    "pk": 4,
+    "fields": {
+        "tipo_transacao": "Mensalidade"
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 1,
+    "fields": {
+        "aluno_id": 1,
+        "valor": -1000.0,
+        "data_transacao": "2025-06-23T16:05:41.703Z",
+        "descricao": "Pagamento Inscrição",
+        "tipo_transacao": 1
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 2,
+    "fields": {
+        "aluno_id": 1,
+        "valor": 1000.0,
+        "data_transacao": "2025-06-23T16:11:22.368Z",
+        "descricao": "Carregamento da Inscrição",
+        "tipo_transacao": 2
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 3,
+    "fields": {
+        "aluno_id": 1,
+        "valor": -100.0,
+        "data_transacao": "2025-06-23T16:48:57.898Z",
+        "descricao": "Pagamento Seguro Escolar",
+        "tipo_transacao": 1
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 4,
+    "fields": {
+        "aluno_id": 1,
+        "valor": 100.0,
+        "data_transacao": "2025-06-23T16:50:49.123Z",
+        "descricao": "Carregamento Seguro Escolar",
+        "tipo_transacao": 2
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 5,
+    "fields": {
+        "aluno_id": 2,
+        "valor": -1000.0,
+        "data_transacao": "2025-06-23T17:17:22.641Z",
+        "descricao": "Pagamento Inscrição",
+        "tipo_transacao": 1
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 6,
+    "fields": {
+        "aluno_id": 2,
+        "valor": 1000.0,
+        "data_transacao": "2025-06-23T17:18:11.277Z",
+        "descricao": "Carregamento da Inscrição",
+        "tipo_transacao": 2
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 7,
+    "fields": {
+        "aluno_id": 1,
+        "valor": 1000.0,
+        "data_transacao": "2025-06-23T23:49:17.957Z",
+        "descricao": "Carregamento",
+        "tipo_transacao": 2
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 8,
+    "fields": {
+        "aluno_id": 1,
+        "valor": -1000.0,
+        "data_transacao": "2025-06-24T00:12:58.290Z",
+        "descricao": "Pagamento",
+        "tipo_transacao": 1
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 9,
+    "fields": {
+        "aluno_id": 1,
+        "valor": -120.0,
+        "data_transacao": "2025-06-24T00:50:16Z",
+        "descricao": "Pagamento",
+        "tipo_transacao": 4
+    }
+},
+{
+    "model": "data_hub.transacao",
+    "pk": 10,
+    "fields": {
+        "aluno_id": 1,
+        "valor": 120.0,
+        "data_transacao": "2025-06-24T00:55:29.911Z",
+        "descricao": "Carregamento para mensalidade",
+        "tipo_transacao": 2
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 1,
+    "fields": {
+        "sala_nome": "Sala Azul",
+        "sala_local": "Bloco A",
+        "sala_valencia": 2,
+        "funcionario_id": 3,
+        "alunos": [
+            19,
+            20
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 2,
+    "fields": {
+        "sala_nome": "Sala Verde",
+        "sala_local": "Bloco B",
+        "sala_valencia": 1,
+        "funcionario_id": 5,
+        "alunos": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 3,
+    "fields": {
+        "sala_nome": "Sala Amarela",
+        "sala_local": "Bloco C",
+        "sala_valencia": 4,
+        "funcionario_id": 7,
+        "alunos": [
+            15,
+            16
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 4,
+    "fields": {
+        "sala_nome": "Sala Vermelha",
+        "sala_local": "Bloco A",
+        "sala_valencia": 3,
+        "funcionario_id": 2,
+        "alunos": [
+            13,
+            14
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 5,
+    "fields": {
+        "sala_nome": "Sala Rosa",
+        "sala_local": "Bloco B",
+        "sala_valencia": 2,
+        "funcionario_id": 6,
+        "alunos": [
+            11,
+            12
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 6,
+    "fields": {
+        "sala_nome": "Sala Laranja",
+        "sala_local": "Bloco C",
+        "sala_valencia": 1,
+        "funcionario_id": 8,
+        "alunos": [
+            9,
+            10
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 7,
+    "fields": {
+        "sala_nome": "Sala Branca",
+        "sala_local": "Bloco A",
+        "sala_valencia": 4,
+        "funcionario_id": 1,
+        "alunos": [
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 8,
+    "fields": {
+        "sala_nome": "Sala Roxa",
+        "sala_local": "Bloco B",
+        "sala_valencia": 3,
+        "funcionario_id": 4,
+        "alunos": [
+            5,
+            6
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 9,
+    "fields": {
+        "sala_nome": "Sala Cinza",
+        "sala_local": "Bloco C",
+        "sala_valencia": 2,
+        "funcionario_id": 9,
+        "alunos": [
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "data_hub.sala",
+    "pk": 10,
+    "fields": {
+        "sala_nome": "Sala Dourada",
+        "sala_local": "Bloco A",
+        "sala_valencia": 1,
+        "funcionario_id": 10,
+        "alunos": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 1,
+    "fields": {
+        "aluno_id": 1,
+        "aluno_financas_id": 1,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 200,
+        "mensalidade_retific": 180,
+        "mensalidade_paga": 180,
+        "data_pagamento": "2023-09-05",
+        "modo_pagamento": "Transferência",
+        "acordo": "Desconto por bolsa"
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 2,
+    "fields": {
+        "aluno_id": 2,
+        "aluno_financas_id": 2,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 220,
+        "mensalidade_retific": 220,
+        "mensalidade_paga": 220,
+        "data_pagamento": "2023-09-07",
+        "modo_pagamento": "Débito Direto",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 3,
+    "fields": {
+        "aluno_id": 3,
+        "aluno_financas_id": 3,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 250,
+        "mensalidade_retific": 240,
+        "mensalidade_paga": 240,
+        "data_pagamento": "2023-09-10",
+        "modo_pagamento": "Cheque",
+        "acordo": "Atraso justificado"
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 4,
+    "fields": {
+        "aluno_id": 4,
+        "aluno_financas_id": 4,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 180,
+        "mensalidade_retific": 180,
+        "mensalidade_paga": 180,
+        "data_pagamento": "2023-09-02",
+        "modo_pagamento": "Numerário",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 5,
+    "fields": {
+        "aluno_id": 5,
+        "aluno_financas_id": 5,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 190,
+        "mensalidade_retific": 190,
+        "mensalidade_paga": 190,
+        "data_pagamento": "2023-09-03",
+        "modo_pagamento": "Cheque Creche",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 6,
+    "fields": {
+        "aluno_id": 6,
+        "aluno_financas_id": 6,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 210,
+        "mensalidade_retific": 210,
+        "mensalidade_paga": 200,
+        "data_pagamento": "2023-09-09",
+        "modo_pagamento": "Outro",
+        "acordo": "Pagamento parcial acordado"
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 7,
+    "fields": {
+        "aluno_id": 7,
+        "aluno_financas_id": 7,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 230,
+        "mensalidade_retific": 230,
+        "mensalidade_paga": 230,
+        "data_pagamento": "2023-09-06",
+        "modo_pagamento": "Transferência",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 8,
+    "fields": {
+        "aluno_id": 8,
+        "aluno_financas_id": 8,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 170,
+        "mensalidade_retific": 170,
+        "mensalidade_paga": 170,
+        "data_pagamento": "2023-09-04",
+        "modo_pagamento": "Numerário",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 9,
+    "fields": {
+        "aluno_id": 9,
+        "aluno_financas_id": 9,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 200,
+        "mensalidade_retific": 190,
+        "mensalidade_paga": 190,
+        "data_pagamento": "2023-09-08",
+        "modo_pagamento": "Cheque Creche",
+        "acordo": "Desconto por pontualidade"
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 10,
+    "fields": {
+        "aluno_id": 10,
+        "aluno_financas_id": 10,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 250,
+        "mensalidade_retific": 250,
+        "mensalidade_paga": 250,
+        "data_pagamento": "2023-09-05",
+        "modo_pagamento": "Débito Direto",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 11,
+    "fields": {
+        "aluno_id": 11,
+        "aluno_financas_id": 11,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 180,
+        "mensalidade_retific": 170,
+        "mensalidade_paga": 170,
+        "data_pagamento": "2023-09-10",
+        "modo_pagamento": "Transferência",
+        "acordo": "Desconto por irmão matriculado"
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 12,
+    "fields": {
+        "aluno_id": 12,
+        "aluno_financas_id": 12,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 220,
+        "mensalidade_retific": 220,
+        "mensalidade_paga": 220,
+        "data_pagamento": "2023-09-07",
+        "modo_pagamento": "Cheque",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 13,
+    "fields": {
+        "aluno_id": 13,
+        "aluno_financas_id": 13,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 240,
+        "mensalidade_retific": 240,
+        "mensalidade_paga": 230,
+        "data_pagamento": "2023-09-06",
+        "modo_pagamento": "Numerário",
+        "acordo": "Redução por dificuldades financeiras"
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 14,
+    "fields": {
+        "aluno_id": 14,
+        "aluno_financas_id": 14,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 210,
+        "mensalidade_retific": 210,
+        "mensalidade_paga": 210,
+        "data_pagamento": "2023-09-04",
+        "modo_pagamento": "Outro",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 15,
+    "fields": {
+        "aluno_id": 15,
+        "aluno_financas_id": 15,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 250,
+        "mensalidade_retific": 250,
+        "mensalidade_paga": 250,
+        "data_pagamento": "2023-09-05",
+        "modo_pagamento": "Cheque Creche",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 16,
+    "fields": {
+        "aluno_id": 16,
+        "aluno_financas_id": 16,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 180,
+        "mensalidade_retific": 180,
+        "mensalidade_paga": 180,
+        "data_pagamento": "2023-09-09",
+        "modo_pagamento": "Transferência",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 17,
+    "fields": {
+        "aluno_id": 17,
+        "aluno_financas_id": 17,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 190,
+        "mensalidade_retific": 190,
+        "mensalidade_paga": 190,
+        "data_pagamento": "2023-09-08",
+        "modo_pagamento": "Débito Direto",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 18,
+    "fields": {
+        "aluno_id": 18,
+        "aluno_financas_id": 18,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 230,
+        "mensalidade_retific": 230,
+        "mensalidade_paga": 220,
+        "data_pagamento": "2023-09-07",
+        "modo_pagamento": "Outro",
+        "acordo": "Reajuste por atraso"
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 19,
+    "fields": {
+        "aluno_id": 19,
+        "aluno_financas_id": 19,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 210,
+        "mensalidade_retific": 210,
+        "mensalidade_paga": 210,
+        "data_pagamento": "2023-09-06",
+        "modo_pagamento": "Numerário",
+        "acordo": ""
+    }
+},
+{
+    "model": "data_hub.mensalidadealuno",
+    "pk": 20,
+    "fields": {
+        "aluno_id": 20,
+        "aluno_financas_id": 20,
+        "periodo_inicio": "2023-09-01",
+        "periodo_fim": "2023-09-30",
+        "mensalidade_calc": 200,
+        "mensalidade_retific": 200,
+        "mensalidade_paga": 190,
+        "data_pagamento": "2023-09-05",
+        "modo_pagamento": "Cheque",
+        "acordo": "Pagou parcialmente"
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 1,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 1,
+        "data": "2024-03-01T00:00:00Z",
+        "agregado": 4,
+        "rendim_líquido": 25000,
+        "despesa_anual": 8000,
+        "irs": "15%",
+        "tax_soc": "11%",
+        "tax_impos": "",
+        "renda": 500,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 2,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 2,
+        "data": "2024-03-02T00:00:00Z",
+        "agregado": 3,
+        "rendim_líquido": 30000,
+        "despesa_anual": 9000,
+        "irs": "12%",
+        "tax_soc": "9%",
+        "tax_impos": "3%",
+        "renda": 600,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 3,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 3,
+        "data": "2024-03-03T00:00:00Z",
+        "agregado": 5,
+        "rendim_líquido": 27000,
+        "despesa_anual": 8500,
+        "irs": "14%",
+        "tax_soc": "10%",
+        "tax_impos": "",
+        "renda": 550,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": "Outros custos"
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 4,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 4,
+        "data": "2024-03-04T00:00:00Z",
+        "agregado": 2,
+        "rendim_líquido": 32000,
+        "despesa_anual": 7500,
+        "irs": "13%",
+        "tax_soc": "8%",
+        "tax_impos": "2%",
+        "renda": 700,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 5,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 5,
+        "data": "2024-03-05T00:00:00Z",
+        "agregado": 6,
+        "rendim_líquido": 23000,
+        "despesa_anual": 7200,
+        "irs": "16%",
+        "tax_soc": "12%",
+        "tax_impos": "",
+        "renda": 450,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 6,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 6,
+        "data": "2024-03-06T00:00:00Z",
+        "agregado": 4,
+        "rendim_líquido": 26000,
+        "despesa_anual": 8900,
+        "irs": "15%",
+        "tax_soc": "11%",
+        "tax_impos": "",
+        "renda": 480,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": "Encargos escolares"
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 7,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 7,
+        "data": "2024-03-07T00:00:00Z",
+        "agregado": 3,
+        "rendim_líquido": 29000,
+        "despesa_anual": 9100,
+        "irs": "14%",
+        "tax_soc": "10%",
+        "tax_impos": "3%",
+        "renda": 620,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 8,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 8,
+        "data": "2024-03-08T00:00:00Z",
+        "agregado": 5,
+        "rendim_líquido": 21000,
+        "despesa_anual": 7800,
+        "irs": "17%",
+        "tax_soc": "13%",
+        "tax_impos": "",
+        "renda": 400,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 9,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 9,
+        "data": "2024-03-09T00:00:00Z",
+        "agregado": 2,
+        "rendim_líquido": 33000,
+        "despesa_anual": 7700,
+        "irs": "12%",
+        "tax_soc": "8%",
+        "tax_impos": "1.5%",
+        "renda": 750,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 10,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 10,
+        "data": "2024-03-10T00:00:00Z",
+        "agregado": 4,
+        "rendim_líquido": 28000,
+        "despesa_anual": 8900,
+        "irs": "14%",
+        "tax_soc": "9%",
+        "tax_impos": "",
+        "renda": 530,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 11,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 11,
+        "data": "2024-03-11T00:00:00Z",
+        "agregado": 3,
+        "rendim_líquido": 27000,
+        "despesa_anual": 9200,
+        "irs": "15%",
+        "tax_soc": "11%",
+        "tax_impos": "3%",
+        "renda": 580,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": "Despesas médicas"
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 12,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 12,
+        "data": "2024-03-12T00:00:00Z",
+        "agregado": 6,
+        "rendim_líquido": 25000,
+        "despesa_anual": 8000,
+        "irs": "16%",
+        "tax_soc": "12%",
+        "tax_impos": "",
+        "renda": 510,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 13,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 13,
+        "data": "2024-03-13T00:00:00Z",
+        "agregado": 5,
+        "rendim_líquido": 30000,
+        "despesa_anual": 8700,
+        "irs": "13%",
+        "tax_soc": "9%",
+        "tax_impos": "2.5%",
+        "renda": 650,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 14,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 14,
+        "data": "2024-03-14T00:00:00Z",
+        "agregado": 2,
+        "rendim_líquido": 34000,
+        "despesa_anual": 7600,
+        "irs": "12%",
+        "tax_soc": "8%",
+        "tax_impos": "",
+        "renda": 770,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 15,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 15,
+        "data": "2024-03-15T00:00:00Z",
+        "agregado": 4,
+        "rendim_líquido": 26000,
+        "despesa_anual": 8900,
+        "irs": "15%",
+        "tax_soc": "10%",
+        "tax_impos": "",
+        "renda": 490,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": "Outros encargos"
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 16,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 16,
+        "data": "2024-03-16T00:00:00Z",
+        "agregado": 3,
+        "rendim_líquido": 32000,
+        "despesa_anual": 7400,
+        "irs": "12%",
+        "tax_soc": "8%",
+        "tax_impos": "1.5%",
+        "renda": 710,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 17,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 17,
+        "data": "2024-03-17T00:00:00Z",
+        "agregado": 6,
+        "rendim_líquido": 22000,
+        "despesa_anual": 8100,
+        "irs": "17%",
+        "tax_soc": "13%",
+        "tax_impos": "",
+        "renda": 420,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 18,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 18,
+        "data": "2024-03-18T00:00:00Z",
+        "agregado": 5,
+        "rendim_líquido": 29000,
+        "despesa_anual": 8500,
+        "irs": "14%",
+        "tax_soc": "9%",
+        "tax_impos": "",
+        "renda": 620,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 19,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 19,
+        "data": "2024-03-19T00:00:00Z",
+        "agregado": 3,
+        "rendim_líquido": 31000,
+        "despesa_anual": 7800,
+        "irs": "12%",
+        "tax_soc": "8%",
+        "tax_impos": "2%",
+        "renda": 680,
+        "med_transp": "Mensal",
+        "medicacao": "Sim",
+        "outros": ""
+    }
+},
+{
+    "model": "data_hub.alunofinancas",
+    "pk": 20,
+    "fields": {
+        "ano_letivo": "2023/2024",
+        "aluno_id": 20,
+        "data": "2024-03-20T00:00:00Z",
+        "agregado": 4,
+        "rendim_líquido": 27000,
+        "despesa_anual": 8600,
+        "irs": "15%",
+        "tax_soc": "11%",
+        "tax_impos": "",
+        "renda": 550,
+        "med_transp": "",
+        "medicacao": "Não",
+        "outros": "Encargos escolares"
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 1,
+    "fields": {
+        "nome": "Sala Azul",
+        "local": "Bloco A",
+        "valencia": "Pre-escolar",
+        "funcionario_id": 3
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 2,
+    "fields": {
+        "nome": "Sala Verde",
+        "local": "Bloco B",
+        "valencia": "Creche",
+        "funcionario_id": 5
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 3,
+    "fields": {
+        "nome": "Sala Amarela",
+        "local": "Bloco C",
+        "valencia": "Jardim Infância",
+        "funcionario_id": 7
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 4,
+    "fields": {
+        "nome": "Sala Vermelha",
+        "local": "Bloco A",
+        "valencia": "Berçário",
+        "funcionario_id": 2
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 5,
+    "fields": {
+        "nome": "Sala Rosa",
+        "local": "Bloco B",
+        "valencia": "Pre-escolar",
+        "funcionario_id": 6
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 6,
+    "fields": {
+        "nome": "Sala Laranja",
+        "local": "Bloco C",
+        "valencia": "Creche",
+        "funcionario_id": 8
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 7,
+    "fields": {
+        "nome": "Sala Branca",
+        "local": "Bloco A",
+        "valencia": "Jardim Infância",
+        "funcionario_id": 1
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 8,
+    "fields": {
+        "nome": "Sala Roxa",
+        "local": "Bloco B",
+        "valencia": "Berçário",
+        "funcionario_id": 4
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 9,
+    "fields": {
+        "nome": "Sala Cinza",
+        "local": "Bloco C",
+        "valencia": "Pre-escolar",
+        "funcionario_id": 9
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 10,
+    "fields": {
+        "nome": "Sala Dourada",
+        "local": "Bloco A",
+        "valencia": "Creche",
+        "funcionario_id": 10
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 11,
+    "fields": {
+        "nome": "Sala Prata",
+        "local": "Bloco B",
+        "valencia": "Jardim Infância",
+        "funcionario_id": 11
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 12,
+    "fields": {
+        "nome": "Sala Turquesa",
+        "local": "Bloco C",
+        "valencia": "Berçário",
+        "funcionario_id": 12
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 13,
+    "fields": {
+        "nome": "Sala Lilás",
+        "local": "Bloco A",
+        "valencia": "Pre-escolar",
+        "funcionario_id": 13
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 14,
+    "fields": {
+        "nome": "Sala Bege",
+        "local": "Bloco B",
+        "valencia": "Creche",
+        "funcionario_id": 14
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 15,
+    "fields": {
+        "nome": "Sala Bordeaux",
+        "local": "Bloco C",
+        "valencia": "Jardim Infância",
+        "funcionario_id": 15
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 16,
+    "fields": {
+        "nome": "Sala Preto e Branco",
+        "local": "Bloco A",
+        "valencia": "Berçário",
+        "funcionario_id": 16
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 17,
+    "fields": {
+        "nome": "Sala Neon",
+        "local": "Bloco B",
+        "valencia": "Pre-escolar",
+        "funcionario_id": 17
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 18,
+    "fields": {
+        "nome": "Sala Pastel",
+        "local": "Bloco C",
+        "valencia": "Creche",
+        "funcionario_id": 18
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 19,
+    "fields": {
+        "nome": "Sala Violeta",
+        "local": "Bloco A",
+        "valencia": "Jardim Infância",
+        "funcionario_id": 19
+    }
+},
+{
+    "model": "data_hub.alunofinacascalc",
+    "pk": 20,
+    "fields": {
+        "nome": "Sala Celeste",
+        "local": "Bloco B",
+        "valencia": "Berçário",
+        "funcionario_id": 20
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 1,
+    "fields": {
+        "nome_proprio": "Ana",
+        "apelido": "Santos",
+        "data_nascimento": "1985-03-15",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "12345678",
+        "data_validade": "2030-06-15",
+        "niss": 123456789,
+        "nif": 987654321,
+        "morada": "Rua das Flores",
+        "codigo_postal": "1000-001",
+        "concelho": "Lisboa",
+        "freguesia_residencia": "Santa Maria Maior",
+        "contacto_telefonico": "912345678",
+        "email": "ana.santos@email.com",
+        "funcao": "Educadora",
+        "salario": 1,
+        "escalao_profissional": "A",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 2,
+    "fields": {
+        "nome_proprio": "Carlos",
+        "apelido": "Silva",
+        "data_nascimento": "1979-07-20",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "87654321",
+        "data_validade": "2028-12-01",
+        "niss": 234567891,
+        "nif": 876543210,
+        "morada": "Avenida Central",
+        "codigo_postal": "2000-002",
+        "concelho": "Porto",
+        "freguesia_residencia": "Cedofeita",
+        "contacto_telefonico": "913456789",
+        "email": "carlos.silva@email.com",
+        "funcao": "Auxiliar",
+        "salario": 2,
+        "escalao_profissional": "B",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 3,
+    "fields": {
+        "nome_proprio": "Mariana",
+        "apelido": "Pereira",
+        "data_nascimento": "1992-01-10",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "AB1234567",
+        "data_validade": "2032-08-22",
+        "niss": 345678912,
+        "nif": 765432109,
+        "morada": "Rua Nova",
+        "codigo_postal": "3000-003",
+        "concelho": "Coimbra",
+        "freguesia_residencia": "Sé Nova",
+        "contacto_telefonico": "914567890",
+        "email": "mariana.pereira@email.com",
+        "funcao": "Coordenadora",
+        "salario": 3,
+        "escalao_profissional": "C",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 4,
+    "fields": {
+        "nome_proprio": "João",
+        "apelido": "Martins",
+        "data_nascimento": "1988-09-25",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "56781234",
+        "data_validade": "2031-05-19",
+        "niss": 456789123,
+        "nif": 654321098,
+        "morada": "Largo dos Poetas",
+        "codigo_postal": "4000-004",
+        "concelho": "Braga",
+        "freguesia_residencia": "São Vicente",
+        "contacto_telefonico": "915678901",
+        "email": "joao.martins@email.com",
+        "funcao": "Professor",
+        "salario": 4,
+        "escalao_profissional": "A",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 5,
+    "fields": {
+        "nome_proprio": "Sofia",
+        "apelido": "Almeida",
+        "data_nascimento": "1995-06-30",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "CD7890123",
+        "data_validade": "2033-10-05",
+        "niss": 567891234,
+        "nif": 543210987,
+        "morada": "Rua Verde",
+        "codigo_postal": "5000-005",
+        "concelho": "Faro",
+        "freguesia_residencia": "Montenegro",
+        "contacto_telefonico": "916789012",
+        "email": "sofia.almeida@email.com",
+        "funcao": "Educadora",
+        "salario": 5,
+        "escalao_profissional": "B",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 6,
+    "fields": {
+        "nome_proprio": "Ricardo",
+        "apelido": "Oliveira",
+        "data_nascimento": "1980-12-12",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "90123456",
+        "data_validade": "2027-11-11",
+        "niss": 678912345,
+        "nif": 432109876,
+        "morada": "Rua Azul",
+        "codigo_postal": "6000-006",
+        "concelho": "Setúbal",
+        "freguesia_residencia": "São Sebastião",
+        "contacto_telefonico": "917890123",
+        "email": "ricardo.oliveira@email.com",
+        "funcao": "Auxiliar",
+        "salario": 6,
+        "escalao_profissional": "C",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 7,
+    "fields": {
+        "nome_proprio": "Teresa",
+        "apelido": "Moreira",
+        "data_nascimento": "1986-05-08",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "EF3456789",
+        "data_validade": "2030-07-21",
+        "niss": 789123456,
+        "nif": 321098765,
+        "morada": "Praça Central",
+        "codigo_postal": "7000-007",
+        "concelho": "Évora",
+        "freguesia_residencia": "Malagueira",
+        "contacto_telefonico": "918901234",
+        "email": "teresa.moreira@email.com",
+        "funcao": "Coordenadora",
+        "salario": 7,
+        "escalao_profissional": "A",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 8,
+    "fields": {
+        "nome_proprio": "Pedro",
+        "apelido": "Costa",
+        "data_nascimento": "1991-04-14",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "67890123",
+        "data_validade": "2029-03-30",
+        "niss": 891234567,
+        "nif": 210987654,
+        "morada": "Travessa das Laranjeiras",
+        "codigo_postal": "8000-008",
+        "concelho": "Funchal",
+        "freguesia_residencia": "São Pedro",
+        "contacto_telefonico": "919012345",
+        "email": "pedro.costa@email.com",
+        "funcao": "Professor",
+        "salario": 8,
+        "escalao_profissional": "B",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 9,
+    "fields": {
+        "nome_proprio": "Helena",
+        "apelido": "Carvalho",
+        "data_nascimento": "1975-08-18",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "GH4567890",
+        "data_validade": "2031-12-14",
+        "niss": 912345678,
+        "nif": 109876543,
+        "morada": "Rua Branca",
+        "codigo_postal": "9000-009",
+        "concelho": "Ponta Delgada",
+        "freguesia_residencia": "São José",
+        "contacto_telefonico": "920123456",
+        "email": "helena.carvalho@email.com",
+        "funcao": "Educadora",
+        "salario": 9,
+        "escalao_profissional": "C",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 10,
+    "fields": {
+        "nome_proprio": "Fernando",
+        "apelido": "Lopes",
+        "data_nascimento": "1983-11-22",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "23456789",
+        "data_validade": "2026-09-09",
+        "niss": 123456789,
+        "nif": 987654321,
+        "morada": "Avenida das Palmeiras",
+        "codigo_postal": "1000-010",
+        "concelho": "Viseu",
+        "freguesia_residencia": "Repeses",
+        "contacto_telefonico": "921234567",
+        "email": "fernando.lopes@email.com",
+        "funcao": "Auxiliar",
+        "salario": 10,
+        "escalao_profissional": "A",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 11,
+    "fields": {
+        "nome_proprio": "Rita",
+        "apelido": "Neves",
+        "data_nascimento": "1997-02-27",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "IJ5678901",
+        "data_validade": "2034-02-02",
+        "niss": 234567891,
+        "nif": 876543210,
+        "morada": "Rua da Paz",
+        "codigo_postal": "1100-011",
+        "concelho": "Guimarães",
+        "freguesia_residencia": "São Paio",
+        "contacto_telefonico": "922345678",
+        "email": "rita.neves@email.com",
+        "funcao": "Coordenadora",
+        "salario": 11,
+        "escalao_profissional": "B",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 12,
+    "fields": {
+        "nome_proprio": "Manuel",
+        "apelido": "Barros",
+        "data_nascimento": "1984-10-05",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "34567890",
+        "data_validade": "2028-07-15",
+        "niss": 345678912,
+        "nif": 765432109,
+        "morada": "Largo do Castelo",
+        "codigo_postal": "1200-012",
+        "concelho": "Leiria",
+        "freguesia_residencia": "Pousos",
+        "contacto_telefonico": "923456789",
+        "email": "manuel.barros@email.com",
+        "funcao": "Professor",
+        "salario": 12,
+        "escalao_profissional": "C",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 13,
+    "fields": {
+        "nome_proprio": "Patrícia",
+        "apelido": "Ramos",
+        "data_nascimento": "1990-09-13",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "KL6789012",
+        "data_validade": "2032-06-23",
+        "niss": 456789123,
+        "nif": 654321098,
+        "morada": "Rua Alegre",
+        "codigo_postal": "1300-013",
+        "concelho": "Aveiro",
+        "freguesia_residencia": "Glória",
+        "contacto_telefonico": "924567890",
+        "email": "patricia.ramos@email.com",
+        "funcao": "Educadora",
+        "salario": 13,
+        "escalao_profissional": "A",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 14,
+    "fields": {
+        "nome_proprio": "André",
+        "apelido": "Tavares",
+        "data_nascimento": "1981-06-29",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "45678901",
+        "data_validade": "2027-05-17",
+        "niss": 567891234,
+        "nif": 543210987,
+        "morada": "Avenida dos Pinheiros",
+        "codigo_postal": "1400-014",
+        "concelho": "Santarém",
+        "freguesia_residencia": "Marvila",
+        "contacto_telefonico": "925678901",
+        "email": "andre.tavares@email.com",
+        "funcao": "Auxiliar",
+        "salario": 14,
+        "escalao_profissional": "B",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 15,
+    "fields": {
+        "nome_proprio": "Cláudia",
+        "apelido": "Nascimento",
+        "data_nascimento": "1987-07-07",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "MN7890123",
+        "data_validade": "2031-04-30",
+        "niss": 678912345,
+        "nif": 432109876,
+        "morada": "Rua da Escola",
+        "codigo_postal": "1500-015",
+        "concelho": "Bragança",
+        "freguesia_residencia": "Sé",
+        "contacto_telefonico": "926789012",
+        "email": "claudia.nascimento@email.com",
+        "funcao": "Coordenadora",
+        "salario": 15,
+        "escalao_profissional": "C",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 16,
+    "fields": {
+        "nome_proprio": "Luís",
+        "apelido": "Ferreira",
+        "data_nascimento": "1993-05-19",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "56789012",
+        "data_validade": "2030-01-25",
+        "niss": 789123456,
+        "nif": 321098765,
+        "morada": "Praça do Comércio",
+        "codigo_postal": "1600-016",
+        "concelho": "Beja",
+        "freguesia_residencia": "São João",
+        "contacto_telefonico": "927890123",
+        "email": "luis.ferreira@email.com",
+        "funcao": "Professor",
+        "salario": 16,
+        "escalao_profissional": "A",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 17,
+    "fields": {
+        "nome_proprio": "Vanessa",
+        "apelido": "Cardoso",
+        "data_nascimento": "1989-12-08",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "OP8901234",
+        "data_validade": "2033-11-11",
+        "niss": 891234567,
+        "nif": 210987654,
+        "morada": "Rua do Mercado",
+        "codigo_postal": "1700-017",
+        "concelho": "Viana do Castelo",
+        "freguesia_residencia": "Monserrate",
+        "contacto_telefonico": "928901234",
+        "email": "vanessa.cardoso@email.com",
+        "funcao": "Educadora",
+        "salario": 17,
+        "escalao_profissional": "B",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 18,
+    "fields": {
+        "nome_proprio": "Hugo",
+        "apelido": "Gomes",
+        "data_nascimento": "1978-03-03",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "67890123",
+        "data_validade": "2029-02-18",
+        "niss": 912345678,
+        "nif": 109876543,
+        "morada": "Travessa das Rosas",
+        "codigo_postal": "1800-018",
+        "concelho": "Portalegre",
+        "freguesia_residencia": "Assunção",
+        "contacto_telefonico": "929012345",
+        "email": "hugo.gomes@email.com",
+        "funcao": "Auxiliar",
+        "salario": 18,
+        "escalao_profissional": "C",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 19,
+    "fields": {
+        "nome_proprio": "Beatriz",
+        "apelido": "Mendes",
+        "data_nascimento": "1996-04-27",
+        "tipo_documento_identificacao": "Passaporte",
+        "numero_documento_identificacao": "QR9012345",
+        "data_validade": "2035-03-07",
+        "niss": 123456789,
+        "nif": 987654321,
+        "morada": "Largo da Sé",
+        "codigo_postal": "1900-019",
+        "concelho": "Castelo Branco",
+        "freguesia_residencia": "Alcains",
+        "contacto_telefonico": "930123456",
+        "email": "beatriz.mendes@email.com",
+        "funcao": "Coordenadora",
+        "salario": 19,
+        "escalao_profissional": "A",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.funcionario",
+    "pk": 20,
+    "fields": {
+        "nome_proprio": "Diogo",
+        "apelido": "Rocha",
+        "data_nascimento": "1982-01-15",
+        "tipo_documento_identificacao": "CC",
+        "numero_documento_identificacao": "78901234",
+        "data_validade": "2026-12-29",
+        "niss": 234567891,
+        "nif": 876543210,
+        "morada": "Avenida das Estrelas",
+        "codigo_postal": "2000-020",
+        "concelho": "Guarda",
+        "freguesia_residencia": "Sé",
+        "contacto_telefonico": "931234567",
+        "email": "diogo.rocha@email.com",
+        "funcao": "Professor",
+        "salario": 20,
+        "escalao_profissional": "B",
+        "ativo": false
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 1,
+    "fields": {
+        "aluno_id": 1,
+        "aluno_financas_id": 1,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 208,
+        "mensalidade_paga": 208,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Comparticipação Jardim infancia",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 2,
+    "fields": {
+        "aluno_id": 2,
+        "aluno_financas_id": 2,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 208,
+        "mensalidade_paga": 208,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Comparticipação Jardim infancia",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 3,
+    "fields": {
+        "aluno_id": 3,
+        "aluno_financas_id": 3,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 208,
+        "mensalidade_paga": 208,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Comparticipação Jardim infancia",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 4,
+    "fields": {
+        "aluno_id": 4,
+        "aluno_financas_id": 4,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 208,
+        "mensalidade_paga": 208,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Comparticipação Jardim infancia",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 5,
+    "fields": {
+        "aluno_id": 5,
+        "aluno_financas_id": 5,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 474,
+        "mensalidade_paga": 474,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Creche Feliz",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 6,
+    "fields": {
+        "aluno_id": 6,
+        "aluno_financas_id": 6,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 240,
+        "mensalidade_paga": 240,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Comparticipação Creche",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 7,
+    "fields": {
+        "aluno_id": 7,
+        "aluno_financas_id": 7,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 474,
+        "mensalidade_paga": 474,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Creche Feliz",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 8,
+    "fields": {
+        "aluno_id": 8,
+        "aluno_financas_id": 8,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 474,
+        "mensalidade_paga": 474,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Creche Feliz",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 9,
+    "fields": {
+        "aluno_id": 9,
+        "aluno_financas_id": 9,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 208,
+        "mensalidade_paga": 208,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Comparticipação Jardim infancia",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.comparticipacaomensalss",
+    "pk": 10,
+    "fields": {
+        "aluno_id": 10,
+        "aluno_financas_id": 10,
+        "periodo_inicio": "2025-03-21",
+        "periodo_fim": "2025-03-31",
+        "mensalidade_valor": 240,
+        "mensalidade_paga": 240,
+        "data_pagamento": "2025-04-08",
+        "modo_pagamento": "Comparticipação Creche",
+        "programa_ss": "1",
+        "acordo": 1
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 1,
+    "fields": {
+        "vacina_name": "BCG",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 2,
+    "fields": {
+        "vacina_name": "Hepatite B",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 3,
+    "fields": {
+        "vacina_name": "Poliomielite",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 4,
+    "fields": {
+        "vacina_name": "Tétano",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 5,
+    "fields": {
+        "vacina_name": "Sarampo",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 6,
+    "fields": {
+        "vacina_name": "Caxumba",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 7,
+    "fields": {
+        "vacina_name": "Rubéola",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 8,
+    "fields": {
+        "vacina_name": "Difteria",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 9,
+    "fields": {
+        "vacina_name": "Coqueluche",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 10,
+    "fields": {
+        "vacina_name": "Hepatite A",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 11,
+    "fields": {
+        "vacina_name": "HPV",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 12,
+    "fields": {
+        "vacina_name": "Febre Amarela",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 13,
+    "fields": {
+        "vacina_name": "Varicela",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 14,
+    "fields": {
+        "vacina_name": "Gripe",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 15,
+    "fields": {
+        "vacina_name": "Meningocócica",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 16,
+    "fields": {
+        "vacina_name": "Pneumocócica",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 17,
+    "fields": {
+        "vacina_name": "Rotavírus",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 18,
+    "fields": {
+        "vacina_name": "Influenza",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 19,
+    "fields": {
+        "vacina_name": "Coronavírus",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.vacina",
+    "pk": 20,
+    "fields": {
+        "vacina_name": "Zoster",
+        "plano_vacina": false
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 1,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 1
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 2,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 2
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 3,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 3
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 4,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 4
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 5,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 5
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 6,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 6
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 7,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 7
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 8,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 8
+    }
+},
+{
+    "model": "data_hub.dose",
+    "pk": 9,
+    "fields": {
+        "idade": 0,
+        "obrigatoria": false,
+        "periodo_recomendado": 1,
+        "dose": 1,
+        "vacina_id": 9
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 1,
+    "fields": {
+        "aluno_id": 1,
+        "valor_pagar": 150,
+        "valor_pago": 100
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 2,
+    "fields": {
+        "aluno_id": 2,
+        "valor_pagar": 200,
+        "valor_pago": 200
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 3,
+    "fields": {
+        "aluno_id": 3,
+        "valor_pagar": 120,
+        "valor_pago": ""
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 4,
+    "fields": {
+        "aluno_id": 4,
+        "valor_pagar": 180,
+        "valor_pago": 80
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 5,
+    "fields": {
+        "aluno_id": 5,
+        "valor_pagar": 90,
+        "valor_pago": 90
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 6,
+    "fields": {
+        "aluno_id": 6,
+        "valor_pagar": 160,
+        "valor_pago": ""
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 7,
+    "fields": {
+        "aluno_id": 7,
+        "valor_pagar": 130,
+        "valor_pago": 65
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 8,
+    "fields": {
+        "aluno_id": 8,
+        "valor_pagar": 100,
+        "valor_pago": ""
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 9,
+    "fields": {
+        "aluno_id": 9,
+        "valor_pagar": 250,
+        "valor_pago": 150
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 10,
+    "fields": {
+        "aluno_id": 10,
+        "valor_pagar": 300,
+        "valor_pago": 200
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 11,
+    "fields": {
+        "aluno_id": 11,
+        "valor_pagar": 170,
+        "valor_pago": 170
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 12,
+    "fields": {
+        "aluno_id": 12,
+        "valor_pagar": 80,
+        "valor_pago": ""
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 13,
+    "fields": {
+        "aluno_id": 13,
+        "valor_pagar": 140,
+        "valor_pago": 100
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 14,
+    "fields": {
+        "aluno_id": 14,
+        "valor_pagar": 200,
+        "valor_pago": ""
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 15,
+    "fields": {
+        "aluno_id": 15,
+        "valor_pagar": 110,
+        "valor_pago": 110
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 16,
+    "fields": {
+        "aluno_id": 16,
+        "valor_pagar": 190,
+        "valor_pago": 90
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 17,
+    "fields": {
+        "aluno_id": 17,
+        "valor_pagar": 210,
+        "valor_pago": 210
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 18,
+    "fields": {
+        "aluno_id": 18,
+        "valor_pagar": 100,
+        "valor_pago": ""
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 19,
+    "fields": {
+        "aluno_id": 19,
+        "valor_pagar": 95,
+        "valor_pago": ""
+    }
+},
+{
+    "model": "data_hub.divida",
+    "pk": 20,
+    "fields": {
+        "aluno_id": 20,
+        "valor_pagar": 125,
+        "valor_pago": 60
+    }
+},
+{
+    "model": "data_hub.acordo",
+    "pk": 1,
+    "fields": {
+        "responsavel_educativo_id": 1,
+        "divida_id": 1
+    }
+},
+{
+    "model": "data_hub.tipoimagem",
+    "pk": 1,
+    "fields": {
+        "tipo_imagem": "Alunos"
+    }
+},
+{
+    "model": "data_hub.tipoimagem",
+    "pk": 2,
+    "fields": {
+        "tipo_imagem": "Finanças"
+    }
+},
+{
+    "model": "data_hub.tipoimagem",
+    "pk": 3,
+    "fields": {
+        "tipo_imagem": "Grafico"
+    }
+},
+{
+    "model": "data_hub.tipoimagem",
+    "pk": 4,
+    "fields": {
+        "tipo_imagem": "grafico"
+    }
+},
+{
+    "model": "data_hub.imagem",
+    "pk": 11,
+    "fields": {
+        "imagem": "14c7dcbfca8943b684dc8cbaa21f961c.png",
+        "alt": "Numero de Alunos por Valencia",
+        "tipo_imagem_id": [
+            4
+        ]
+    }
+},
+{
+    "model": "data_hub.imagem",
+    "pk": 12,
+    "fields": {
+        "imagem": "819a591db89e4a49a2e84e7c36203c4c.png",
+        "alt": "Mensalidades por Valencia",
+        "tipo_imagem_id": [
+            4
+        ]
+    }
+},
+{
+    "model": "data_hub.imagem",
+    "pk": 13,
+    "fields": {
+        "imagem": "6c51a7f9500d4680abc8d3713327b0c2.png",
+        "alt": "Mensalidades SS por Valência",
+        "tipo_imagem_id": [
+            4
+        ]
+    }
+},
+{
+    "model": "data_hub.imagem",
+    "pk": 14,
+    "fields": {
+        "imagem": "a5762967d2be4cafa8b545396fcc936b.png",
+        "alt": "Número de Alunos por Valência",
+        "tipo_imagem_id": [
+            4
+        ]
+    }
+},
+{
+    "model": "data_hub.imagem",
+    "pk": 15,
+    "fields": {
+        "imagem": "4fac7ae9064545a18be077d636b3c373.png",
+        "alt": "Mensalidades por Valência",
+        "tipo_imagem_id": [
+            4
+        ]
+    }
+},
+{
+    "model": "data_hub.tipoproblema",
+    "pk": 1,
+    "fields": {
+        "tipo_problema": "Doença"
+    }
+},
+{
+    "model": "data_hub.tipoproblema",
+    "pk": 2,
+    "fields": {
+        "tipo_problema": "Alergia"
+    }
+},
+{
+    "model": "data_hub.tipoproblema",
+    "pk": 3,
+    "fields": {
+        "tipo_problema": "Deficiencia"
+    }
+},
+{
+    "model": "data_hub.valencia",
+    "pk": 1,
+    "fields": {
+        "valencia_nome": "Creche"
+    }
+},
+{
+    "model": "data_hub.valencia",
+    "pk": 2,
+    "fields": {
+        "valencia_nome": "Pre-escolar"
+    }
+},
+{
+    "model": "data_hub.valencia",
+    "pk": 3,
+    "fields": {
+        "valencia_nome": "Bercario"
+    }
+},
+{
+    "model": "data_hub.valencia",
+    "pk": 4,
+    "fields": {
+        "valencia_nome": "Jardim de Infancia"
+    }
+},
+{
+    "model": "data_hub.cuidadoespecial",
+    "pk": 1,
+    "fields": {
+        "problema": "Alergia",
+        "tipo_problema": 2,
+        "descricao": ""
+    }
+},
+{
+    "model": "data_hub.cuidadoespecial",
+    "pk": 2,
+    "fields": {
+        "problema": "Deficiencia Motora",
+        "tipo_problema": 3,
+        "descricao": "Dificuldade em mover partes do corpo"
+    }
+},
+{
+    "model": "data_hub.cuidadoespecial",
+    "pk": 3,
+    "fields": {
+        "problema": "Asma",
+        "tipo_problema": 1,
+        "descricao": ""
+    }
+},
+{
+    "model": "data_hub.cuidadoespecial",
+    "pk": 4,
+    "fields": {
+        "problema": "Deficiencia Auditica",
+        "tipo_problema": 3,
+        "descricao": ""
+    }
+}
+]
