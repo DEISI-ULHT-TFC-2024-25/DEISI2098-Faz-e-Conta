@@ -118,19 +118,20 @@ def gerar_grafico_numero_alunos_por_valencia(return_path=False):
 def gerar_grafico_mensalidades_por_valencia(return_path=False):
     valencias = Valencia.objects.all()
     contagem = {val.valencia_nome: 0 for val in valencias}
-    tipo_mensalidade = TipoTransacao.objects.filter(tipo_transacao__iexact="Mensalidade").first()
-    if tipo_mensalidade:
-        transacoes = Transacao.objects.filter(tipo_transacao=tipo_mensalidade).select_related('aluno_id')
-        for transacao in transacoes:
-            aluno = transacao.aluno_id
-            if aluno:
-                salas = Sala.objects.filter(alunos=aluno).select_related('sala_valencia')
-                for sala in salas:
-                    valencia_nome = sala.sala_valencia.valencia_nome
-                    contagem[valencia_nome] += 1
+    mensalidades = Transacao.objects.filter(tipo_transacao= TipoTransacao.objects.get(tipo_transacao= "Mensalidade"))
+    
+    for mensalidade in mensalidades:
+        salas = Sala.objects.filter(alunos__in=[mensalidade.aluno_id])
+        for sala in salas:
+            valencia = sala.sala_valencia
+            if valencia:
+                contagem[valencia.valencia_nome] -= mensalidade.valor
+                print(f"Valencia: {contagem[valencia.valencia_nome]}")
+
+    
     return gerar_grafico_pizza(
         ["Valência", list(contagem.keys())],
-        ["Número de Mensalidades", list(contagem.values())],
+        ["Valor de Mensalidades", list(contagem.values())],
         "Mensalidades por Valência",
         return_path=return_path
     )

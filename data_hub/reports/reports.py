@@ -306,7 +306,7 @@ def reportMensal(request, month=None, year=None):
     doc2 = SimpleDocTemplate(buffer2, pagesize=landscape(A4), leftMargin=40, rightMargin=40, topMargin=40, bottomMargin=40)
     elements2 = []
 
-    payments_in_default = float(calcular_pagamentos_falta_alunos(mes=month, ano=year) or 0)
+    payments_in_default = float(calcular_pagamentos_falta_alunos(mes=month, ano=year)*-1 or 0)
     elements2.append(Paragraph(f"Valor de pagamentos de alunos em falta: {payments_in_default}€", styles['Title']))
     elements2.append(Spacer(1, 12))
 
