@@ -226,11 +226,18 @@
                         </div>
                     </div>
 {% comment %}-------------------{% endcomment %}
+                    <div class="dropdown-submenu">
+                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">Json =></span>
+                        <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
+                            <a href="{% url 'import_data' %}">Import Json</a>
+                            <a href="{% url 'export_json' %}">Export Json</a>
+                        </div>
+                    </div>
+{% comment %}-------------------{% endcomment %}
                 </div>
             </div>
         {% endif %}
-        <a href="{% url 'import_data' %}">Import Data</a>
-        <a href="{% url 'export_json' %}">Export Json</a>
+        
     {% endif %}
     
     <span style="color: white; margin-left: auto; display: inline-block; vertical-align: middle; font-size: 18px; padding: 10px 15px;">
