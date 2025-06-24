@@ -1,6 +1,3 @@
-def calcular_mensalidade(id_aluno):
-    pass
-
 # Calculos
 def calcular_despesas():
     from .models import DespesaFixa, DespesasVariavel
@@ -26,7 +23,7 @@ def calcular_pagamento_mensal_alunos(mes=None):
             pagamentos = pagamento.objects.filter(tipo_pagamento_id__tipo_pagamento="pagamento")
         else:
             pagamentos = pagamento.objects.filter(
-            data_pagamento__month=mes,
+            data_transacao__month=mes,
             tipo_pagamento_id__tipo_pagamento="pagamento"
             )
         alunos = Aluno.objects.all()
@@ -54,8 +51,8 @@ def calcular_pagamentos_falta_alunos(mes=None, ano=None):
         pagamentos = Transacao.objects.all()
     else:
         pagamentos = Transacao.objects.filter(
-            (Q(data_pagamento__year=ano) & Q(data_pagamento__month__lte=mes)) |
-            Q(data_pagamento__year__lt=ano)
+            (Q(data_transacao__year=ano) & Q(data_transacao__month__lte=mes)) |
+            Q(data_transacao__year__lt=ano)
         )
     
     # Calcula o saldo de cada aluno a partir dos pagamentos
@@ -69,9 +66,40 @@ def calcular_pagamentos_falta_alunos(mes=None, ano=None):
             saldos -= abs(alunos_saldo[aluno])
     
     return saldos
+            
+
+def calcular_mensalidade_aluno(id_aluno):
+    from .models import Aluno, ResponsavelEducativo, LinkFiliacao
+    try:
+        aluno = Aluno.objects.get(pk=id_aluno)
+        links = LinkFiliacao.objects.filter(aluno_id=aluno)
+        responsaveis = ResponsavelEducativo.objects.filter(
+            responsavel_educativo_id__in=[l.responsavel_educativo_id.responsavel_educativo_id for l in links]
+        )
+
+        salarios = []
+        for responsavel in responsaveis:
+            if responsavel.salario:
+                salarios.append(responsavel.salario)
+        if not salarios:
+            return f"Não foi possível encontrar salário para os responsáveis do aluno com ID {id_aluno}."
+
+        # Exemplo de cálculo: mensalidade é 10% da soma dos salários dos responsáveis
+        mensalidade = sum(salarios) * 0.10
+        return mensalidade
+    except Aluno.DoesNotExist:
+        return f"Aluno com ID {id_aluno} não encontrado."
+    
 
 # Transações
-def pagamento(id_aluno, valor, descricao=None):
+def get_tipo_transacao_default(valor):
+    from .models import TipoTransacao
+    if valor > 0:
+        return TipoTransacao.objects.get(tipo_transacao="Carregamento")
+    else:
+        return TipoTransacao.objects.get(tipo_transacao="Pagamento")
+    
+def pagamento(id_aluno, valor, descricao=None, tipo_transacao=None, data_transacao=None):
     from .models import Aluno, Transacao, TipoTransacao
     from django.utils import timezone
 
@@ -83,18 +111,24 @@ def pagamento(id_aluno, valor, descricao=None):
         if valor > 0:
             if descricao is None:
                 descricao = "Carregamento"
-            else:
-                tipo_pagamento = TipoTransacao.objects.get(tipo_transacao="Carregamento")
+            tipo_pagamento = TipoTransacao.objects.get(tipo_transacao="Carregamento")
         else:
             if descricao is None:
                 descricao = "Pagamento"
-            else:
+            if tipo_transacao is None:
                 tipo_pagamento = TipoTransacao.objects.get(tipo_transacao="Pagamento")
+        if tipo_pagamento is None:
+            tipo_pagamento = TipoTransacao.objects.get(pk = tipo_transacao)
+        
+        if data_transacao is not None:
+            data_transacao = timezone.datetime.strptime(data_transacao, "%Y-%m-%d %H:%M:%S")
+        else:
+            data_transacao = timezone.now()
             
         Transacao.objects.create(
             aluno_id = aluno,
             valor = valor,
-            data_transacao = timezone.now(),
+            data_transacao = data_transacao,
             descricao = descricao,
             tipo_transacao = tipo_pagamento,
         )
@@ -105,7 +139,7 @@ def pagamento(id_aluno, valor, descricao=None):
 def verificar_pagamentos():
     from .models import Aluno, Transacao as pagamento
     try:
-        pagamentos = pagamento.objects.filter(data_pagamento__isnull=True)
+        pagamentos = pagamento.objects.filter(data_transacao__isnull=True)
         alunos = Aluno.objects.filter()
         valores_alunos = set()
         

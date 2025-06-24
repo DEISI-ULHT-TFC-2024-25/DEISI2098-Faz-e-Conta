@@ -1,8 +1,12 @@
 from django.contrib import admin
 from django.apps import apps
+
+from data_hub import functions
 from .models import *
 from django.db.models import Sum
 from .admin_filters import *
+from django.utils.html import format_html
+from django.urls import reverse
 
 class DefaultAdmin(admin.ModelAdmin):
     def __init__(self, model, admin_site):
@@ -11,7 +15,7 @@ class DefaultAdmin(admin.ModelAdmin):
         super().__init__(model, admin_site)
 
 class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('nome_completo', 'numero_documento', 'processo', 'saldo', 'sala_nome')
+    list_display = ('nome_completo', 'numero_documento', 'processo', 'saldo', 'sala_nome', 'ver_detalhes_link')
     search_fields = ('nome_proprio', 'apelido', 'numero_documento', 'processo')
     list_filter = (SaldoListFilter, 'cuidados_especias', 'sala')
     ordering = [field.name for field in Aluno._meta.fields]
@@ -24,6 +28,12 @@ class AlunoAdmin(admin.ModelAdmin):
         # Mostra todas as salas em que o aluno está, separadas por vírgula
         return ", ".join([s.sala_nome for s in obj.sala_set.all()])
     sala_nome.short_description = 'Sala'
+
+    def ver_detalhes_link(self, obj):
+        valor = functions.calcular_mensalidade_aluno(obj.pk)
+        url = reverse('registar_pagamento', args=[obj.pk, 4, valor])
+        return format_html('<a href="{}">{}</a>', url, functions.calcular_mensalidade_aluno(obj.pk))
+    ver_detalhes_link.short_description = 'Pagar Mensalidade'
     
 class ResponsavelEducativoAdmin(admin.ModelAdmin):
     list_display = ('nome_completo', 'numero_documento', 'telefone', 'email')
@@ -79,10 +89,8 @@ class ImagemAdmin(admin.ModelAdmin):
 
 class TransacaoAdmin(admin.ModelAdmin):
     list_display = ('nome_completo', 'data_transacao', 'tipo_transacao', 'valor', 'descricao')
-    search_fields = ('aluno_id__processo', 'aluno_id__nome_proprio', 'aluno_id__apelido')
+    search_fields = ('aluno_id__pk', 'aluno_id__nome_proprio', 'aluno_id__apelido')
     list_filter = ('data_transacao', 'tipo_transacao')
-
-    
     def nome_completo(self, obj):
         return f"{obj.aluno_id.nome_proprio} {obj.aluno_id.apelido}"
     

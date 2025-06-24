@@ -143,8 +143,20 @@
                         <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
                             <a href="/admin/data_hub/aluno/">Alunos</a>
                             <a href="/admin/data_hub/aluno/add/">Adicionar Aluno</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">Salas =></span>
+                        <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
                             <a href="/admin/data_hub/sala/">Salas</a>
                             <a href="/admin/data_hub/sala/add">Adicionar sala</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">R.E. =></span>
+                        <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
+                            <a href="/admin/data_hub/responsaveleducativo/">Responsaveis Educativos</a>
+                            <a href="/admin/data_hub/responsaveleducativo/add/">Adicionar Responsavel Educativo</a>
                         </div>
                     </div>
                 </div>
@@ -206,6 +218,14 @@
                             <a href="{% url 'admin:auth_permission_add' %}">Adicionar Permissão</a>
                         </div>
                     </div>
+{% comment %}-------------------{% endcomment %}
+                    <div class="dropdown-submenu">
+                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">Admin =></span>
+                        <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
+                            <a href="/admin/data_hub/tipotransacao/add/">Adicionar Tipo Transação</a>
+                        </div>
+                    </div>
+{% comment %}-------------------{% endcomment %}
                 </div>
             </div>
         {% endif %}

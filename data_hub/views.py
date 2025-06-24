@@ -17,6 +17,7 @@ from django.urls import get_resolver
 import csv, json
 from .forms import ImportFileForm
 from .forms import *
+import datetime
 
 
 login_url='login'
@@ -72,16 +73,17 @@ def add_saldo(request, id_aluno):
     return render(request, 'financas/add_saldo.html', {'aluno': aluno})
 
 @login_required(login_url=login_url)
-def registar_pagamento(request, id_aluno=None):
+def registar_pagamento(request, id_aluno=None, tipo_transacao=None, valor=None):
     if request.method == 'POST':
         form = TransacaoForm(request.POST)
         if form.is_valid():
             aluno_id = form.cleaned_data['aluno_id'].pk
             valor = form.cleaned_data['valor']
             descricao = form.cleaned_data['descricao']
+            tipo_transacao = form.cleaned_data['tipo_transacao'] or functions.get_tipo_transacao_default(valor)
             try:
-                print(f"Descrição: {descricao}|")
-                functions.pagamento(aluno_id, valor, descricao)
+                
+                functions.pagamento(id_aluno=aluno_id, valor=valor, descricao=descricao, tipo_transacao=tipo_transacao.tipo_transacao_id)
                 messages.success(request, f'Pagamento registado com sucesso: {valor}')
             except ValueError:
                 messages.error(request, 'Valor inválido.')
@@ -92,7 +94,21 @@ def registar_pagamento(request, id_aluno=None):
         else:
             try:
                 aluno = Aluno.objects.get(pk=id_aluno)
-                form = TransacaoForm(initial={'aluno_id': aluno})
+                initial = {'aluno_id': aluno}
+                if tipo_transacao is not None:
+                    initial['tipo_transacao'] = tipo_transacao
+                if valor is not None and valor != '':
+                    try:
+                        valor_float = float(valor)
+                        # Se tipo_transacao não for 2, inverter o sinal
+                        if str(tipo_transacao) != '2':
+                            valor_float = -abs(valor_float)
+                        else:
+                            valor_float = abs(valor_float)
+                        initial['valor'] = valor_float
+                    except ValueError:
+                        messages.error(request, 'Valor inválido no URL.')
+                form = TransacaoForm(initial=initial)
             except Aluno.DoesNotExist:
                 form = TransacaoForm()
     return render(request, 'financas/registar_pagamento.html', {'form': form})
