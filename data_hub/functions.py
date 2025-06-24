@@ -1,3 +1,68 @@
+# Mensalidades
+def calcular_rendimento_anual_bruto(responsaveis=None):
+    from .models import ResponsavelEducativo
+    from django.db.models import Sum
+    try:
+        if responsaveis is None:
+            return 0
+        if isinstance(responsaveis, ResponsavelEducativo):
+            responsaveis = [responsaveis]
+        total_rendimento = ResponsavelEducativo.objects.filter(pk__in=[r.pk for r in responsaveis]).aggregate(total=Sum('salario')*12)['total'] or 0
+        return total_rendimento
+    except Exception as e:
+        print(f"Erro ao calcular rendimento anual bruto: {e}")
+        return 0
+    
+def calcular_despesas_anuais_fixas(responsaveis=None):
+    return 0
+
+def calcular_despesas_mensais_fixas(responsaveis=None):
+    return 0
+
+def calcular_rendimento_medio_mensal_agregado(responsaveis=None):
+    return (calcular_rendimento_anual_bruto(responsaveis)/12 - calcular_despesas_anuais_fixas(responsaveis)/12 - calcular_despesas_mensais_fixas(responsaveis))/responsaveis.count() if responsaveis else 0
+    
+def calcular_desconto_mensalidade(responsaveis=None):
+    '''
+        Escalões de desconto:
+        - Até 600€: 50%
+        - Entre 601€ e 760€: 30%
+        - Entre 761€ e 1600€: 20%
+        - Acima de 1600€: 10%
+    '''
+    rendimento_anual = calcular_rendimento_anual_bruto(responsaveis)/12
+    if rendimento_anual <= 600:
+        return 0.5
+    elif rendimento_anual <= 760:
+        return 0.3
+    elif rendimento_anual <= 1600:
+        return 0.2
+    else:
+        return 0.1
+
+def calcular_mensalidade_aluno(id_aluno):
+    from .models import Aluno, ResponsavelEducativo
+    try:
+        aluno = Aluno.objects.get(pk=id_aluno)
+        responsaveis = ResponsavelEducativo.objects.filter(aluno_id=aluno.pk)
+        mensalidade = calcular_rendimento_medio_mensal_agregado(responsaveis=responsaveis) * (1 - calcular_desconto_mensalidade(responsaveis=responsaveis))
+        return mensalidade
+    except Aluno.DoesNotExist:
+        print(f"Aluno com ID {id_aluno} não encontrado.")
+        return 0
+    except ResponsavelEducativo.DoesNotExist:
+        print(f"Responsável educativo para o aluno com ID {id_aluno} não encontrado.")
+        return 0
+    except Exception as e:
+        print(f"Erro ao calcular mensalidade do aluno: {e}")
+        return 0
+    
+    return 0
+    
+
+
+
+
 # Calculos
 def calcular_despesas():
     from .models import DespesaFixa, DespesasVariavel
@@ -68,28 +133,6 @@ def calcular_pagamentos_falta_alunos(mes=None, ano=None):
     return saldos
             
 
-def calcular_mensalidade_aluno(id_aluno):
-    from .models import Aluno, ResponsavelEducativo, LinkFiliacao
-    try:
-        aluno = Aluno.objects.get(pk=id_aluno)
-        links = LinkFiliacao.objects.filter(aluno_id=aluno)
-        responsaveis = ResponsavelEducativo.objects.filter(
-            responsavel_educativo_id__in=[l.responsavel_educativo_id.responsavel_educativo_id for l in links]
-        )
-
-        salarios = []
-        for responsavel in responsaveis:
-            if responsavel.salario:
-                salarios.append(responsavel.salario)
-        if not salarios:
-            return f"Não foi possível encontrar salário para os responsáveis do aluno com ID {id_aluno}."
-
-        # Exemplo de cálculo: mensalidade é 10% da soma dos salários dos responsáveis
-        mensalidade = sum(salarios) * 0.10
-        return mensalidade
-    except Aluno.DoesNotExist:
-        return f"Aluno com ID {id_aluno} não encontrado."
-    
 
 # Transações
 def get_tipo_transacao_default(valor):
