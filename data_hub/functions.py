@@ -209,3 +209,63 @@ def get_sala_id(aluno_id):
     for sala in Sala.objects.all():
         if sala.alunos.filter(pk=aluno_id).exists():
             return sala.pk
+
+# Backup
+def create_backup():
+    import os
+    import shutil
+    from datetime import datetime
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    db_path = os.path.join(base_dir, 'db.sqlite3')
+    backup_dir = os.path.join(base_dir, 'backup')
+    if not os.path.exists(backup_dir):
+        os.makedirs(backup_dir)
+    now = datetime.now().strftime("%Y-%m-%d-%H%M%S")
+    backup_filename = f"db_{now}.sqlite3"
+    backup_path = os.path.join(backup_dir, backup_filename)
+    try:
+        shutil.copy2(db_path, backup_path)
+        print(f"Backup criado em: {backup_path}")
+    except Exception as e:
+        print(f"Erro ao criar backup: {e}")
+
+
+def restore_backup(backup_filename=None):
+    import os
+    import shutil
+    from datetime import datetime
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    db_path = os.path.join(base_dir, 'db.sqlite3')
+    backup_dir = os.path.join(base_dir, 'backup')
+    if not os.path.exists(backup_dir):
+        print("Diretório de backup não encontrado.")
+        return
+    if backup_filename is None:
+        backup_files = [f for f in os.listdir(backup_dir) if f.startswith('db_') and f.endswith('.sqlite3')]
+        if not backup_files:
+            print("Nenhum arquivo de backup encontrado.")
+            return
+        backup_filename = sorted(backup_files)[-1]  # Pega o mais recente
+    backup_path = os.path.join(backup_dir, backup_filename)
+    if not os.path.exists(backup_path):
+        print(f"Arquivo de backup {backup_filename} não encontrado.")
+        return
+    try:
+        shutil.copy2(backup_path, db_path)
+        print(f"Backup restaurado de: {backup_path}")
+    except Exception as e:
+        print(f"Erro ao restaurar backup: {e}")
+
+def listar_backups():
+    import os
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    backup_dir = os.path.join(base_dir, 'backup')
+    if not os.path.exists(backup_dir):
+        print("Diretório de backup não encontrado.")
+        return []
+    backup_files = [f for f in os.listdir(backup_dir) if f.startswith('db_') and f.endswith('.sqlite3')]
+    if not backup_files:
+        print("Nenhum arquivo de backup encontrado.")
+        return []
+    backup_files.sort(reverse=True)  # Ordena do mais recente para o mais antigo
+    return [os.path.join(backup_dir, f) for f in backup_files]

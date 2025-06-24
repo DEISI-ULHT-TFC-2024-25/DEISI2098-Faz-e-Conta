@@ -1,0 +1,26 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+<h2>Restaurar Backup</h2>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="backup_filename">Selecione o backup para restaurar:</label>
+        <select name="backup_filename" id="backup_filename" required>
+            <option value="">-- Escolha um backup --</option>
+            {% for file in backup_files %}
+                <option value="{{ file }}">{{ file }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">Restaurar</button>
+</form>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

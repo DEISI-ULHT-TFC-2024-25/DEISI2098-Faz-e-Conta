@@ -210,3 +210,33 @@ def export_data_json(request):
     response['Content-Disposition'] = 'attachment; filename="data_hub.json"'
     return response
     
+
+
+# Backup
+@login_required(login_url=login_url)
+def create_backup(request):
+    try:
+        functions.create_backup()
+        messages.success(request, 'Backup criado com sucesso.')
+    except Exception as e:
+        messages.error(request, f'Erro ao criar backup: {e}')
+    return redirect('index')
+
+
+@login_required(login_url=login_url)
+def restore_backup(request):
+    if request.method == 'POST':
+        backup_filename = request.POST.get('backup_filename')
+        if backup_filename:
+            try:
+                functions.restore_backup(backup_filename)
+                messages.success(request, 'Backup restaurado com sucesso.')
+            except Exception as e:
+                messages.error(request, f'Erro ao restaurar backup: {e}')
+        else:
+            messages.error(request, 'Nenhum arquivo de backup selecionado.')
+    else:
+        backup_files = functions.listar_backups()
+        return render(request, 'backup/restore_backup.html', {'backup_files': backup_files})
+
+    return redirect('index')

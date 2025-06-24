@@ -44,14 +44,18 @@ imports = [
     path('import/', views.import_data, name='import_data'),
 ]
 
+backups = [
+    path('backups/create', views.create_backup, name='create_backup'),
+    path('backups/restore', views.restore_backup, name='restore_backup'),
+]
+
 '''
 URLs added
 '''
 urlpatterns += testes
-
 urlpatterns += user
 urlpatterns += reports
 urlpatterns += financas
 urlpatterns += alunos
 urlpatterns += imports
-
+urlpatterns += backups
