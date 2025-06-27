@@ -14,6 +14,9 @@ testes = [
 financas = [
     path('financas/dividas', views.alunos_dividas, name='alunos_dividas'),
     path('financas/add_saldo/<int:id_aluno>/', views.add_saldo, name='add_saldo'),
+    
+    path('financas/comparticipacao', views.comparticipacoes, name='comparticipacoes'),
+    path('financas/comparticipacao/add/<int:tipo_transacao>', views.registar_pagamento, name='registar_comparticipacao'),
 
     path('financas/pagamento/add/', views.registar_pagamento, name='registar_pagamento'),
     path('financas/pagamento/add/<int:id_aluno>/', views.registar_pagamento, name='registar_pagamento'),

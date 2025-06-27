@@ -179,11 +179,12 @@ def gerar_grafico_despesas_fixas_por_tipo(return_path=False):
 def gerar_grafico_mensalidades_SS_por_valencia(return_path=False):
     valencias = Valencia.objects.all()
     contagem = {val.valencia_nome: 0 for val in valencias}
-    for m in ComparticipacaoMensalSs.objects.select_related('aluno_id'):
+    
+    for m in Transacao.objects.filter(tipo_transacao=3):
         salas = Sala.objects.filter(alunos=m.aluno_id).select_related('sala_valencia')
         for sala in salas:
             valencia_nome = sala.sala_valencia.valencia_nome
-            contagem[valencia_nome] += 1
+            contagem[valencia_nome] += m.valor
     return gerar_grafico_pizza(
         ["Valência", list(contagem.keys())],
         ["Mensalidades SS", list(contagem.values())],

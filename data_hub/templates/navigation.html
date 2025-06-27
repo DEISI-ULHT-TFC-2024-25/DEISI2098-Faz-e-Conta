@@ -182,6 +182,13 @@
                             <a href="{% url 'registar_pagamento' %}">Registar Transação</a>
                         </div>
                     </div>
+                    <div class="dropdown-submenu">
+                        <span class="dropdown-btn" onmouseover="openSubmenu(this)" onmouseout="closeSubmenu(this)">Comparticipações =></span>
+                        <div class="dropdown-container" style="left: 100%; top: 0; min-width: 180px; display: none;">
+                            <a href="{% url 'comparticipacoes' %}">Comparticipações</a>
+                            <a href="{% url 'registar_comparticipacao' tipo_transacao=3 %}">Registar Comparticipação</a>
+                        </div>
+                    </div>
                     <a href="{% url 'reports' %}">Reports</a>
                 </div>
             </div>

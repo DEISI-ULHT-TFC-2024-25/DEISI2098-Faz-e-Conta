@@ -147,33 +147,46 @@ def pagamento(id_aluno, valor, descricao=None, tipo_transacao=None, data_transac
     from django.utils import timezone
 
     try:
-        tipo_pagamento = None
         aluno = Aluno.objects.get(pk=id_aluno)
-        aluno.saldo += valor
         
-        if valor > 0:
-            if descricao is None:
-                descricao = "Carregamento"
-            tipo_pagamento = TipoTransacao.objects.get(tipo_transacao="Carregamento")
+        print(f"{tipo_transacao}")
+
+        # Determinar o tipo de transação
+        tipo_pagamento = None
+        if tipo_transacao is not None:
+            if isinstance(tipo_transacao, TipoTransacao):
+                tipo_pagamento = tipo_transacao
+            else:
+                tipo_pagamento = TipoTransacao.objects.get(pk=tipo_transacao) if isinstance(tipo_transacao, int) else TipoTransacao.objects.get(tipo_transacao=tipo_transacao)
         else:
-            if descricao is None:
+            tipo_pagamento = TipoTransacao.objects.get(tipo_transacao="Carregamento") if valor > 0 else TipoTransacao.objects.get(tipo_transacao="Pagamento")
+
+        # Ajustar saldo do aluno (exceto para Comparticipação)
+        if tipo_pagamento.tipo_transacao != "Comparticipação":
+            aluno.saldo += valor
+
+        # Definir descrição se não fornecida
+        if descricao is None:
+            if tipo_pagamento.tipo_transacao == "Comparticipação":
+                descricao = "Comparticipação da Segurança Social"
+            elif valor > 0:
+                descricao = "Carregamento"
+            else:
                 descricao = "Pagamento"
-            if tipo_transacao is None:
-                tipo_pagamento = TipoTransacao.objects.get(tipo_transacao="Pagamento")
-        if tipo_pagamento is None:
-            tipo_pagamento = TipoTransacao.objects.get(pk = tipo_transacao)
-        
+
+        # Definir data da transação
         if data_transacao is not None:
-            data_transacao = timezone.datetime.strptime(data_transacao, "%Y-%m-%d %H:%M:%S")
+            if isinstance(data_transacao, str):
+                data_transacao = timezone.datetime.strptime(data_transacao, "%Y-%m-%d %H:%M:%S")
         else:
             data_transacao = timezone.now()
-            
+
         Transacao.objects.create(
-            aluno_id = aluno,
-            valor = valor,
-            data_transacao = data_transacao,
-            descricao = descricao,
-            tipo_transacao = tipo_pagamento,
+            aluno_id=aluno,
+            valor=valor,
+            data_transacao=data_transacao,
+            descricao=descricao,
+            tipo_transacao=tipo_pagamento,
         )
         aluno.save()
     except Exception as e:
@@ -228,7 +241,6 @@ def create_backup():
         print(f"Backup criado em: {backup_path}")
     except Exception as e:
         print(f"Erro ao criar backup: {e}")
-
 
 def restore_backup(backup_filename=None):
     import os
