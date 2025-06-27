@@ -314,26 +314,22 @@ def reportMensal(request, month=None, year=None):
     table_data = [[
         Paragraph("Nome de aluno", wrap_style),
         Paragraph("Valência", wrap_style),
-        Paragraph("Quantia mensal devida", wrap_style),
         Paragraph("Quantia em falta", wrap_style),
         Paragraph("Data do último pagamento", wrap_style),
         Paragraph("Quantia do último pagamento", wrap_style),
-        Paragraph("Valor pago pela SS", wrap_style),
-        Paragraph("Data último pagamento SS", wrap_style),
-        Paragraph("Acordo", wrap_style),
+        # Paragraph("Quantia mensal devida", wrap_style),
+        # Paragraph("Acordo", wrap_style),
     ]]
 
     for p in pagamentos:
         table_data.append([
             Paragraph(str(p["Nome de aluno"]), wrap_style),
             Paragraph(str(p["Valência"]), wrap_style),
-            Paragraph(str(p["Quantia mensal devida"]), wrap_style),
             Paragraph(str(p["Quantia em falta"]), wrap_style),
             Paragraph(str(p["Data do último pagamento"]), wrap_style),
             Paragraph(str(p["Quantia do último pagamento"]), wrap_style),
-            Paragraph(str(p["Valor pago pela SS"]), wrap_style),
-            Paragraph(str(p["Data último pagamento SS"]), wrap_style),
-            Paragraph(str(p["Acordo"]), wrap_style),
+            #Paragraph(str(p["Quantia mensal devida"]), wrap_style),
+            #Paragraph(str(p["Acordo"]), wrap_style),
         ])
 
     col_widths = [100, 80, 70, 70, 85, 75, 75, 85, 70]
@@ -350,6 +346,46 @@ def reportMensal(request, month=None, year=None):
         ('FONTSIZE', (0, 0), (-1, -1), 8),
     ]))
     elements2.append(KeepTogether(table))
+    
+    elements2.append(PageBreak())
+    comparticipacoes = calcular_comparticipacao_ss()
+    elements2.append(Paragraph(f"Comparticipações SS: {comparticipacoes}€", styles['Title']))
+    elements2.append(Spacer(1, 12))
+
+    pagamentos = listar_comparticipações_ss(mes=month, ano=year)
+    table_data = [
+        [
+            Paragraph("Nome de aluno", wrap_style),
+            Paragraph("Valência", wrap_style),
+            Paragraph("Valor pago pela SS", wrap_style),
+            Paragraph("Data do Ultimo Pagamento", wrap_style),
+        ]
+    ]
+
+    for p in pagamentos:
+        table_data.append([
+            Paragraph(str(p["Nome de aluno"]), wrap_style),
+            Paragraph(str(p["Valência"]), wrap_style),
+            Paragraph(f'{float(p["Valor pago pela SS"]):.2f}€', wrap_style),
+            Paragraph(p["Data do último pagamento"].strftime('%d/%m/%Y') if p["Data do último pagamento"] else "", wrap_style),
+        ])
+
+    col_widths = [100, 80, 70, 70, 85, 75, 75, 85, 70]
+    table = Table(table_data, colWidths=col_widths, repeatRows=1)
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('FONTSIZE', (0, 0), (-1, -1), 8),
+    ]))
+    elements2.append(KeepTogether(table))
+    
+    
     doc2.build(elements2)
 
     # Parte 3 - Final
@@ -362,8 +398,9 @@ def reportMensal(request, month=None, year=None):
     variable_expenses = float(calcular_despesas_variaveis(mes=month, ano=year) or 0)
     total_students = Aluno.objects.count() or 1
 
-    cost_per_student = calcular_despesas_por_aluno(mes=month, ano=year) * -1
-
+    # cost_per_student = calcular_despesas_por_aluno(mes=month, ano=year) * -1
+    cost_per_student = calcular_valor_medio_aluno(mes=month, ano=year)
+    
     final_balance = (
         total_fees_paid_by_students + total_fees_paid_by_ss
         - fixed_expenses - variable_expenses - payments_in_default

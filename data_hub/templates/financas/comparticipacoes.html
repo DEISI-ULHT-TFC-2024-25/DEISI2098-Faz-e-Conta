@@ -1,0 +1,75 @@
+{% extends "navigation.html" %}
+
+{% block title %}Transações de Pagamento{% endblock %}
+
+{% block style %}
+<style>
+    .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 14px;
+    }
+    .admin-table th, .admin-table td {
+    border: 1px solid #e1e1e1;
+    padding: 8px 12px;
+    text-align: left;
+    }
+    .admin-table thead {
+    background: #f5f5f5;
+    }
+    .admin-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+    }
+    .admin-table tbody tr:hover {
+    background: #eaf3fc;
+    }
+    .filter-form {
+    margin-bottom: 20px;
+    }
+    .filter-form input {
+    margin-right: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ title }}</h1>
+    <form method="get" class="filter-form" style="display: flex; align-items: center; gap: 4px; margin-bottom: 10px;">
+        <input type="text" name="nome" placeholder="Procurar" value="{{ request.GET.nome }}" style="margin-right: 0;">
+        <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0 4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
+            <circle cx="9" cy="9" r="7" stroke="#555" stroke-width="2"/>
+            <line x1="14.2" y1="14.2" x2="18" y2="18" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+    </form>
+
+    {% if transacoes %}
+    <p>{{ description }}</p>
+    <table class="admin-table">
+        <thead>
+        <tr>
+            <th>Aluno</th>
+            <th>Valor</th>
+            <th>Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transacao in transacoes %}
+            <tr>
+            <td>{{ transacao.aluno_id.nome_proprio }} {{ transacao.aluno_id.apelido }}</td>
+            <td>{{ transacao.valor }}</td>
+            <td>{{ transacao.data_transacao|date:"d/m/Y" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        Nenhuma transação encontrada.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -10,7 +10,73 @@ def calcular_total_mensalidades():
         return 0
     total = Transacao.objects.filter(tipo_transacao=tipo_mensalidade).aggregate(total=Sum('valor'))['total']
     return total * -1 or 0\
+
+def calcular_total_mensalidades_ss():
+    return Transacao.objects.filter(tipo_transacao=3).aggregate(
+        total=Sum('valor')
+    )['total'] or 0
+
+def calcular_mensalidades_ss_por_valencia():
+    mensalidades_por_valencia_ss = set()
+    valencias = Sala.objects.values_list('sala_valencia', flat=True).distinct()
+    # valencias agora são IDs de Valencia, precisamos buscar o nome
+    for valencia_id in valencias:
+        valencia_obj = Valencia.objects.filter(pk=valencia_id).first()
+        valencia_nome = valencia_obj.valencia_nome if valencia_obj else "Indefinido"
+        mensalidades_por_valencia_ss.add(valencia_nome)
+    mensalidades_por_valencia_ss = {valencia: 0 for valencia in mensalidades_por_valencia_ss}
     
+    mensalidades = Transacao.objects.filter(tipo_transacao=3)
+    
+    for m in mensalidades:
+        sala = Sala.objects.filter(alunos=m.aluno_id).first()
+        if sala and sala.sala_valencia:
+            valencia_nome = sala.sala_valencia.valencia_nome
+        else:
+            valencia_nome = "Indefinido"
+        
+        mensalidades_por_valencia_ss[valencia_nome] = mensalidades_por_valencia_ss.get(valencia_nome, 0) + m.valor
+
+    print(mensalidades_por_valencia_ss)
+    return mensalidades_por_valencia_ss
+
+def calcular_comparticipacao_ss():
+    total = Transacao.objects.filter(tipo_transacao=3).aggregate(total=Sum('valor'))['total']
+    return total or 0
+
+def listar_comparticipações_ss(mes=None, ano=None):
+    pagamentos = Transacao.objects.filter(tipo_transacao=3)
+    if mes is not None and ano is not None:
+        pagamentos = pagamentos.filter(
+            data_transacao__month=mes,
+            data_transacao__year=ano
+        )
+    resultados = {}
+    for pagamento in pagamentos.select_related('aluno_id'):
+        aluno = pagamento.aluno_id
+        if not aluno:
+            continue
+        nome_aluno = f"{aluno.nome_proprio} {aluno.apelido}"
+        sala = Sala.objects.filter(alunos=aluno).first()
+        valencia_nome = sala.sala_valencia.valencia_nome if sala and sala.sala_valencia else "Indefinido"
+        if aluno.pk not in resultados:
+            resultados[aluno.pk] = {
+                "Nome de aluno": nome_aluno,
+                "Valência": valencia_nome,
+                "Valor pago pela SS": 0,
+                "Data do último pagamento": None,
+            }
+        resultados[aluno.pk]["Valor pago pela SS"] += pagamento.valor
+        # Guarda a data do pagamento mais recente
+        if (resultados[aluno.pk]["Data do último pagamento"] is None or 
+            (pagamento.data_transacao and pagamento.data_transacao > resultados[aluno.pk]["Data do último pagamento"])):
+            resultados[aluno.pk]["Data do último pagamento"] = pagamento.data_transacao
+
+    # Ajusta o formato da data para .date()
+    for r in resultados.values():
+        if r["Data do último pagamento"]:
+            r["Data do último pagamento"] = r["Data do último pagamento"].date()
+    return list(resultados.values())
 
 def calcular_mensalidades_por_valencia():
     mensalidades_por_valencia = set()
@@ -39,25 +105,6 @@ def calcular_mensalidades_por_valencia():
         mensalidades_por_valencia[valencia_nome] = mensalidades_por_valencia.get(valencia_nome, 0) - transacao.valor
 
     return mensalidades_por_valencia
-
-def calcular_total_mensalidades_ss():
-    return ComparticipacaoMensalSs.objects.filter(mensalidade_paga__isnull=False).aggregate(
-        total=Sum('mensalidade_paga')
-    )['total'] or 0
-
-def calcular_mensalidades_ss_por_valencia():
-    mensalidades_por_valencia_ss = {}
-    mensalidades = ComparticipacaoMensalSs.objects.filter(mensalidade_paga__isnull=False)
-
-    for m in mensalidades:
-        sala = Sala.objects.filter(alunos=m.aluno_id).first()
-        if sala and sala.sala_valencia:
-            valencia_nome = sala.sala_valencia.valencia_nome
-        else:
-            valencia_nome = "Indefinido"
-        mensalidades_por_valencia_ss[valencia_nome] = mensalidades_por_valencia_ss.get(valencia_nome, 0) + m.mensalidade_paga
-
-    return mensalidades_por_valencia_ss
 
 def calcular_pagamentos_em_falta():
     dividas = Divida.objects.all()
@@ -90,26 +137,25 @@ def listar_pagamentos_em_falta(mes=None, ano=None):
     pagamentos = Transacao.objects.all()
     
     for aluno in alunos:
-        pagamentos_data = pagamentos.filter(aluno_id=aluno.pk).order_by('-data_transacao').first()
+        pagamentos_data = pagamentos.filter(aluno_id=aluno.pk).exclude(tipo_transacao__tipo_transacao_id=3).order_by('-data_transacao').first()
         sala = Sala.objects.filter(alunos=aluno).first()
         valencia_nome = sala.sala_valencia.valencia_nome if sala and sala.sala_valencia else "Indefinido"
-            
+        comparticipacoes_data = pagamentos.filter(aluno_id=aluno.pk, tipo_transacao=3).order_by('-data_transacao').first()
+        valor_pago_ss = pagamentos.filter(aluno_id=aluno.pk, tipo_transacao=3).aggregate(total=Sum('valor'))['total'] or 0
+
         pagamento_em_falta = {
             "Nome de aluno": f"{aluno.nome_proprio} {aluno.apelido}",
             "Valência": valencia_nome,
-            "Quantia mensal devida": f"{aluno.saldo} __Temp__",
             "Quantia em falta": aluno.saldo,
-            "Data do último pagamento": pagamentos_data.data_transacao if pagamentos_data else None,
+            "Data do último pagamento": pagamentos_data.data_transacao.date() if pagamentos_data and pagamentos_data.data_transacao else None,
             "Quantia do último pagamento": pagamentos_data.valor if pagamentos_data else 0,
-            "Valor pago pela SS": 0,
-            "Data último pagamento SS": None,
-            "Acordo": "Não" + "__Temp__",
+            "Valor pago pela SS": valor_pago_ss,
+            "Data último pagamento SS": comparticipacoes_data.data_transacao.date() if comparticipacoes_data and comparticipacoes_data.data_transacao else None,
         }
 
         pagamentos_em_falta.append(pagamento_em_falta)
 
     return pagamentos_em_falta
-
 
 # Despesas
 def calcular_despesas_fixas(mes=None, ano=None):
@@ -150,3 +196,14 @@ def calcular_despesas(mes=None, ano=None):
 def calcular_despesas_por_aluno(mes=None, ano=None):
     return (calcular_despesas(mes=mes, ano=ano) / Aluno.objects.count()) if Aluno.objects.count() > 0 else 0
 
+def calcular_valor_medio_aluno(mes=None, ano=None):
+    pagamentos = Transacao.objects.exclude(tipo_transacao=3)
+    if mes is not None and ano is not None:
+        pagamentos = pagamentos.filter(
+            data_transacao__year__lte=ano
+        ).filter(
+            Q(data_transacao__year__lt=ano) | Q(data_transacao__year=ano, data_transacao__month__lte=mes)
+        )
+    total_pago = pagamentos.aggregate(total=Sum('valor'))['total'] or 0
+    num_alunos = Aluno.objects.count()
+    return (total_pago / num_alunos) if num_alunos > 0 else 0

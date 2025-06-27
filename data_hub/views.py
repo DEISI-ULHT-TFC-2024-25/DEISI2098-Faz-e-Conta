@@ -89,7 +89,7 @@ def registar_pagamento(request, id_aluno=None, tipo_transacao=None, valor=None):
             descricao = form.cleaned_data['descricao']
             tipo_transacao = form.cleaned_data['tipo_transacao'] or functions.get_tipo_transacao_default(valor)
             try:
-                
+                print(f"2: {form.cleaned_data['tipo_transacao'] }")
                 functions.pagamento(id_aluno=aluno_id, valor=valor, descricao=descricao, tipo_transacao=tipo_transacao.tipo_transacao_id)
                 messages.success(request, f'Pagamento registado com sucesso: {valor}')
             except ValueError:
@@ -97,28 +97,56 @@ def registar_pagamento(request, id_aluno=None, tipo_transacao=None, valor=None):
             return redirect('/admin/data_hub/aluno/')
     else:
         if id_aluno is None:
-            form = TransacaoForm()
+            if tipo_transacao is None:
+                form = TransacaoForm()
+            else:
+                initial = {'tipo_transacao': tipo_transacao}
+                form = TransacaoForm(initial=initial)
         else:
             try:
                 aluno = Aluno.objects.get(pk=id_aluno)
                 initial = {'aluno_id': aluno}
                 if tipo_transacao is not None:
                     initial['tipo_transacao'] = tipo_transacao
+                    print(f"Inicial tipo_transacao: {initial['tipo_transacao']}")
                 if valor is not None and valor != '':
                     try:
                         valor_float = float(valor)
                         # Se tipo_transacao não for 2, inverter o sinal
-                        if str(tipo_transacao) != '2':
+                        if str(tipo_transacao) != '2' and str(tipo_transacao) != '3':
                             valor_float = -abs(valor_float)
                         else:
                             valor_float = abs(valor_float)
                         initial['valor'] = valor_float
                     except ValueError:
                         messages.error(request, 'Valor inválido no URL.')
+                
                 form = TransacaoForm(initial=initial)
             except Aluno.DoesNotExist:
                 form = TransacaoForm()
     return render(request, 'financas/registar_pagamento.html', {'form': form})
+
+@login_required(login_url=login_url)
+def comparticipacoes(request):
+    tipo_transacao = TipoTransacao.objects.get(pk=3)
+    transacoes = Transacao.objects.filter(tipo_transacao=tipo_transacao).select_related('aluno_id')
+
+    # Filtros
+    nome = request.GET.get('nome', '').strip()
+
+    if nome:
+        transacoes = transacoes.filter(
+            aluno_id__nome_proprio__icontains=nome
+        ) | transacoes.filter(
+            aluno_id__apelido__icontains=nome
+        )
+
+    content = {
+        'title': 'Comparticipações',
+        'description': '',
+        'transacoes': transacoes,
+    }
+    return render(request, 'financas/comparticipacoes.html', content)
 
 # User
 def user_login(request):

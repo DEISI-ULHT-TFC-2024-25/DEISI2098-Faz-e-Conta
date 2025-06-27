@@ -77,7 +77,6 @@ class DividaAdmin(admin.ModelAdmin):
     agrupar_dividas.short_description = "Agrupar dívidas selecionadas"
 
 
-
 class ImagemAdmin(admin.ModelAdmin):
     list_display = ('alt', 'imagem', 'tipos_imagem')
     search_fields = ('alt',)
@@ -110,7 +109,12 @@ admin.site.register(Divida, DividaAdmin)
 admin.site.register(Imagem, ImagemAdmin)
 admin.site.register(Transacao, TransacaoAdmin)
 
+class TipoTransacaoAdmin(admin.ModelAdmin):
+    list_display = ('tipo_transacao_id','tipo_transacao')
+    search_fields = ('tipo_transacao',)
+    ordering = ('tipo_transacao',)
 
+admin.site.register(TipoTransacao, TipoTransacaoAdmin)
 
 models = apps.get_models()
 for model in models:
